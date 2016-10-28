@@ -46,7 +46,7 @@ class User extends Component {
 
     componentDidMount () {
         let {userinfo, userInfoActions} = this.props
-        !userinfo.data.data && userInfoActions.getUserInfo()
+        !userinfo.data && userInfoActions.getUserInfo()
         // 普通的业务请求
         
         // get('/api/user').then(res => {

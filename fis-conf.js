@@ -33,6 +33,9 @@ fis.match('{/app/**.js,*.jsx}', {
 
 fis.match('*.less', {
     parser: fis.plugin('less'),
+    postprocessor: fis.plugin('px2rem', {
+      remUnit: 75
+    }, 'append'),
     rExt: '.css'
 });
 
@@ -45,6 +48,16 @@ fis.media('publish')
     })
     .match('*.{js,css,jsx,es6,less}', {
         domain : ['//static.waimai.baidu.com']
+    })
+    // 定义modile的id，即打包之后的代码中的 `defind('node_module/react/lib/index.js')`这种相对路径改为 `define('xxxxxx')` 这种ID的形式
+    // 这个配置是上线之后又作为优化配置上去的，会是打包的代码更小一些
+    .match('/{node_modules,app}/**.{js,jsx}', {
+        moduleId: function (m, path) {
+           return fis.util.md5(path);
+        }
+    })
+    .match('*.{js,css,png,jpg,jpeg,gif}', {
+        useHash: true
     });
 
 // fis3 中预设的是 fis-components，这里使用 fis3-hook-node_modules，所以先关了。
@@ -56,34 +69,12 @@ fis.match('/{node_modules,app}/**.{js,jsx}', {
     isMod: true
 });
 
-// 定义modile的id，即打包之后的代码中的 `defind('node_module/react/lib/index.js')`这种相对路径改为 `define('xxxxxx')` 这种ID的形式
-// 这个配置是上线之后又作为优化配置上去的，会是打包的代码更小一些
-fis.media('publish').match('/{node_modules,app}/**.{js,jsx}', {
-    moduleId: function (m, path) {
-       return fis.util.md5(path);
-    }
-});
-
 fis.match('*.{js,es,es6,jsx,ts,tsx}', {
-    // 直接 require 'xxx.css'，npm i fis3-preprocessor-js-require-css --save-dev
-    // 直接 require 'xxx.png'等文件，npm i fis3-preprocessor-js-require-file --save-dev
+    // 支持直接 require 'xxx.css' 直接 require 'xxx.png'等文件
     preprocessor: [
         fis.plugin('js-require-file'),
         fis.plugin('js-require-css')
     ]
-});
-
-fis.match('::package', {
-    // 本项目为纯前端项目，所以用 loader 编译器加载，需要 npm install fis3-postpackager-loader  --save-dev
-    // 如果用后端运行时框架，请不要使用。
-    postpackager: fis.plugin('loader', {
-        useInlineMap: false
-    })
-});
-
-fis.media('publish').match('*.{js,css,png,jpg,jpeg,gif}', {
-    // 增加 md5 戳
-    useHash: true
 });
 
 // 以下两个 match ，最终将所有的 js、css、图片都打包到 static/news/webappreact 目录下，静态文件都在那个目录
@@ -93,33 +84,32 @@ fis.match('**/(*.{png,jpg,jpeg,gif})', {
 fis.match('::package', {
     // 需要 npm install fis3-packager-deps-pack --save-dev
     packager: fis.plugin('deps-pack', {
-        // 第一步，将 /node_module 中的依赖项，打包成 static/news/webappreact/third.js
+        // 将 /node_module 中的依赖项，打包成 static/news/webappreact/third.js
         'static/news/third.js': [
             // 将 /app/index.js 的依赖项加入队列，包含了 /app 中的依赖项 和 /node_modules 中的依赖项
             '/app/index.jsx:deps',
             // 移除 /app/** 只保留 /node_module 中的依赖项
             '!/app/**'
         ],
-        // 第二步，将 /app 中的依赖项，打包成 static/news/app.js
-        // 'static/news/app.js': [
-        //     // 将 /app/index.jsx 加入队列
-        //     '/app/index.jsx',
-        //     // 将 /app/index/jsx 的所有依赖项加入队列，因为第一步中已经命中了 /node_module 中的所有依赖项，因此这里只打包 /app 中的依赖项
-        //     '/app/index.jsx:deps'
-        // ],
-        // ---------上面是按需打包js文件---------
+
         // 将几个直接以<script>方式引用到 html 中的 js 文件（例如 fastclick.js、mod.js、百度统计的js等）打包成一个 lib.js ，减少http请求
         // js工具包，一般单独放在 static 文件夹下面
         'static/news/lib.js': '/static/**.js',
 
         // 在此打包 css，因为 fis.match('::packager') 配置的打包优先级更高
         'static/news/aio.css': '*.{less,css}'
+
+        // 将 /app 中的依赖项，打包成 static/news/app.js
+        // 'static/news/app.js': [
+        //     // 将 /app/index.jsx 加入队列
+        //     '/app/index.jsx',
+        //     // 将 /app/index/jsx 的所有依赖项加入队列，因为第一步中已经命中了 /node_module 中的所有依赖项，因此这里只打包 /app 中的依赖项
+        //     '/app/index.jsx:deps'
+        // ],
     }),
 
-    // 本项目为纯前段项目，所以用 loader 编译器加载，需要 npm install fis3-postpackager-loader  --save-dev
-    // 如果用后端运行时框架，请不要使用。
+    // 本项目为纯前端项目，所以用 loader 编译器加载 如果用后端运行时框架，请不要使用
     postpackager: fis.plugin('loader', {
         useInlineMap: false
     })
 });
-

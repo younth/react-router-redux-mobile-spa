@@ -13,13 +13,13 @@ window.Perf = Perf
 const store = configureStore()
 
 // 获取 route 配置
-import RouteMap from './router/routeMap'
+import Router from './router'
 
 import '../static/common.less'
 
 render(
     <Provider store={store}>
-        <RouteMap history={hashHistory}/>
+        <Router history={hashHistory}/>
     </Provider>,
     document.getElementById('root')
 )

@@ -1,4 +1,4 @@
-# 小度商城前端技术评审
+# 小度商城前端技术方案
 
 ## 项目背景
     
@@ -22,7 +22,7 @@
 
 #### 1. 前端框架: react 技术栈
 
-- React VS Vue
+- React
 - Reflex -> Redux
 - React-router
 - 基于React的同构
@@ -62,8 +62,6 @@ fis.match('::packager', {
     })
 });
 ```
-
-
 
 #### 3. 数据流：redux
 
@@ -153,7 +151,6 @@ export default createReducer(List(), {
 - 更新的是`系统数据`，在有promise字段的时候才交给中间件处理
 - 保证原有的请求方式
 - 增加新的请求更新方式，直接更新store
-
 
 
 ### 项目目录结构

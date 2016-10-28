@@ -4,15 +4,14 @@ import * as PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Router, Route, IndexRoute } from 'react-router'
 
 // App 入口
-import App from '../containers/App'
+import App from './containers/App'
 
 // home 页
-import Home from './Home'
-
-import User from '../containers/user'
+import Home from './containers/Home'
+import User from './containers/User'
 
 // 404
-import NotFound from '../containers/404'
+import NotFound from './containers/404'
 
 // 配置 router
 export default class RouteMap extends Component {
