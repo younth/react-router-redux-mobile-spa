@@ -1,0 +1,10 @@
+{
+ "error": 0,
+ "message": "ok",
+ "data": {
+   "username": "younth",
+   "uid": 1,
+   "age": 25,
+   "company": "baidu"
+ }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "dumall",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --ext \".js,.jsx\" app",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish": "rm -rf ./release && fis3 release publish -cd ./release && rm -rf ./release/app ./release/node_modules ./release/resource",
+    "build": "rm -rf ./release && fis3 release publish -cd ./release"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^7.0.0",
+    "eslint": "^2.10.2",
+    "eslint-plugin-react": "^5.1.1",
+    "fetch-jsonp": "^1.0.0",
+    "fis-parser-babel-5.x": "^1.4.0",
+    "fis-parser-less": "^0.1.3",
+    "fis3-deploy-http-push": "^1.0.3",
+    "fis3-hook-commonjs": "^0.1.15",
+    "fis3-hook-node_modules": "^2.2.7",
+    "fis3-packager-deps-pack": "^0.0.2",
+    "fis3-parser-typescript": "^0.2.3",
+    "fis3-postpackager-loader": "^1.3.17",
+    "fis3-preprocessor-js-require-css": "^0.1.0",
+    "fis3-preprocessor-js-require-file": "^0.1.0",
+    "process": "^0.11.2"
+  },
+  "dependencies": {
+    "es6-promise": "^3.1.2",
+    "react": "^15.2.1",
+    "react-addons-css-transition-group": "^15.2.1",
+    "react-addons-perf": "^15.2.1",
+    "react-addons-pure-render-mixin": "^15.2.1",
+    "react-addons-update": "^15.2.1",
+    "react-anything-sortable": "^1.5.0",
+    "react-dom": "^15.0.1",
+    "react-redux": "^4.4.4",
+    "react-router": "^2.2.2",
+    "react-swipe": "^5.0.3",
+    "redux": "^3.4.0",
+    "swipe-js-iso": "^2.0.3",
+    "whatwg-fetch": "^1.0.0",
+    "redux-thunk": "^2.1.0"
+  }
+}
