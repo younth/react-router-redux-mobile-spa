@@ -9,7 +9,7 @@ import Header from '../../components/Header'
 import * as demoActions from '../../actions/demo'
 import * as userInfoActions from '../../actions/userinfo'
 
-import {get} from '../../fetch/get'
+import { get } from '../../fetch/request'
 
 
 class User extends Component {
