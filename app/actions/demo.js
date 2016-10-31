@@ -8,3 +8,4 @@ export const getDemoData = () => {
         promise: get('/news?tn=bdcmspage')
     }
 }
+

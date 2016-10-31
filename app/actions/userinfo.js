@@ -8,3 +8,12 @@ export const getUserInfo = () => {
         promise: get('/api/user')
     }
 }
+
+// 更新 global
+export function addressUpdate(data) {
+    return {
+        type: actionTypes.ADRESS_UPDATE,
+        data
+    }
+}
+

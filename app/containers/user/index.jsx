@@ -47,6 +47,11 @@ class User extends Component {
     componentDidMount () {
         let {userinfo, userInfoActions} = this.props
         !userinfo.data && userInfoActions.getUserInfo()
+
+        userInfoActions.addressUpdate({
+            lat: '1111',
+            lng: '22222'
+        })
         // 普通的业务请求
         
         // get('/api/user').then(res => {
@@ -61,7 +66,8 @@ class User extends Component {
 
 function mapStateToProps(state) {
     return {
-        userinfo: state.userinfo
+        userinfo: state.userinfo,
+        globalVal: state.globalVal
     }
 }
 

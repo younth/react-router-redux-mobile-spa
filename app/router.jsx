@@ -3,6 +3,8 @@ import React, { PropTypes, Component } from 'react'
 import * as PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Router, Route, IndexRoute } from 'react-router'
 
+import { redirectToLogin } from './util/authService'
+
 // App 入口
 import App from './containers/App'
 
@@ -33,7 +35,7 @@ export default class RouteMap extends Component {
                 {/* 先加载app组件 */}
                 <Route path="/" component={App}>
                     <IndexRoute component={Home}/>
-                    <Route path="user"  component={User}/>
+                    <Route path="user" component={User} onEnter={redirectToLogin} />
                     {/* 404 */}
                     <Route path="*" component={NotFound}/>
                     <Route path="/404" component={NotFound}/>
