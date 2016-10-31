@@ -37,6 +37,7 @@ export default class User extends Component {
         super(props, context);
         //this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         this.state = {
+            name: '',
         }
     }
     
@@ -64,6 +65,8 @@ export default class User extends Component {
             lat: '1111',
             lng: '22222'
         })
+        
+
         // 普通的业务请求
         
         // get('/api/user').then(res => {
@@ -71,5 +74,11 @@ export default class User extends Component {
         // }).then(json => {
         //     console.log(json.data);
         // });
+    },
+
+    handClick() {
+        this.setState({
+            btnClass: 'red'
+        })
     }
 }
