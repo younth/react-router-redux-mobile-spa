@@ -11,8 +11,8 @@ export default function userinfo(state = initialState, action) {
         case actionTypes.ADRESS_UPDATE:
             return {
                 ...state,
-                lat: action.data.lat,
-                lng: action.data.lng
+                lat: action.lat || action.data.lat,
+                lng: action.lng || action.data.lng
             }
         default:
             return state
