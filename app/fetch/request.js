@@ -48,14 +48,14 @@ export function post(url, paramsObj) {
 }
 
 // jsonp保持与fetch一致的API
-export function getJsonp (url, data) {
-    data = obj2params(data);
-    if (data) {
-        url += (url.indexOf('?') === -1 ? '?' : '&') + data;
-    }
-    let result = fetchJsonp(url, {
-        // jsonpCallback: 'jsoncallback',
-        timeout: 3000
-    });
-    return result;
-}
+// export function getJsonp (url, data) {
+//     data = obj2params(data);
+//     if (data) {
+//         url += (url.indexOf('?') === -1 ? '?' : '&') + data;
+//     }
+//     let result = fetchJsonp(url, {
+//         // jsonpCallback: 'jsoncallback',
+//         timeout: 3000
+//     });
+//     return result;
+// }

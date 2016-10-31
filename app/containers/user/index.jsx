@@ -11,8 +11,21 @@ import * as userInfoActions from '../../actions/userinfo'
 
 import { get } from '../../fetch/request'
 
-
-class User extends Component {
+const mapStateToProps = state => {
+    return {
+        userinfo: state.userinfo,
+        globalVal: state.globalVal
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        demoActions: bindActionCreators(demoActions, dispatch),
+        userInfoActions: bindActionCreators(userInfoActions, dispatch)
+    }
+}
+// React & Redux 绑定
+@connect(mapStateToProps,mapDispatchToProps)
+export default class User extends Component {
 
     static propTypes = {
         userinfo: PropTypes.object.isRequired,
@@ -24,7 +37,6 @@ class User extends Component {
         super(props, context);
         //this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         this.state = {
-            
         }
     }
     
@@ -61,24 +73,3 @@ class User extends Component {
         // });
     }
 }
-
-// -----------------------React & Redux 绑定-----------------------------
-
-function mapStateToProps(state) {
-    return {
-        userinfo: state.userinfo,
-        globalVal: state.globalVal
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        demoActions: bindActionCreators(demoActions, dispatch),
-        userInfoActions: bindActionCreators(userInfoActions, dispatch)
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(User)
