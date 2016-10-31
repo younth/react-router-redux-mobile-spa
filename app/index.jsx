@@ -9,6 +9,8 @@ import configureStore from './store/configureStore'
 import * as Perf from 'react-addons-perf'
 window.Perf = Perf
 
+import Utils from './util/util';
+
 // 创建 Redux 的 store 对象
 const store = configureStore()
 
@@ -17,10 +19,29 @@ import Router from './router'
 
 import '../static/common.less'
 
-render(
-    <Provider store={store}>
-        <Router history={hashHistory}/>
-    </Provider>,
-    document.getElementById('root')
-)
+const renderPage = function () {
+    WMAppReady(function () {
+        // 打开上拉刷新
+        // WMApp.page.openPageRefresh();
+        // WMApp.entry.setPageAction('onPageRefresh', function () {
+        //   setTimeout(function (){
+        //       WMApp.page.hidePageRefresh();
+        //   }, 400)
+        // });
+        render(
+            <Provider store={store}>
+                <Router history={hashHistory}/>
+            </Provider>,
+            document.getElementById('root')
+        )
+    })
+}
+
+renderPage();
+// debug模式 url: debug=1 方便线上在浏览器打开调试
+if(Utils.getCurrentParam('debug') || !isWMApp) {
+    require.async('./util/page.js', function () {
+        renderPage();
+    });
+}
 
