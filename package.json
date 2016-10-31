@@ -35,7 +35,6 @@
     "react-addons-perf": "^15.2.1",
     "react-addons-pure-render-mixin": "^15.2.1",
     "react-addons-update": "^15.2.1",
-    "react-anything-sortable": "^1.5.0",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.4",
     "react-router": "^2.2.2",
