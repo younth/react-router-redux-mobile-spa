@@ -14,7 +14,6 @@ class Privilege extends Component {
         return (
             <div>
             	我的特权
-            	<div className="test"></div>
             </div>
         )
     }
