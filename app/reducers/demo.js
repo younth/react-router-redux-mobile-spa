@@ -1,9 +1,9 @@
-// import * as actionTypes from '../constants/types'
-import {
-    GET_ADLIST_REQUEST,
-    GET_ADLIST_SUCCESS,
-    GET_ADLIST_FAILURE
-} from '../constants/actionTypes'
+import * as actionTypes from '../constants/types'
+// import {
+//     GET_ADLIST_REQUEST,
+//     GET_ADLIST_SUCCESS,
+//     GET_ADLIST_FAILURE
+// } from '../constants/actionTypes'
 
 const initialState = {
     name: 'demo'
@@ -11,18 +11,18 @@ const initialState = {
 
 export default function demo(state = initialState, action) {
     switch (action.type) {
-        case GET_ADLIST_REQUEST:
+        case actionTypes.GET_ADLIST_REQUEST:
             return {
                 ...state,
                 loading: true
             }
-        case GET_ADLIST_SUCCESS:
+        case actionTypes.GET_ADLIST_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 data: action.json
             }
-        case GET_ADLIST_FAILURE:
+        case actionTypes.GET_ADLIST_FAILURE:
             return {
                 ...state,
                 loading: false,
