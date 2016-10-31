@@ -229,7 +229,14 @@ dumall
     
 ```
 
-
+### 开发
+安装依赖包 npm i --registry=https://registry.npm.taobao.org
+启动fis3 server服务 fis3 server start
+查看项目信息 fis3 server info
+打开fis3 server地址 fis3 server open  
+将代码推到fis3 server www文件中 fis3 release -cw
+项目链接 http://172.17.101.144:8080/
+代码规范检查 npm run lint
 
 
 

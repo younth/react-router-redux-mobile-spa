@@ -27,8 +27,9 @@ class User extends Component {
             
         }
     }
+    
     render() {
-        let {userinfo} = this.props;
+        let {userinfo} = this.props
         if (userinfo.data && userinfo.data.data) {
             console.log('数据已经请求过了~')
             console.log(userinfo.data.data)
@@ -39,7 +40,6 @@ class User extends Component {
             <div id="userinfo_view">
                 <Header />
                 <h2>会员中心</h2>
-                
             </div>
         )
     }

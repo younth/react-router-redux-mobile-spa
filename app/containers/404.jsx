@@ -13,7 +13,7 @@ class NotFoundPage extends React.Component {
         return (
             <div>
                 <Header />
-                <NotFound/>
+                <NotFound />
             </div>
         )
     }

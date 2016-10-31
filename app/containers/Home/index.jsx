@@ -1,6 +1,9 @@
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
+import '../../../static/styles/home.less'
+
+
 // 组装 home 组件
 class Home extends Component {
     constructor(props, context) {
@@ -9,7 +12,10 @@ class Home extends Component {
     }
     render() {
         return (
-            <div>首页</div>
+            <div>
+            	首页
+            	<div className="test"></div>
+            </div>
         )
     }
 }
