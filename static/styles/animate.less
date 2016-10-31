@@ -1,0 +1,207 @@
+//常用的各种css3动画
+
+@keyframes bounceOutUp {
+    20% {
+        transform: translate3d(0, -0.5rem, 0);
+    }
+    40%,
+    45% {
+        opacity: 1;
+        transform: translate3d(0, 1rem, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(0, -100rem, 0);
+    }
+}
+
+@keyframes bounceInDown {
+    0%,
+    60%,
+    75%,
+    90%,
+    100% {
+        transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -150rem, 0);
+    }
+    60% {
+        opacity: 1;
+        transform: translate3d(0, 1.25rem, 0);
+    }
+    75% {
+        transform: translate3d(0, -0.5rem, 0);
+    }
+    90% {
+        transform: translate3d(0, 0.25rem, 0);
+    }
+    100% {
+        transform: none;
+    }
+}
+
+//弹框出现的动画
+@keyframes slowBounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+//loading
+@keyframes stretchdelay {
+    0%,40%,100% {
+        transform: scaleY(0.4)
+    }
+
+    20% {
+        transform: scaleY(1.0)
+    }
+}
+
+//加入购物车
+@keyframes shopCart {
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.2);
+  }
+
+  50% {
+    transform: scale(.8);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+//loading球
+@keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(0.0);
+  } 40% {
+    transform: scale(1.0);
+  }
+}
+// 特殊的up
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 300px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -20px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+//页面级别的载入
+@keyframes effectsIn {
+    0% {
+        opacity: .7;
+        transform: scale(0.8)
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+
+@keyframes effectsOut {
+    0% {
+        opacity: .7;
+        transform: scale(1)
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.8)
+    }
+}
+
+// scale动画在安卓下面会有问题，scale必须是html body overflow:hidden下生效
+@keyframes page-fadeIn {
+    0% {
+        transform: scale(1.1);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes page-fadeOut {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

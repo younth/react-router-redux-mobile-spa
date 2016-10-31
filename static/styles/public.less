@@ -1,0 +1,79 @@
+//无侵入方式的公用类，不调用不会产生多余的代码
+@import 'est/all.less';
+@use-autoprefixer: false;
+@default-font-size: 24px;
+@support-ie-version: 9;
+@support-old-ie: false;
+@support-html5: false;
+
+
+//变量
+@com-color: #ee2b4e;
+@yellow: #fff56c;
+
+//公用方法
+.center() {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.all-center(){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.x-center() {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.y-center() {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.v-height(@height) {
+    height: @height;
+    line-height: @height;
+}
+
+.background(@width, @height, @url) {
+    background: url(@url) no-repeat;
+    width: @width;
+    height: @height;
+    background-size: 100% 100%;
+}
+
+.hide() {
+    display: none!important
+}
+
+//动画方法
+.animate(@type, @duration: .5s, @delay: 0s, @ease: linear, @count: 1){
+    animation: @type @duration @delay @ease;
+    animation-fill-mode: both;
+    animation-iteration-count: @count;
+}
+
+// 会员用到的
+@black: #808080;
+@grey: #f2f2f2;
+@red: #ff2d4b;
+@deep-grey: #c2c2c3;
+@grey-background: #fafafa;
+@white: #fff;
+//不设置width
+.btn(@height, @background) {
+    display: block;
+    height: @height;
+    line-height: @height;
+    border-radius: 45px;
+    text-align: center;
+    background: @background;
+}
+
+.pixel-border(@color) {
+    border: 1px solid @color;/*px*/
+}

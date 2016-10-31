@@ -1,55 +1,31 @@
-
-// html {
-//     font-size: 200px;
-// }
-// @media screen and (max-width:360px){
-//     html {
-//         font-size:180px;
-//     }
-// }
-
-body {
+html, body {
     padding: 0;
     margin: 0;
-
     -webkit-font-smoothing: antialiased;
     font-family: arial, sans-serif;
-
     * {
         padding: 0;
         margin: 0;
-
         // 设置一个默认值
         font-size: 24px;
     }
-
     a {
         text-decoration: none;
     }
-
     hr {
         height: 0;
         border-top: 0;
         color: #5dabf0;
         border-bottom-color: #5dabf0;
     }
-
     input {
         outline: none;
-    }
-
-    .float-left {
-        float: left;
-    }
-    .float-right {
-        float: right;
     }
     .clearfix:after {
         display: table;
         content: '';
         clear: both;
     }
-
     // router转场动画效果
     .animate-slide-left-appear {
       transform: translate(100%, 0);

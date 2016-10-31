@@ -17,7 +17,8 @@ const store = configureStore()
 // 获取 route 配置
 import Router from './router'
 
-import '../static/common.less'
+import '../static/styles/common.less'
+import '../static/styles/home.less'
 
 const renderPage = function () {
     WMAppReady(function () {
