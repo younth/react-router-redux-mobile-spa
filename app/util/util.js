@@ -7,70 +7,70 @@ var Utils = {
     // 获取url中所有的参数
     getParams(url) {
         var vars = {},
-            hash, hashes, i;
+            hash, hashes, i
 
-        url = url || window.location.href;
+        url = url || window.location.href
 
         // 没有参数的情况
         if (url.indexOf('?') == -1) {
-            return vars;
+            return vars
         }
 
-        hashes = url.slice(url.indexOf('?') + 1).split('&');
+        hashes = url.slice(url.indexOf('?') + 1).split('&')
 
         for (i = 0; i < hashes.length; i++) {
             if (!hashes[i] || hashes[i].indexOf('=') == -1) {
-                continue;
+                continue
             }
-            hash = hashes[i].split('=');
+            hash = hashes[i].split('=')
             if (hash[1]) {
-                vars[hash[0]] = (hash[1].indexOf("#") != -1) ? hash[1].slice(0, hash[1].indexOf("#")) : hash[1];
+                vars[hash[0]] = (hash[1].indexOf("#") != -1) ? hash[1].slice(0, hash[1].indexOf("#")) : hash[1]
             }
         }
-        return vars;
+        return vars
     },
 
     // 获取指定name的参数
     getParam(name, url) {
-        return this.getParams(url)[name];
+        return this.getParams(url)[name]
     },
 
     getCurrentParam(name) {
-        return this.getParam(name, location.href);
+        return this.getParam(name, location.href)
     },
 
     // 设置头部信息及右上角按钮事件
     setTitleBar(cfg = {}) {
-        WMAppReady(function() {
-            WMApp.page.setTitleBar({
+        window.WMAppReady(function() {
+            window.WMApp.page.setTitleBar({
                 titleText: cfg.titleText,
                 actionText: cfg.actionText || ' ',
-                actionClickAble: cfg.actionClickAble || 0,
-            });
-            WMApp.entry.setPageAction('onActionClick', function() {
-                cfg.shareParams ? WMApp.share.share(cfg.shareParams) : (location.href = cfg.url);
-            });
+                actionClickAble: cfg.actionClickAble || 0
+            })
+            window.WMApp.entry.setPageAction('onActionClick', function() {
+                cfg.shareParams ? window.WMApp.share.share(cfg.shareParams) : (location.href = cfg.url)
+            })
         })
     },
 
     // 设置返回按钮操作
     setBack(cfg = {}) {
-        WMAppReady(function() {
-            cfg.type = cfg.type || 3;
-            WMApp.entry.setPageAction('onBack', function() {
+        window.WMAppReady(function() {
+            cfg.type = cfg.type || 3
+            window.WMApp.entry.setPageAction('onBack', function() {
                 if (cfg.type === 1) {
                     // 关闭
-                    return 1;
+                    return 1
                 } else if (cfg.type === 3) {
                     // 返回
-                    history.back();
-                    return 0;
+                    history.back()
+                    return 0
                 } else if (cfg.type === 2) {
                     // 跳转url
-                    location.href = cfg.url;
-                    return 0;
+                    location.href = cfg.url
+                    return 0
                 }
-            });
+            })
         })
     },
 
@@ -83,32 +83,31 @@ var Utils = {
                 header: 1,
                 pageData: pageData
             }
-        };
-        WMApp.page.changePage(params);
+        }
+        window.WMApp.page.changePage(params)
     },
 
     // 显示loading
     loading(type = 1) {
-        WMAppReady(function() {
-            WMApp.nui.loading({
+        window.WMAppReady(function() {
+            window.WMApp.nui.loading({
                 show: type
-            });
+            })
         })
     },
 
     // 封装toast方法
     showToast(text, speed = 'short') {
-        WMApp.nui.toast({
+        window.WMApp.nui.toast({
             text: text,
             duration: speed
-        });
+        })
     },
 
     alert(obj) {
         alert(JSON.stringify(obj))
-    },
+    }
 
+}
 
-};
-
-export default Utils;
+export default Utils

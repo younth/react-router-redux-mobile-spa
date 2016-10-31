@@ -21,7 +21,7 @@ import '../static/styles/common.less'
 import '../static/styles/home.less'
 
 const renderPage = function () {
-    WMAppReady(function () {
+    window.WMAppReady(function () {
         // 打开上拉刷新
         // WMApp.page.openPageRefresh();
         // WMApp.entry.setPageAction('onPageRefresh', function () {
@@ -40,7 +40,7 @@ const renderPage = function () {
 
 renderPage();
 // debug模式 url: debug=1 方便线上在浏览器打开调试
-if(Utils.getCurrentParam('debug') || !isWMApp) {
+if(Utils.getCurrentParam('debug') || !window.isWMApp) {
     require.async('./util/page.js', function () {
         renderPage();
     });

@@ -72,9 +72,9 @@ export default class User extends Component {
         // get('/api/user').then(res => {
         //     return res.json()
         // }).then(json => {
-        //     console.log(json.data);
-        // });
-    },
+        //     console.log(json.data)
+        // })
+    }
 
     handClick() {
         this.setState({

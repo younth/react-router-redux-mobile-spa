@@ -1,10 +1,9 @@
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-import '../../../../static/styles/home.less'
+import './index.less'
 
-
-// 组装 home 组件
+// 组装 Privilege 组件
 class Privilege extends Component {
     constructor(props, context) {
         super(props, context);

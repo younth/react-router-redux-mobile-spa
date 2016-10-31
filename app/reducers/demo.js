@@ -1,9 +1,4 @@
 import * as actionTypes from '../constants/types'
-// import {
-//     GET_ADLIST_REQUEST,
-//     GET_ADLIST_SUCCESS,
-//     GET_ADLIST_FAILURE
-// } from '../constants/actionTypes'
 
 const initialState = {
     name: 'demo'

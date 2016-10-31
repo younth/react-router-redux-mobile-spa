@@ -1,8 +1,9 @@
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-import '../../../static/styles/home.less'
+import '../../../static/styles/common.less'
 
+import Privilege from './privilege'
 
 // 组装 home 组件
 class Home extends Component {
@@ -14,7 +15,7 @@ class Home extends Component {
         return (
             <div>
             	首页
-            	<div className="test"></div>
+                <Privilege />
             </div>
         )
     }
