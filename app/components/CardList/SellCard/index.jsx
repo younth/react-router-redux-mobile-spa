@@ -3,11 +3,26 @@
  */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as globalActions from '../../../actions/globalVal'
 
 import './index.less'
 
 // 组装 SellCard 组件
-class SellCard extends Component {
+const mapStateToProps = state => {
+    return {
+        globalVal: state.globalVal
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        globalActions: bindActionCreators(globalActions, dispatch)
+    }
+}
+// React & Redux 绑定
+@connect(mapStateToProps,mapDispatchToProps)
+export default class SellCard extends Component {
     constructor(props, context) {
         super(props, context)
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
@@ -27,15 +42,17 @@ class SellCard extends Component {
             <div className="sellcard-item">
                 <div className="section1">
                     <div className="base-info">
-                        <div className="name">5 折配送卡</div>
+                        <div className="name">{card.privilege_name}</div>
                         <div className="desc">仅支持百度专送</div>
                     </div>
                     <div className="other-info">
                         <div className="price-wrap">
-                            <div className="price">30</div>
+                            <div className="price">{card.price * 10 * 10}</div>
                         </div>
                         <div className="btn-wrap">
-                            <div className="buy">购买</div>
+                            <div className="btn buy">购买</div>
+                            <div className="btn conflict">购买</div>
+                            <div className="btn nostock">缺货中</div>
                         </div>
                     </div>
                 </div>

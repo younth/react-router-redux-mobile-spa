@@ -1,8 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-import ReactSwipe from 'react-swipe';
-
 import './index.less'
 
 // 组装 SwipeCard 组件

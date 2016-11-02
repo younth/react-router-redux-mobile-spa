@@ -23,12 +23,8 @@ class SwipeCard extends Component {
     }
     render() {
         return (
-
             <div className="swipe-wrap">
-                <ReactSwipe continuous={false} className="card-swipe" key={this.props.cardlist.length} callback={this.swipeCallback}>
-                    {this.props.cardlist.map((item, index) => <CommonCard key = {index} card = {item}/>)}
-                </ReactSwipe>
-                
+                {this.props.cardlist.map((item, index) => <CommonCard key = {index} card = {item}/>)}
             </div>
         )
     }

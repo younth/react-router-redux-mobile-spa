@@ -11,21 +11,22 @@ class SwipeCard extends Component {
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
     render() {
+        let card = this.props.card
         return (
             <div className="card-item">
                 <div className="section1">
-                    <div className="city">北京</div>
+                    <div className="city">{card.city_name}</div>
                     <Link className="to-use-detail" to='detail'>查看详情</Link>
 
                 </div>
                 <div className="section2">
-                    <div className="discount">5</div>
+                    <div className="discount">{card.discount_desc}</div>
                     <div className="discount-rule">
-                        <div className="name">折 配送月卡</div>
+                        <div className="name">折 {card.privilege_name}</div>
                         <div className="desc">仅支持百度专送</div>
                     </div>
                 </div>
-                <div className="section3 end-time">有效期至 2016.12.1</div>
+                <div className="section3 end-time">有效期至 {card.end_time}</div>
             </div>
         )
     }

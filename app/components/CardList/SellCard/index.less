@@ -78,15 +78,21 @@
                 color: @red;
             }
             .btn-wrap {
-                .buy {
+                .btn {
                     width: 110px;
                     .v-height(50px);
-                    border: 2px solid @red;
                     border-radius: 25px;
                     text-align: center;
                     font-size: 28px;
                     font-family: 'PingFangSC-Reqular';
-                    color: @red;
+                }
+                .buy {
+                    border: 2px solid @red;
+                    color: @red;                    
+                }
+                .conflict, .nostock {
+                    border: 2px solid @shallow-gray2;
+                    color: @shallow-gray2;
                 }
             }
         }
