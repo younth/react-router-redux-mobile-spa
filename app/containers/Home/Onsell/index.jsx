@@ -1,5 +1,5 @@
 /*
- * @file 首页热卖商品区组件
+ * @file 首页热卖商品区组件 Onsell
  */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'

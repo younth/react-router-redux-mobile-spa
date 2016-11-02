@@ -13,13 +13,14 @@ export default function card(state = initialState, action) {
                 loading: true,
             }
         case actionTypes.GET_HOMECARD_SUCCESS:
-            let result = action.json;
+            let result = action.json.result;
             return {
                 ...state,
                 loading: false,
                 userPrivileges: result.user_privileges,
                 cityPrivileges: result.city_privileges,
                 isVip: result.is_vip,
+                errno: 0
             }
         case actionTypes.GET_HOMECARD_FAILURE:
             // error_no 不等于0

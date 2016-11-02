@@ -17,8 +17,6 @@ const store = configureStore()
 // 获取 route 配置
 import Router from './router'
 
-import '../static/common.less'
-
 const renderPage = function () {
     window.WMAppReady(function () {
         // 打开上拉刷新

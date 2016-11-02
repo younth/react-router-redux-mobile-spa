@@ -12,7 +12,6 @@ import './index.less'
 
 import Mime from './Mime'
 import Onsell from './Onsell'
-import Loading from '../../components/Loading'
 
 import * as demoActions from '../../actions/demo'
 import * as userInfoActions from '../../actions/userinfo'
@@ -42,7 +41,7 @@ export default class Home extends Component {
     }
     constructor(props, context) {
         super(props, context);
-        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     }
     compontentWillMount() {
         // 展示loading状态 todo
@@ -59,27 +58,23 @@ export default class Home extends Component {
     }
     render() {
         let {card} = this.props
-        let user_privileges = [], city_privileges = []
-        if (card.state === 2) {
+        let userPrivileges = [], cityPrivileges = []
+        if (card.errno === 0) {
             // 隐藏loading状态 todo
             // loading(0)
-            console.log('请求成功')
+            // console.log('请求成功')
             console.log(card)
-            user_privileges = card.user_privileges
-            city_privileges = card.city_privileges
+            userPrivileges = card.userPrivileges
+            cityPrivileges = card.cityPrivileges
             // 更新全局数据
             globalActions.addressUpdate({
                 isVip: card.isVip
             })
-        } else if (card.state === 3) {
-            console.log('请求失败')
-        } else {
-            console.log('还未请求')
         }
         return (
             <div>
-                { user_privileges.length ? <Mime cardlist={user_privileges}/> : '' }
-                { city_privileges.length ? <Onsell cardlist={city_privileges} isVip={card.isVip} /> : '' }
+                { userPrivileges && userPrivileges.length ? <Mime cardlist={userPrivileges}/> : '' }
+                { cityPrivileges && cityPrivileges.length ? <Onsell cardlist={cityPrivileges} isVip={card.isVip} /> : '' }
                 <Link className="to-rule" to="rule">小度商城规则</Link>
             </div>
         )
