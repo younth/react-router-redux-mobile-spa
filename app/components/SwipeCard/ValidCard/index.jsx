@@ -1,19 +1,27 @@
+/*
+ * @file 首页已购卡片-有效卡组件 ValidCard
+ */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Link } from 'react-router'
-
+import classNames from 'classnames';
 import './index.less'
 
-// 组装 SwipeCard 组件
-class SwipeCard extends Component {
+// 组装 ValidCard 组件
+class ValidCard extends Component {
     constructor(props, context) {
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
     render() {
         let card = this.props.card
+        let cardType = this.props.cardType
+        let btnClass = classNames({
+              'card-item': true,
+              cardType
+            })
         return (
-            <div className="card-item">
+            <div className = { classNames("card-item", this.props.cardType) }>
                 <div className="section1">
                     <div className="city">{card.city_name}</div>
                     <Link className="to-use-detail" to='detail'>查看详情</Link>
@@ -32,4 +40,4 @@ class SwipeCard extends Component {
     }
 }
 
-export default SwipeCard
+export default ValidCard

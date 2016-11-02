@@ -73,8 +73,8 @@ export default class Home extends Component {
         }
         return (
             <div>
-                { userPrivileges && userPrivileges.length ? <Mime cardlist={userPrivileges}/> : '' }
-                { cityPrivileges && cityPrivileges.length ? <Onsell cardlist={cityPrivileges} isVip={card.isVip} /> : '' }
+                { userPrivileges && <Mime cardlist={userPrivileges}/> }
+                { cityPrivileges && cityPrivileges.length && <Onsell cardlist={cityPrivileges} isVip={card.isVip} /> }
                 <Link className="to-rule" to="rule">小度商城规则</Link>
             </div>
         )

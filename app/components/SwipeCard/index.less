@@ -5,11 +5,20 @@
     height: @h;
     background-size: 100% 100%;
 }
+
 .swipe-wrap {
-	width: 2000px;
-	display: flex;
-	margin-top: 40px;
-	// width: 750px;
-	// overflow: hidden;
-	// position: relative;
+    width: 2000px;
+    display: flex;
+    // width: 750px;
+    // overflow: hidden;
+    // position: relative;
+}
+
+// card-item 公共样式
+.card-item {
+    margin: 40px 15px 0 15px;
+    &.only-card {
+        width: 690px;
+        float: none;
+    }
 }

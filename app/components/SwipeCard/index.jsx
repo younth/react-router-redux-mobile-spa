@@ -1,9 +1,14 @@
+/*
+ * @file 首页已购卡片列表组件 SwipeCard
+ */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import ReactSwipe from 'react-swipe';
 
-import CommonCard from './CommonCard';
+import ValidCard from './ValidCard';
+import RenewCard from './RenewCard';
+import ExpiredCard from './ExpiredCard';
 
 import './index.less'
 
@@ -21,18 +26,77 @@ class SwipeCard extends Component {
             curCard: index
         })
     }
+    // 区分有效卡、可续费卡、过期卡可续费卡和无用可删除卡
+    // 存在的问题：先把用户已购卡片遍历一遍，区分有效卡与无效卡中的四种卡片状态，再在render中遍历并展示
+    // => 结构较为清晰，但是遍历两遍性能较差。
+    // => 已购卡数量较少，可以接受遍历两遍。
+    // => 可以实现四种卡片的排序，如果在render中边遍历判断边展示，只能按照接口返回卡片顺序排序
+    // => 后端未返回所有已购卡数量，因此需要通过遍历或者获取两种卡数量之和的方式得到数量以判断是否展示单张卡样式（当然这是小问题，时间复杂度O(1)）
+    // => 我选择了遍历两遍的方式，第一遍判断卡类型，第二遍渲染DOM
+    distinguishCard(cardlist = []) {
+        // 定义返回值
+        let validCard = [], renewCard = [], expiredCard = [], uselessCard = []
+        let num = 0 // 已购卡数量
+        // 获取有效卡 valid
+        let valid = cardlist && cardlist.valid || []
+        // 区分有效卡中的 正常有效卡 和 可续费卡
+        // 判断依据 renew_state 为 true 标识可续费
+        valid.length && valid.map((item, index) => {
+            if (item.renew_state) {
+                item.cardType = 'renewCard'
+                renewCard.push(item)
+            } else {
+                item.cardType = 'validCard'
+                validCard.push(item)
+            }
+        })
+        // 获取过期卡 expired
+        let expired = cardlist && cardlist.expired || []
+        // 区分过期卡中的 过期可续费卡（在售） 和 无用可删除卡（下架）
+        // 判断依据 renew_state 为 true 代表可续费
+        expired.length && expired.map((item, index) => {
+            if (item.renew_state) {
+                item.cardType = 'expiredCard'
+                expiredCard.push(item)
+            } else if (item.off_sale) {
+                item.cardType = 'uselessCard'
+                uselessCard.push(item)
+            }
+        })
+        // 获取已购卡总数量
+        // num = valid && valid.length + expired && expired.length
+        // 排序后的 cardlist
+        let ranklist = renewCard
+        ranklist = ranklist.concat(validCard).concat(expiredCard).concat(uselessCard)
+        // 获取已购卡总数量
+        // num = ranklist.length
+        return ranklist // 排序后的 cardlist
+    }
+    renderCard(card, key, specialType = '') {
+        if (card.cardType === 'renewCard') {
+            return <RenewCard key = {key} card = {card} cardType = {specialType}/>
+        } else if (card.cardType === 'validCard') {
+            return <ValidCard key = {key} card = {card} cardType = {specialType}/>
+        } else if (card.cardType === 'expiredCard') {
+            return <ExpiredCard key = {key} card = {card} cardType = {specialType}/>
+        } else if (card.cardType === 'uselessCard') {
+            return <UselessCard key = {key} card = {card} cardType = {specialType}/>
+        }
+    }
     render() {
-        let cardlist = this.props.cardlist
-        let length = cardlist && cardlist.length || 0
-        console.log(length);
+        let cardlist = this.distinguishCard(this.props.cardlist)
+        console.log(cardlist.length);
         return (
             <div>
             {
-                length === 1 ?
-                <div className="swipe-wrap">
-                    {cardlist.map((item, index) => <CommonCard key = {index} card = {item}/>)}
+                // todo length === 0时展示提示图案
+                cardlist && cardlist.length === 1
+                ? this.renderCard(cardlist[0], 0, 'only-card')
+                : <div className="swipe-wrap">
+                    {
+                        cardlist.map((item, index) => this.renderCard(item, index))
+                    }
                 </div>
-                : <div></div>
             }
             </div>
         )
