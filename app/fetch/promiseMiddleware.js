@@ -5,38 +5,34 @@
 export default function promiseMiddleware() {
     return next => action => {
         // rest是action对象剩下的变量集合
-        const {
-            promise,
-            type,
-            ...rest
-        } = action;
+        const { promise, type, ...rest } = action;
         // 非promise直接返回
         if (!promise) return next(action)
-            // promise对下各种状态类型
+        // promise对下各种状态类型
         const SUCCESS = type + '_SUCCESS';
         const REQUEST = type + '_REQUEST';
         const FAILURE = type + '_FAILURE';
         // 开始请求
-        next({...rest,
-            type: REQUEST
-        })
+        next({...rest, type: REQUEST })
 
         return promise
             .then(res => res.json())
             .then(json => {
                 // success 结果包裹在json中
-                next({...rest,
-                    json,
-                    type: SUCCESS
-                })
+                if (Number(json.error_no) === 0) {
+                    next({...rest, json, type: SUCCESS })
+                } else {
+                    next({...rest, json, type: FAILURE })
+                }
                 return true
             })
             .then(undefined, error => {
                 // error
-                next({...rest,
-                    error,
-                    type: FAILURE
-                })
+                let json = {
+                    error_msg: String(error),
+                    error_no: 10086
+                }
+                next({...rest, json, type: FAILURE })
                 return false
             })
     }

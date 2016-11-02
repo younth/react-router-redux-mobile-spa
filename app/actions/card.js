@@ -7,6 +7,6 @@ import {
 export const getHomeCard = () => {
 	return {
 		type: actionTypes.GET_HOMECARD,
-		promise: get('/wmall/center?display=json')
+		promise: get('/wmalls/center?display=json')
 	}
 }

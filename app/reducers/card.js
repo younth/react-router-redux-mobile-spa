@@ -1,9 +1,7 @@
 import * as actionTypes from '../constants/types'
 
 const initialState = {
-    name: 'card',
-    loading: true,
-    state: 0
+    loading: true
 }
 
 export default function card(state = initialState, action) {
@@ -13,24 +11,23 @@ export default function card(state = initialState, action) {
             return {
                 ...state,
                 loading: true,
-                state: 1
             }
         case actionTypes.GET_HOMECARD_SUCCESS:
+            let result = action.json;
             return {
                 ...state,
                 loading: false,
-                user_privileges: action.json.result.user_privileges,
-                city_privileges: action.json.result.city_privileges,
-                isVip: action.json.result.is_vip,
-                state: 2
+                userPrivileges: result.user_privileges,
+                cityPrivileges: result.city_privileges,
+                isVip: result.is_vip,
             }
         case actionTypes.GET_HOMECARD_FAILURE:
+            // error_no 不等于0
             return {
                 ...state,
                 loading: false,
-                data: null,
-                error: action.error,
-                state: 3
+                errno: action.json.error_no,
+                errmsg: action.json.error_msg
             }
         default:
             return state
