@@ -19,17 +19,6 @@ module.exports = function(req, res, next) {
 				'discount_desc': '5', // 折扣描述
 				'renew_state': false, //是否可续费状态,
 				'expired_in': 3 // 几天内到期
-			}, { // 用户特权列表
-				'city_id': 132, // 城市id 
-				'city_name': '上海', // 城市名字 
-				'privilege_id': 2,
-				'privilege_name': '测试卡',
-				'start_time': '2016-01-01', // 会员开始时间 
-				'end_time': '2016-02-01', // 会员结束时间 
-				'valid': true, // 是否有效
-				'discount_desc': '7', // 折扣描述
-				'renew_state': true, //是否可续费状态,
-				'expired_in': 3 // 几天内到期
 			}],
 			city_privileges: [{
 				city_id: "131",

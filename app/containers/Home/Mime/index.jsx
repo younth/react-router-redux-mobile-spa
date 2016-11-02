@@ -1,3 +1,6 @@
+/*
+ * @file 首页我的特权区组件 Mime
+ */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Link } from 'react-router'

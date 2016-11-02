@@ -22,9 +22,18 @@ class SwipeCard extends Component {
         })
     }
     render() {
+        let cardlist = this.props.cardlist
+        let length = cardlist && cardlist.length || 0
+        console.log(length);
         return (
-            <div className="swipe-wrap">
-                {this.props.cardlist.map((item, index) => <CommonCard key = {index} card = {item}/>)}
+            <div>
+            {
+                length === 1 ?
+                <div className="swipe-wrap">
+                    {cardlist.map((item, index) => <CommonCard key = {index} card = {item}/>)}
+                </div>
+                : <div></div>
+            }
             </div>
         )
     }
