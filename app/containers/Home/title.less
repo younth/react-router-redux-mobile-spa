@@ -1,0 +1,31 @@
+@import '../../../static/styles/public.less';
+@font-color: #333;
+.setBG(@url, @w, @h) {
+    background: url(@url) no-repeat;
+    width: @w;
+    height: @h;
+    background-size: 100% 100%;
+}
+
+.icon-before(@bg: './img/i_title.png', @w: 30px, @h: 30px) {
+    &:before {
+        content: '';
+        display: block;
+        .setBG(@bg, @w, @h);
+        margin-right: 10px;
+    }
+}
+
+.title-wrap {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 30px 0 30px;
+    .title {
+        font-size: 32px;
+        color: @font-color;
+        font-family: 'PingFangSC-Reqular';
+        .icon-before();
+        display: flex;
+        align-items: center;
+    }
+}

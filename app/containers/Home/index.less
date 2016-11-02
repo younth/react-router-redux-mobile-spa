@@ -1,0 +1,28 @@
+@import '../../../static/styles/public.less';
+@shallow-gray2: #a9a9a9; // 文字浅灰色（活动规则,tip,小度商城规则）
+.setBG(@url, @w, @h) {
+    background: url(@url) no-repeat;
+    width: @w;
+    height: @h;
+    background-size: 100% 100%;
+}
+
+.icon-before(@bg: './img/i_rule.png', @w: 28px, @h: 28px) {
+    &:before {
+        content: '';
+        display: block;
+        .setBG(@bg, @w, @h);
+        margin-right: 10px;
+    }
+}
+
+.to-rule {
+    font-size: 24px;
+    color: @shallow-gray2;
+    font-family: 'PingFangSC-Reqular';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .icon-before();
+    margin: 30px 0;
+}
