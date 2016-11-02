@@ -15,10 +15,10 @@ class Onsell extends Component {
     render() {
         return (
             <div>
-                <div className="title-wrap">
-                    <div className="title">热卖中（<span className="city-name">北京</span>）</div>
+                <div className = "title-wrap">
+                    <div className = "title">热卖中（<span className = "city-name">北京</span>）</div>
                 </div>
-                <CardList cardlist={this.props.cardlist}/>
+                <CardList cardlist = {this.props.cardlist} isVip = {this.props.isVip}/>
             </div>
         )
     }

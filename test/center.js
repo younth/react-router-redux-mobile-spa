@@ -38,7 +38,13 @@ module.exports = function(req, res, next) {
 				privilege_name: "5折配送卡",
 				start_time: "2016-11-22",
 				end_time: "2016-11-30",
-				discount: "7", // 库存
+				privilege_rule: {
+					discount_rate: 80,
+					day_limit: 4,
+					month_limit: 20,
+					max_discount: 4
+				},
+				stock: 1030,
 				price: 0.29 // 价格（分）
 			}]
 		},

@@ -3,41 +3,63 @@
  */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import * as globalActions from '../../../actions/globalVal'
 
 import './index.less'
 
 // 组装 SellCard 组件
-const mapStateToProps = state => {
-    return {
-        globalVal: state.globalVal
-    }
-}
-const mapDispatchToProps = dispatch => {
-    return {
-        globalActions: bindActionCreators(globalActions, dispatch)
-    }
-}
-// React & Redux 绑定
-@connect(mapStateToProps,mapDispatchToProps)
-export default class SellCard extends Component {
+class SellCard extends Component {
     constructor(props, context) {
         super(props, context)
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
+        this.unfoldRule = this.unfoldRule.bind(this)
+        this.handBuyBtn = this.handBuyBtn.bind(this)
         this.state = {
-            rulefold: true // 使用规则折叠true 展开false
+            rulefold: true, // 使用规则折叠true 展开false
+            rulebtnval: '查看使用规则',
+            btnstatus: 'buy',
+            conflictreason: ''
         }
     }
     unfoldRule() {
+        this.state.rulefold = !this.state.rulefold;
         // 展开使用规则
         this.setState({
-            rulefold: false
+            rulefold: this.state.rulefold,
+            rulebtnval: this.state.rulefold ? '查看使用规则' : '使用规则'
         })
+    }
+    handBuyBtn() {
+        let btnstatus = this.state.btnstatus
+        if (btnstatus === 'buy') {
+            // 跳到提单页
+        } else if (btnstatus === 'conflict') {
+            // 提示不可购买原因 dialog
+            let conflictreason = this.state.conflictreason
+            // alert(conflictreason)
+            window.WMApp.nui.toast({text: conflictreason})
+        } else {
+            return false;
+        }
+    }
+    getBtnStatus(card, isVip) {
+        let btnstatus = 'buy', conflictreason = ''
+        if (card.stock > 0) {
+            if (isVip) {
+                btnstatus = 'conflict'
+                conflictreason = '会员不能买todo'
+            } else {
+                // todo 同类权益卡冲突待补充
+                btnstatus = 'buy'
+            }
+        } else {
+            btnstatus = 'nostock'
+        }
+        this.state.btnstatus = btnstatus
+        this.state.conflictreason = conflictreason
     }
     render() {
         let card = this.props.card
+        this.getBtnStatus(card, this.props.isVip)
         return (
             <div className="sellcard-item">
                 <div className="section1">
@@ -49,20 +71,26 @@ export default class SellCard extends Component {
                         <div className="price-wrap">
                             <div className="price">{card.price * 10 * 10}</div>
                         </div>
-                        <div className="btn-wrap">
-                            <div className="btn buy">购买</div>
-                            <div className="btn conflict">购买</div>
-                            <div className="btn nostock">缺货中</div>
+                        <div className="btn-wrap" onClick = {this.handBuyBtn}>
+                        {
+                            this.state.btnstatus === 'buy'
+                            ? <div className="btn buy">购买</div>
+                            : this.state.btnstatus === 'conflict'
+                            ? <div className="btn conflict">购买</div>
+                            : this.state.btnstatus === 'nostock'
+                            ? <div className="btn nostock">缺货中</div>
+                            : ''
+                        }
                         </div>
                     </div>
                 </div>
+                <div className="section2 to-use-rule" onClick={this.unfoldRule}>{this.state.rulebtnval}</div>
                 {
-                    this.state.rulefold
-                    ? <div className="section2 to-use-rule" onClick={this.unfoldRule.bind(this)}>查看使用规则</div>
-                    : <div className="section3 rule-wrap">
-                        <p>在山的那边 海的那边 有一群蓝精灵</p>
-                        <p>在山的那边 海的那边 有一群蓝精灵</p>
-                        <p>在山的那边 海的那边 有一群蓝精灵</p>
+                    !this.state.rulefold && <div className="section3 rule-wrap">
+                        <p>特权只在开通城市有效</p>
+                        <p>每单最高减免{card.privilege_rule && card.privilege_rule.max_discount}元配送费</p>
+                        <p>每天最多可享{card.privilege_rule && card.privilege_rule.day_limit}单</p>
+                        <p>每月最多可享{card.privilege_rule && card.privilege_rule.month_limit}单</p>
                     </div>
                 }
             </div>

@@ -44,9 +44,13 @@ export default class Home extends Component {
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
+    compontentWillMount() {
+        // 展示loading状态 todo
+        // loading()
+    }
     componentDidMount () {
         let {card, cardActions, globalActions} = this.props
-        !card.data && cardActions.getUserInfo()
+        !card.data && cardActions.getHomeCard()
 
         globalActions.addressUpdate({
             lat: '1111',
@@ -57,6 +61,8 @@ export default class Home extends Component {
         let {card} = this.props
         let user_privileges = [], city_privileges = []
         if (card.state === 2) {
+            // 隐藏loading状态 todo
+            // loading(0)
             console.log('请求成功')
             console.log(card)
             user_privileges = card.user_privileges
@@ -72,9 +78,8 @@ export default class Home extends Component {
         }
         return (
             <div>
-                <Loading loading={card.loading}/>
                 { user_privileges.length ? <Mime cardlist={user_privileges}/> : '' }
-                { city_privileges.length ? <Onsell cardlist={city_privileges} /> : '' }
+                { city_privileges.length ? <Onsell cardlist={city_privileges} isVip={card.isVip} /> : '' }
                 <Link className="to-rule" to="rule">小度商城规则</Link>
             </div>
         )

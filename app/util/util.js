@@ -87,7 +87,7 @@ var Utils = {
         window.WMApp.page.changePage(params)
     },
 
-    // 显示loading
+    // 显示loading 1(显示) 0(隐藏)
     loading(type = 1) {
         window.WMAppReady(function() {
             window.WMApp.nui.loading({
