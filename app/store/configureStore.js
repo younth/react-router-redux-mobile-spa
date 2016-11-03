@@ -11,8 +11,9 @@ export default function configureStore(initialState, history) {
     let finalCreateStore;
 
     // 触发 redux-devtools
-    finalCreateStore = compose(applyMiddleware(...middleware), window.devToolsExtension ? window.devToolsExtension() : undefined)
-
+    finalCreateStore = window.devToolsExtension ? 
+        compose(applyMiddleware(...middleware), window.devToolsExtension()) :
+        compose(applyMiddleware(...middleware))
     // 创建 store，第二个参数是可选的, 用于设置 state 初始状态
     const store = finalCreateStore(createStore)(rootReducer, initialState)
 
