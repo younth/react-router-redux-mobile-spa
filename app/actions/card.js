@@ -17,3 +17,10 @@ export const getConfirmInfo = () => {
 		promise: get('/wmall/view?display=json') // 还需要传入特权卡ID
 	}
 }
+//获取特权卡使用详情，promise形式
+export const getDiscountDetail = () => {
+	return {
+		type: actionTypes.GET_DISCOUNTDETAIL,
+		promise: get('/wmall/promotiondetail?display=json') // TODO
+	}
+}

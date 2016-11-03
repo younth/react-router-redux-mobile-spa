@@ -13,6 +13,8 @@ import Home from './containers/Home'
 import User from './containers/User'
 // Confirm 提交订单页
 import Confirm from './containers/Confirm'
+// Detail 使用详情
+import Detail from './containers/Detail'
 
 // 404
 import NotFound from './containers/404'
@@ -38,6 +40,7 @@ export default class RouteMap extends Component {
                 <Route path="/" component={App}>
                     <IndexRoute component={Home}/>
                     <Route path="confirm" component={Confirm} onEnter={redirectToLogin} />
+                    <Route path="detail" component={Detail} onEnter={redirectToLogin} />
 
                     <Route path="user" component={User} onEnter={redirectToLogin} />
                     {/* 404 */}

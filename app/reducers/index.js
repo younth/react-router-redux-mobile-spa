@@ -5,6 +5,7 @@ import userinfo from './userinfo'
 import globalVal from './globalVal'
 import card from './card'
 import confirm from './confirm'
+import detail from './detail'
 
 // 聚合reducer
 const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
 	userinfo,
 	card,
 	globalVal,
-	confirm
+	confirm,
+	detail
 })
 
 export default rootReducer
