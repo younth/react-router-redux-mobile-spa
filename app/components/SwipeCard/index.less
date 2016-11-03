@@ -11,7 +11,7 @@
     background-size: 100% 100%;
 }
 
-.icon-after(@bg: './img/i_right.png', @w: 11px, @h: 20px) {
+.icon-after(@bg: '../../../static/img/i_right_white.png', @w: 11px, @h: 20px) {
     &:after {
         content: '';
         display: block;
@@ -20,7 +20,7 @@
     }
 }
 
-.icon-before(@bg: './img/i_location.png', @w: 15px, @h: 19px) {
+.icon-before(@bg: '../../../static/img/i_location.png', @w: 15px, @h: 19px) {
     &:before {
         content: '';
         display: block;
@@ -32,6 +32,7 @@
 .swipe-wrap {
     width: 10000px;
     display: flex;
+    margin-left: 15px; // 不要删
     // width: 750px;
     // overflow: hidden;
     // position: relative;
@@ -42,55 +43,66 @@
     font-size: 22px;
     color: @white;
     font-family: 'PingFangSC-Reqular';
-    width: 540px;
-    height: 290px;
-    padding: 30px 40px;
+    width: 620px; // 540px;
+    height: 350px; // 290px;
     border-radius: 15px; // todo
     background: url('img/bg-card.png');
     background-color: @red;
+    display: flex;
     float: left;
-    .section1 {
-        display: flex;
-        justify-content: space-between;
-        .city {
-            .icon-before();
+    .inner-card {
+        width: 100%;
+        height: 100%;
+        padding: 30px 40px;
+        .section1 {
             display: flex;
-            align-items: center;
-        }
-        .to-use-detail {
-            font-size: 22px;
-            color: @white;
-            font-family: 'PingFangSC-Reqular';
-            .icon-after();
-            display: flex;
-            align-items: center;
-        }
-    }
-    .section2 {
-        display: flex;
-        align-items: flex-end;
-        height: 180px;
-        .discount {
-            font-size: 140px;
-            margin-right: 20px;
-            margin-left: 10px;
-        }
-        .discount-rule {
-            .name {
-                font-size: 40px;
-                font-family: 'PingFangSc-Semibolds';
-                margin-bottom: 16px;
+            justify-content: space-between;
+            .city {
+                .icon-before();
+                [data-dpr = '3'] & {
+                    .icon-before('../../../static/img/i_location3x.png', 23px, 29px);
+                }
+                display: flex;
+                align-items: center;
             }
-            .desc {
-                font-size: 26px;
-                margin-bottom: 16px;
+            .to-use-detail {
+                font-size: 22px;
+                color: @white;
+                font-family: 'PingFangSC-Reqular';
+                .icon-after();
+                [data-dpr = '3'] & {
+                    .icon-after('../../../static/img/i_right_white3x.png', 15px, 26px);
+                }
+                display: flex;
+                align-items: center;
             }
         }
-    }
-    .section3 {
-        .time-wrap {
-            vertical-align: bottom;
-            text-align: right;
+        .section2 {
+            display: flex;
+            align-items: flex-end;
+            height: 220px;
+            .discount {
+                font-size: 200px;
+                margin-right: 20px;
+                margin-left: 10px;
+            }
+            .discount-rule {
+                .name {
+                    font-size: 40px;
+                    font-family: 'PingFangSc-Semibolds';
+                    margin-bottom: 16px;
+                }
+                .desc {
+                    font-size: 26px;
+                    margin-bottom: 16px;
+                }
+            }
+        }
+        .section3 {
+            .time-wrap {
+                vertical-align: bottom;
+                text-align: right;
+            }
         }
     }
 }
@@ -98,7 +110,7 @@
 .card-item {
     margin: 40px 15px 0 15px;
     &.only-card {
-        width: 610px;
+        width: 690px; // 610px;
         float: none;
     }
     &.unenforcedCard {
@@ -109,11 +121,18 @@
             }
         }
     }
+    &.validCard {
+        .section3 {
+            .time-wrap {
+                margin-top: 20px;
+            }
+        }
+    }
     &.renewCard,
     &.expiredCard,
     &.uselessCard {
         .section2 {
-            height: 170px;
+            height: 210px;
             justify-content: space-between;
             .desc-wrap {
                 display: flex;
@@ -128,7 +147,7 @@
                 .v-height(40px);
                 background: @yellow;
                 margin-right: -40px;
-                margin-bottom: 12px;
+                margin-bottom: 20px;
                 border-radius: 30px 0 0 30px;
                 text-indent: 20px;
             }
@@ -139,6 +158,7 @@
                 justify-content: flex-end;
                 .btn {
                     .btn(@white);
+                    margin-top: -5px;
                 }
             }
         }

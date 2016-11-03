@@ -45,13 +45,24 @@ class SellCard extends Component {
         let btnstatus = 'buy', conflictreason = ''
         if (card.stock > 0) {
             if (isVip) {
+                // 会员冲突
                 btnstatus = 'conflict'
                 conflictreason = '会员不能买todo'
             } else {
                 // todo 同类权益卡冲突待补充
-                btnstatus = 'buy'
+                let btn_state = Number.parseInt(card.btn_state)
+                if (btn_state === 1) {
+                    // 可购买
+                    btnstatus = 'buy'
+                } else if (btn_state === 2) {
+                    btnstatus = 'conflict'
+                    conflictreason = card.conflict_msg
+                } else if (btn_state === 3) {
+                    btnstatus = 'renew'
+                }
             }
         } else {
+            // 无库存
             btnstatus = 'nostock'
         }
         this.state.btnstatus = btnstatus
@@ -64,7 +75,12 @@ class SellCard extends Component {
             <div className="sellcard-item">
                 <div className="section1">
                     <div className="base-info">
-                        <div className="name">{card.privilege_name}</div>
+                        <div className="name">
+                            {card.privilege_name}
+                            {
+                                (card.stock <= 1000 && card.stock > 0) && <span className="stock">（库存{card.stock}张）</span>
+                            }
+                        </div>
                         <div className="desc">仅支持百度专送</div>
                     </div>
                     <div className="other-info">
@@ -75,6 +91,8 @@ class SellCard extends Component {
                         {
                             this.state.btnstatus === 'buy'
                             ? <div className="btn buy">购买</div>
+                            : this.state.btnstatus === 'renew'
+                            ? <div className="btn renew">续费</div>
                             : this.state.btnstatus === 'conflict'
                             ? <div className="btn conflict">购买</div>
                             : this.state.btnstatus === 'nostock'

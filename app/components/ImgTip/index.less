@@ -1,0 +1,41 @@
+@import '../../../static/styles/common.less';
+@gray: #a9a9a9;
+.setBG(@url, @w, @h) {
+    background: url(@url) no-repeat;
+    width: @w;
+    height: @h;
+    background-size: 100% 100%;
+}
+
+.tip-wrap {
+    margin-top: 40px;
+    margin-bottom: 60px;
+    text-align: center;
+    .tip-img {
+        margin: 0 auto;
+    }
+    .tip-msg {
+        font-size: 28px;
+        color: @gray;
+        p {
+            margin-top: 15px;
+        }
+    }
+    &.viptip {
+        .tip-img {
+            .setBG('./img/tip_nousercard.png', 194px, 184px);
+        }
+    }
+    &.nousercard {
+        .tip-img {
+            .setBG('./img/tip_nousercard.png', 194px, 184px);
+        }
+    }
+    &.nocitycard {
+        margin-top: 80px;
+        margin-bottom: 130px;
+        .tip-img {
+            .setBG('./img/tip_nocitycard.png', 220px, 220px);
+        }
+    }
+}

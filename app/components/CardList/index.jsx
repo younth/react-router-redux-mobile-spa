@@ -7,8 +7,6 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import SellCard from './SellCard';
 import MessageTip from './MessageTip';
 
-import './index.less'
-
 // 组装 CardList 组件
 class CardList extends Component {
     constructor(props, context) {

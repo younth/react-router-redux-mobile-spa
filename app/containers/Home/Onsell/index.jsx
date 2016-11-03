@@ -5,6 +5,8 @@ import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import CardList from '../../../components/CardList'
+import TitleBar from '../../../components/TitleBar'
+import ImgTip from '../../../components/ImgTip'
 
 // 组装 Onsell 组件
 class Onsell extends Component {
@@ -15,9 +17,7 @@ class Onsell extends Component {
     render() {
         return (
             <div>
-                <div className = "title-wrap">
-                    <div className = "title">热卖中（<span className = "city-name">北京</span>）</div>
-                </div>
+                <TitleBar type = "cityCard" title = "热卖中（北京）" />
                 <CardList cardlist = {this.props.cardlist} isVip = {this.props.isVip}/>
             </div>
         )

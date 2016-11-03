@@ -42,13 +42,13 @@ class SwipeCard extends Component {
         // 获取有效卡 valid
         let valid = cardlist && cardlist.valid || []
         // 区分有效卡中的 正常有效卡、可续费卡 和 未生效卡
-        // 判断依据 renew_state 为 true 标识可续费, can_use 为 true 代表当前可使用
+        // 判断依据 renew_state 为 true 标识可续费, current_in_service 为 true 代表当前可使用
         valid.length && valid.map((item, index) => {
             if (item.renew_state) {
                 // 可续费卡（提示续费）
                 item.cardType = 'renewCard'
                 renewCard.push(item)
-            } else if (item.can_use) {
+            } else if (item.current_in_service) {
                 // 当前可用卡（只展示截止时间）
                 item.cardType = 'validCard'
                 validCard.push(item)

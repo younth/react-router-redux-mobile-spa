@@ -1,5 +1,6 @@
 @import '../../../../static/styles/common.less';
 @red: #ff2d4b; // 外卖红
+@yellow: #ffac1c;
 @font-color: #333; // 基本文字颜色
 @shallow-gray: #808080; // 文字浅灰色（活动规则）
 @shallow-gray2: #a9a9a9;
@@ -10,19 +11,19 @@
     background-size: 100% 100%;
 }
 
-.point-before() {
+.point-before(@size: 6px) {
     &:before {
         content: '';
-        width: 6px;
-        height: 6px;
-        border-radius: 6px;
+        width: @size;
+        height: @size;
+        border-radius: @size;
         display: block;
         margin-right: 16px;
         background: @shallow-gray2;
     }
 }
 
-.icon-after(@bg: './img/i_bottom.png', @w: 17px, @h: 10px) {
+.icon-after(@bg: '../../../../static/img/i_bottom.png', @w: 17px, @h: 10px) {
     &:after {
         content: '';
         display: block;
@@ -52,14 +53,18 @@
             .name {
                 font-size: 32px;
                 color: @font-color;
-                font-family: 'PingFangSc-Semibolds';
                 font-weight: bold;
                 margin-bottom: 20px;
+                .stock {
+                    font-size: 28px;
+                    color: @yellow;
+                font-weight: normal;
+
+                }
             }
             .desc {
                 font-size: 28px;
                 color: @font-color;
-                font-family: 'PingFangSC-Reqular';
                 margin-bottom: 4px;
             }
         }
@@ -73,7 +78,6 @@
                 display: flex;
                 align-items: flex-end;
                 .yuan();
-                font-family: 'PingFangSC-Reqular';
                 font-size: 38px;
                 color: @red;
             }
@@ -96,25 +100,24 @@
     .section2.to-use-rule {
         font-size: 24px;
         color: @shallow-gray;
-        font-family: 'PingFangSC-Reqular';
         display: flex;
         align-items: center;
         margin-top: 16px;
         .icon-after();
+        [data-dpr = '3'] & {
+            .icon-after('../../../../static/img/i_bottom3x.png', 26px, 15px);
+        }
     }
     .section3.rule-wrap {
         p {
             display: flex;
             align-items: center;
             .point-before();
+            [data-dpr = '3'] & {
+                .point-before(9px);
+            }
+            color: @shallow-gray2;
             margin-top: 16px;
         }
     }
-}
-
-.sellcard-item.tip {
-    border-bottom: none;
-    font-size: 28x;
-    color: @shallow-gray2;
-    font-family: 'PingFangSC-Reqular';
 }

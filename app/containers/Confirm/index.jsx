@@ -62,7 +62,6 @@ export default class Confirm extends Component {
             // 隐藏loading状态 todo
             // loading(0)
             // console.log('请求成功')
-            console.log(card)
             userPrivileges = card.userPrivileges
             cityPrivileges = card.cityPrivileges
             // 更新全局数据

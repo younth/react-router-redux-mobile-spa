@@ -12,6 +12,7 @@ import './index.less'
 
 import Mime from './Mime'
 import Onsell from './Onsell'
+import ImgTip from '../../components/ImgTip'
 
 import * as demoActions from '../../actions/demo'
 import * as userInfoActions from '../../actions/userinfo'
@@ -63,9 +64,8 @@ export default class Home extends Component {
             // 隐藏loading状态 todo
             // loading(0)
             // console.log('请求成功')
-            console.log(card)
-            userPrivileges = card.userPrivileges
-            cityPrivileges = card.cityPrivileges
+            userPrivileges = card.userPrivileges || {} // [valid = [{}, {}, {}], expired = [{}, {}, {}]]
+            cityPrivileges = card.cityPrivileges || [] // [{}, {}, {}]
             // 更新全局数据
             globalActions.addressUpdate({
                 isVip: card.isVip
@@ -73,8 +73,12 @@ export default class Home extends Component {
         }
         return (
             <div>
-                { userPrivileges && <Mime cardlist={userPrivileges}/> }
-                { cityPrivileges && cityPrivileges.length && <Onsell cardlist={cityPrivileges} isVip={card.isVip} /> }
+                { userPrivileges && <Mime cardlist={userPrivileges} isVip={card.isVip} /> }
+                { 
+                    cityPrivileges.length
+                    ? <Onsell cardlist={cityPrivileges} isVip={card.isVip} /> 
+                    : <ImgTip type = "nocitycard" /> 
+                }
                 <Link className="to-rule" to="rule">小度商城规则</Link>
             </div>
         )
