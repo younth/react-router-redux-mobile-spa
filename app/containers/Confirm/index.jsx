@@ -9,23 +9,20 @@ import { Link } from 'react-router'
 
 import './index.less'
 
-import Mime from './Mime'
-import Onsell from './Onsell'
+import TitleBar from '../../components/TitleBar'
+import Access from '../../components/Access'
 
-import * as demoActions from '../../actions/demo'
-import * as userInfoActions from '../../actions/userinfo'
 import * as globalActions from '../../actions/globalVal'
 import * as cardActions from '../../actions/card'
 
 const mapStateToProps = state => {
     return {
-        card: state.card,
+        confirm: state.confirm,
         globalVal: state.globalVal
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        demoActions: bindActionCreators(demoActions, dispatch),
         globalActions: bindActionCreators(globalActions, dispatch),
         cardActions: bindActionCreators(cardActions, dispatch)
     }
@@ -35,8 +32,7 @@ const mapDispatchToProps = dispatch => {
 export default class Confirm extends Component {
     static propTypes = {
         globalActions: PropTypes.object.isRequired,
-        cardActions: PropTypes.object.isRequired,
-        demoActions: PropTypes.object.isRequired
+        cardActions: PropTypes.object.isRequired
     }
     constructor(props, context) {
         super(props, context);
@@ -47,33 +43,46 @@ export default class Confirm extends Component {
         // loading()
     }
     componentDidMount () {
-        let {card, cardActions, globalActions} = this.props
-        !card.data && cardActions.getHomeCard()
-
+        let {confirm, cardActions, globalActions} = this.props
+        !confirm.data && cardActions.getConfirmInfo()
         globalActions.addressUpdate({
             lat: '1111',
             lng: '22222'
         })
     }
     render() {
-        let {card} = this.props
-        let userPrivileges = [], cityPrivileges = []
-        if (card.errno === 0) {
+        let {confirm} = this.props
+        console.log(confirm);
             // 隐藏loading状态 todo
             // loading(0)
-            // console.log('请求成功')
-            userPrivileges = card.userPrivileges
-            cityPrivileges = card.cityPrivileges
             // 更新全局数据
-            globalActions.addressUpdate({
-                isVip: card.isVip
-            })
-        }
+            // globalActions.addressUpdate({
+            //     isVip: card.isVip
+            // })
         return (
-            <div>
-                { userPrivileges && <Mime cardlist={userPrivileges}/> }
-                { cityPrivileges && cityPrivileges.length && <Onsell cardlist={cityPrivileges} isVip={card.isVip} /> }
-                <Link className="to-rule" to="rule">小度商城规则</Link>
+            <div className = "confirmPage">
+                <TitleBar type = "accessTitle" title = "本卡特权" />
+                <Access />
+                <TitleBar type = "cityTitle" title = "开通城市" />
+                <div className = "city-show">北京</div>
+                <div className = "select-period">
+                    <TitleBar type = "periodTitle" title = "有效期" />
+                    <div className = "radio-wrap">
+                        <div className="radio-item">
+                            <div className = "text">一个月</div>
+                            <div className = "radio"></div>
+                        </div>
+                        <div className="radio-item">
+                            <div className = "text">一个月</div>
+                            <div className = "radio"></div>
+                        </div>
+                    </div>
+                </div>
+                <div className = "agree-wrap">
+                    <div className="radio"></div>
+                    同意并接受<Link to="rule">《百度外卖购卡协议》</Link>
+                </div>
+                <div className="buy-card">去支付 ￥30</div>
             </div>
         )
     }

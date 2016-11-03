@@ -1,0 +1,29 @@
+@import '../../../static/styles/common.less';
+@black: #333;
+.setBG(@url, @w, @h) {
+    background: url(@url) no-repeat;
+    width: @w;
+    height: @h;
+    background-size: 100% 100%;
+}
+
+.access-wrap {
+    display: flex;
+    width: 100%;
+    height: 130px;
+    color: @black;
+    font-size: 24px;
+    text-align: center;
+    align-items: center;
+    .access-item {
+        flex: 1;
+        .info {
+            margin-bottom: 10px;
+            .num {
+                font-size: 59px;
+                margin-right: 6px;
+            }
+        }
+        .desc {}
+    }
+}

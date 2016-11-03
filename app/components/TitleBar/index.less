@@ -42,9 +42,37 @@
     }
     &.cityCard {
         .title {
-            .icon-before(@bg: '../../../static/img/i_hotsell3x.png', @w: 45px, @h: 45px);
+            .icon-before(@bg: '../../../static/img/i_hotsell.png', @w: 30px, @h: 30px);
             [data-dpr=3] & {
                 .icon-before(@bg: '../../../static/img/i_hotsell3x.png', @w: 45px, @h: 45px);
+            }
+        }
+    }
+    &.accessTitle {
+        .title {
+            .icon-before(@bg: '../../../static/img/i_access.png', @w: 30px, @h: 30px);
+            [data-dpr=3] & {
+                .icon-before(@bg: '../../../static/img/i_access3x.png', @w: 45px, @h: 45px);
+            }
+        }
+    }
+    &.cityTitle {
+        .title {
+            .icon-before(@bg: '../../../static/img/i_city.png', @w: 30px, @h: 30px);
+            [data-dpr=3] & {
+                .icon-before(@bg: '../../../static/img/i_city3x.png', @w: 45px, @h: 45px);
+            }
+        }
+    }
+    &.accessTitle, &.cityTitle {
+        margin: 40px 30px;
+    }
+    &.periodTitle {
+        margin: 0 0 0 20px;
+        .title {
+            .icon-before(@bg: '../../../static/img/i_period.png', @w: 30px, @h: 30px);
+            [data-dpr=3] & {
+                .icon-before(@bg: '../../../static/img/i_period3x.png', @w: 45px, @h: 45px);
             }
         }
     }

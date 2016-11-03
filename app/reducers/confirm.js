@@ -7,22 +7,20 @@ const initialState = {
 export default function card(state = initialState, action) {
     switch (action.type) {
 
-        case actionTypes.GET_HOMECARD_REQUEST:
+        case actionTypes.GET_CONFIRMINFO_REQUEST:
             return {
                 ...state,
                 loading: true,
             }
-        case actionTypes.GET_HOMECARD_SUCCESS:
+        case actionTypes.GET_CONFIRMINFO_SUCCESS:
             let result = action.json.result;
             return {
                 ...state,
                 loading: false,
-                userPrivileges: result.user_privileges,
-                cityPrivileges: result.city_privileges,
-                isVip: result.is_vip,
+                data: result,
                 errno: 0
             }
-        case actionTypes.GET_HOMECARD_FAILURE:
+        case actionTypes.GET_CONFIRMINFO_FAILURE:
             // error_no 不等于0
             return {
                 ...state,

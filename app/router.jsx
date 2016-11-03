@@ -12,8 +12,7 @@ import App from './containers/App'
 import Home from './containers/Home'
 import User from './containers/User'
 // Confirm 提交订单页
-// import Confirm from './containers/Confirm'
-                    // <Route path="confirm" component={Confirm} onEnter={redirectToLogin} />
+import Confirm from './containers/Confirm'
 
 // 404
 import NotFound from './containers/404'
@@ -38,6 +37,8 @@ export default class RouteMap extends Component {
                 {/* 先加载app组件 */}
                 <Route path="/" component={App}>
                     <IndexRoute component={Home}/>
+                    <Route path="confirm" component={Confirm} onEnter={redirectToLogin} />
+
                     <Route path="user" component={User} onEnter={redirectToLogin} />
                     {/* 404 */}
                     <Route path="*" component={NotFound}/>
