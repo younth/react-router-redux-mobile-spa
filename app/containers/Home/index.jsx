@@ -74,11 +74,7 @@ export default class Home extends Component {
         return (
             <div>
                 { userPrivileges && <Mime cardlist={userPrivileges} isVip={card.isVip} /> }
-                { 
-                    cityPrivileges.length
-                    ? <Onsell cardlist={cityPrivileges} isVip={card.isVip} /> 
-                    : <ImgTip type = "nocitycard" /> 
-                }
+                { cityPrivileges && <Onsell cardlist={cityPrivileges} isVip={card.isVip} /> }
                 <Link className="to-rule" to="rule">小度商城规则</Link>
             </div>
         )
