@@ -1,4 +1,4 @@
-@import '../../../../static/styles/public.less';
+@import '../../../../static/styles/common.less';
 @red: #ff2d4b; // 外卖红
 @font-color: #333; // 基本文字颜色
 @shallow-gray: #808080; // 文字浅灰色（活动规则）
@@ -8,15 +8,6 @@
     width: @w;
     height: @h;
     background-size: 100% 100%;
-}
-
-.yuan() {
-    &:before {
-        content: '￥';
-        color: @red;
-        font-size: 22px;
-        display: block;
-    }
 }
 
 .point-before() {
@@ -37,6 +28,15 @@
         display: block;
         .setBG(@bg, @w, @h);
         margin-left: 10px;
+    }
+}
+
+.yuan() {
+    &:before {
+        content: '￥';
+        color: @red;
+        font-size: 22px;
+        display: block;
     }
 }
 
@@ -79,18 +79,14 @@
             }
             .btn-wrap {
                 .btn {
-                    width: 110px;
-                    .v-height(50px);
-                    border-radius: 25px;
-                    text-align: center;
-                    font-size: 28px;
-                    font-family: 'PingFangSC-Reqular';
+                    .btn();
                 }
                 .buy {
                     border: 2px solid @red;
-                    color: @red;                    
+                    color: @red;
                 }
-                .conflict, .nostock {
+                .conflict,
+                .nostock {
                     border: 2px solid @shallow-gray2;
                     color: @shallow-gray2;
                 }

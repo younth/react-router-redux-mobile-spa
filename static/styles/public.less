@@ -5,11 +5,10 @@
 @support-ie-version: 9;
 @support-old-ie: false;
 @support-html5: false;
-
 //变量
 @com-color: #ee2b4e;
 @yellow: #fff56c;
-
+@red: #ff2d4b; // 外卖红
 //公用方法
 .center() {
     position: absolute;
@@ -17,7 +16,8 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
-.all-center(){
+
+.all-center() {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,44 +28,50 @@
     left: 50%;
     transform: translateX(-50%);
 }
+
 .y-center() {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
 }
+
 .v-height(@height) {
     height: @height;
     line-height: @height;
 }
 
-.background(@width, @height, @url) {
-    background: url(@url) no-repeat;
-    width: @width;
-    height: @height;
-    background-size: 100% 100%;
-}
-
-.hide() {
+.hide {
     display: none!important
 }
 
 //动画方法
-.animate(@type, @duration: .5s, @delay: 0s, @ease: linear, @count: 1){
+.animate(@type, @duration: .5s, @delay: 0s, @ease: linear, @count: 1) {
     animation: @type @duration @delay @ease;
     animation-fill-mode: both;
     animation-iteration-count: @count;
 }
 
 //不设置width
-.btn(@height, @background) {
-    display: block;
-    height: @height;
-    line-height: @height;
-    border-radius: 45px;
+// .btn(@height, @background) {
+//     display: block;
+//     height: @height;
+//     line-height: @height;
+//     border-radius: 45px;
+//     text-align: center;
+//     background: @background;
+// }
+// 通用按钮 透明有边距
+.btn(@red: @red) {
+    width: 110px;
+    .v-height(50px);
+    border-radius: 25px;
     text-align: center;
-    background: @background;
+    font-size: 28px;
+    border: 2px solid @red;
+    color: @red;
 }
 
 .pixel-border(@color) {
-    border: 1px solid @color;/*px*/
+    border: 1px solid @color;
+    /*px*/
 }

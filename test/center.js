@@ -25,7 +25,30 @@ module.exports = function(req, res, next) {
                     },
                     expired: false, // 是否过期
                     renew_state: false, // 是否可续费
-                    expired_in: 226, // 还有多少天过期
+                    can_use: true, // 是否可用
+                    expired_in: 3, // 还有多少天过期
+                    city_name: "北京市",
+                    discount_rate: 5, // 几折
+                    off_sale: false // 是否下架
+                }, {
+                    city_id: 131,
+                    state: 1,
+                    start_time: "2016-10-28",
+                    end_time: "2017-06-17",
+                    privilege_no: 131201611000001,
+                    privilege_type: 1000,
+                    privilege_desc: "配送折扣",
+                    privilege_name: "32131231",
+                    privilege_info: {
+                        discount_rate: 80,
+                        day_limit: 4,
+                        month_limit: 20,
+                        max_discount: 4
+                    },
+                    expired: false, // 是否过期
+                    renew_state: true, // 是否可续费
+                    can_use: false, // 是否可用
+                    expired_in: 3, // 还有多少天过期
                     city_name: "北京市",
                     discount_rate: 5, // 几折
                     off_sale: false // 是否下架
@@ -46,30 +69,10 @@ module.exports = function(req, res, next) {
                     },
                     expired: false, // 是否过期
                     renew_state: false, // 是否可续费
-                    expired_in: 226, // 还有多少天过期
-                    city_name: "北京市",
-                    discount_rate: 8, // 几折
-                    off_sale: false // 是否下架
-                }, {
-                    city_id: 131,
-                    state: 1,
-                    start_time: "2016-10-28",
-                    end_time: "2017-06-17",
-                    privilege_no: 131201611000001,
-                    privilege_type: 1000,
-                    privilege_desc: "配送折扣",
-                    privilege_name: "32131231",
-                    privilege_info: {
-                        discount_rate: 80,
-                        day_limit: 4,
-                        month_limit: 20,
-                        max_discount: 4
-                    },
-                    expired: false, // 是否过期
-                    renew_state: true, // 是否可续费
+                    can_use: false, // 是否可用
                     expired_in: 3, // 还有多少天过期
                     city_name: "北京市",
-                    discount_rate: 8, // 几折
+                    discount_rate: 5, // 几折
                     off_sale: false // 是否下架
                 }],
                 expired: [{
@@ -89,9 +92,10 @@ module.exports = function(req, res, next) {
                     },
                     expired: true, // 是否过期
                     renew_state: true, // 是否可续费
-                    expired_in: 226, // 还有多少天过期
+                    can_use: false, // 是否可用
+                    expired_in: 3, // 还有多少天过期
                     city_name: "北京市",
-                    discount_rate: 8, // 几折
+                    discount_rate: 5, // 几折
                     off_sale: false // 是否下架
                 }, {
                     city_id: 131,
@@ -108,11 +112,12 @@ module.exports = function(req, res, next) {
                         month_limit: 20,
                         max_discount: 4
                     },
-                    expired: false, // 是否过期
+                    expired: true, // 是否过期
                     renew_state: false, // 是否可续费
-                    expired_in: 226, // 还有多少天过期
+                    can_use: false, // 是否可用
+                    expired_in: 3, // 还有多少天过期
                     city_name: "北京市",
-                    discount_rate: 8, // 几折
+                    discount_rate: 5, // 几折
                     off_sale: true // 是否下架
                 }]
             },

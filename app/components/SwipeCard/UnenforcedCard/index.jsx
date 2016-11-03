@@ -1,13 +1,13 @@
 /*
- * @file 首页已购卡片-有效卡组件 ValidCard
+ * @file 首页已购卡片-未生效卡组件 UnenforcedCard
  */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Link } from 'react-router'
 import classNames from 'classnames';
 
-// 组装 ValidCard 组件
-class ValidCard extends Component {
+// 组装 UnenforcedCard 组件
+class UnenforcedCard extends Component {
     constructor(props, context) {
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -30,7 +30,8 @@ class ValidCard extends Component {
                 </div>
                 <div className="section3">
                     <div className="time-wrap">
-                        有效期至 {card.end_time}
+                        有效期 
+                        <div className="time">{card.start_time} ~ {card.end_time}</div>
                     </div>
                 </div>
             </div>
@@ -38,4 +39,4 @@ class ValidCard extends Component {
     }
 }
 
-export default ValidCard
+export default UnenforcedCard

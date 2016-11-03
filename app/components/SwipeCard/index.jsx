@@ -8,7 +8,9 @@ import ReactSwipe from 'react-swipe';
 
 import ValidCard from './ValidCard';
 import RenewCard from './RenewCard';
+import UnenforcedCard from './UnenforcedCard';
 import ExpiredCard from './ExpiredCard';
+import UselessCard from './UselessCard';
 
 import './index.less'
 
@@ -35,19 +37,25 @@ class SwipeCard extends Component {
     // => 我选择了遍历两遍的方式，第一遍判断卡类型，第二遍渲染DOM
     distinguishCard(cardlist = []) {
         // 定义返回值
-        let validCard = [], renewCard = [], expiredCard = [], uselessCard = []
+        let validCard = [], renewCard = [], unenforcedCard = [], expiredCard = [], uselessCard = []
         let num = 0 // 已购卡数量
         // 获取有效卡 valid
         let valid = cardlist && cardlist.valid || []
-        // 区分有效卡中的 正常有效卡 和 可续费卡
-        // 判断依据 renew_state 为 true 标识可续费
+        // 区分有效卡中的 正常有效卡、可续费卡 和 未生效卡
+        // 判断依据 renew_state 为 true 标识可续费, can_use 为 true 代表当前可使用
         valid.length && valid.map((item, index) => {
             if (item.renew_state) {
+                // 可续费卡（提示续费）
                 item.cardType = 'renewCard'
                 renewCard.push(item)
-            } else {
+            } else if (item.can_use) {
+                // 当前可用卡（只展示截止时间）
                 item.cardType = 'validCard'
                 validCard.push(item)
+            } else {
+                // 未生效卡（展示起止时间）
+                item.cardType = 'unenforcedCard'
+                unenforcedCard.push(item)
             }
         })
         // 获取过期卡 expired
@@ -56,27 +64,29 @@ class SwipeCard extends Component {
         // 判断依据 renew_state 为 true 代表可续费
         expired.length && expired.map((item, index) => {
             if (item.renew_state) {
+                // 过期在售可续费卡
                 item.cardType = 'expiredCard'
                 expiredCard.push(item)
             } else if (item.off_sale) {
+                // 过期下架可删除卡
                 item.cardType = 'uselessCard'
                 uselessCard.push(item)
             }
         })
-        // 获取已购卡总数量
-        // num = valid && valid.length + expired && expired.length
         // 排序后的 cardlist
         let ranklist = renewCard
-        ranklist = ranklist.concat(validCard).concat(expiredCard).concat(uselessCard)
-        // 获取已购卡总数量
-        // num = ranklist.length
+        ranklist = ranklist.concat(validCard).concat(unenforcedCard).concat(expiredCard).concat(uselessCard)
+
         return ranklist // 排序后的 cardlist
     }
     renderCard(card, key, specialType = '') {
+        specialType = specialType ? `${specialType} ${card.cardType}` : card.cardType;
         if (card.cardType === 'renewCard') {
             return <RenewCard key = {key} card = {card} cardType = {specialType}/>
         } else if (card.cardType === 'validCard') {
             return <ValidCard key = {key} card = {card} cardType = {specialType}/>
+        } else if (card.cardType === 'unenforcedCard') {
+            return <UnenforcedCard key = {key} card = {card} cardType = {specialType}/>
         } else if (card.cardType === 'expiredCard') {
             return <ExpiredCard key = {key} card = {card} cardType = {specialType}/>
         } else if (card.cardType === 'uselessCard') {
@@ -85,7 +95,6 @@ class SwipeCard extends Component {
     }
     render() {
         let cardlist = this.distinguishCard(this.props.cardlist)
-        console.log(cardlist.length);
         return (
             <div>
             {

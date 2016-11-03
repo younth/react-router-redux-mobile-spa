@@ -1,4 +1,9 @@
-@import '../../../static/styles/public.less';
+@import '../../../static/styles/common.less';
+@red: #ff2d4b; // 外卖红
+@white: #fff;
+@yellow: #ffac1c;
+@bg-gray: #b4b4b4;
+@bg-dark-gray: #828282;
 .setBG(@url, @w, @h) {
     background: url(@url) no-repeat;
     width: @w;
@@ -6,8 +11,26 @@
     background-size: 100% 100%;
 }
 
+.icon-after(@bg: './img/i_right.png', @w: 11px, @h: 20px) {
+    &:after {
+        content: '';
+        display: block;
+        .setBG(@bg, @w, @h);
+        margin-left: 10px;
+    }
+}
+
+.icon-before(@bg: './img/i_location.png', @w: 15px, @h: 19px) {
+    &:before {
+        content: '';
+        display: block;
+        .setBG(@bg, @w, @h);
+        margin-right: 10px;
+    }
+}
+
 .swipe-wrap {
-    width: 2000px;
+    width: 10000px;
     display: flex;
     // width: 750px;
     // overflow: hidden;
@@ -16,9 +39,118 @@
 
 // card-item 公共样式
 .card-item {
+    font-size: 22px;
+    color: @white;
+    font-family: 'PingFangSC-Reqular';
+    width: 540px;
+    height: 290px;
+    padding: 30px 40px;
+    border-radius: 15px; // todo
+    background: url('img/bg-card.png');
+    background-color: @red;
+    float: left;
+    .section1 {
+        display: flex;
+        justify-content: space-between;
+        .city {
+            .icon-before();
+            display: flex;
+            align-items: center;
+        }
+        .to-use-detail {
+            font-size: 22px;
+            color: @white;
+            font-family: 'PingFangSC-Reqular';
+            .icon-after();
+            display: flex;
+            align-items: center;
+        }
+    }
+    .section2 {
+        display: flex;
+        align-items: flex-end;
+        height: 180px;
+        .discount {
+            font-size: 140px;
+            margin-right: 20px;
+            margin-left: 10px;
+        }
+        .discount-rule {
+            .name {
+                font-size: 40px;
+                font-family: 'PingFangSc-Semibolds';
+                margin-bottom: 16px;
+            }
+            .desc {
+                font-size: 26px;
+                margin-bottom: 16px;
+            }
+        }
+    }
+    .section3 {
+        .time-wrap {
+            vertical-align: bottom;
+            text-align: right;
+        }
+    }
+}
+
+.card-item {
     margin: 40px 15px 0 15px;
     &.only-card {
-        width: 690px;
+        width: 610px;
         float: none;
+    }
+    &.unenforcedCard {
+        .section3 {
+            .time-wrap {
+                line-height: 30px;
+                margin-top: -22px;
+            }
+        }
+    }
+    &.renewCard,
+    &.expiredCard,
+    &.uselessCard {
+        .section2 {
+            height: 170px;
+            justify-content: space-between;
+            .desc-wrap {
+                display: flex;
+                align-items: flex-end;
+            }
+            .msg-tip {
+                .expired-in {
+                    color: @red;
+                }
+                display: flex;
+                width: 160px;
+                .v-height(40px);
+                background: @yellow;
+                margin-right: -40px;
+                margin-bottom: 12px;
+                border-radius: 30px 0 0 30px;
+                text-indent: 20px;
+            }
+        }
+        .section3 {
+            .btn-wrap {
+                display: flex;
+                justify-content: flex-end;
+                .btn {
+                    .btn(@white);
+                }
+            }
+        }
+    }
+    &.expiredCard,
+    &.uselessCard {
+        background-color: @bg-gray;
+        .section2 {
+            .msg-tip {
+                text-indent: 30px;
+                background-color: @bg-dark-gray;
+            }
+        }
     }
 }

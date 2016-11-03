@@ -2,6 +2,8 @@
  * promise中间件, 让action返回promise,把action与reducer联系起来
  * author: wangyang@iwaimai.baidu.com
  */
+require('es6-promise').polyfill()
+
 export default function promiseMiddleware() {
     return next => action => {
         // rest是action对象剩下的变量集合

@@ -2,7 +2,6 @@
 @import './public.less';
 @import './animate.less';
 .global-reset();
-
 * {
     box-sizing: border-box;
 }
@@ -10,18 +9,21 @@
 html,
 body {
     width: 100%;
-    font-family: 'Microsoft YaHei',arial,helvetica,sans-serif;
+    font-family: 'Microsoft YaHei', arial, helvetica, sans-serif;
     // 安卓下面动画无法滚动 必须设置这个
     .user-select(none);
     -webkit-tap-highlight-color: transparent;
 }
 
+
 /*去除黑色阴影*/
+
 a,
 input {
     -webkit-tap-highlight-color: transparent;
     -webkit-appearance: none;
 }
+
 //页面上的文字或者图片不被用户选择时候亦或者禁止长按保存图片
 a,
 img {
@@ -36,15 +38,16 @@ i {
 a {
     text-decoration: none;
 }
+
 input {
     .reset-focus();
 }
 
 .item-transition-enter {
-  opacity: 0;
-  transition: all .3s ease-in;
+    opacity: 0;
+    transition: all .3s ease-in;
 }
 
 .item-transition-enter.item-transition-enter-active {
-  opacity: 1;
+    opacity: 1;
 }

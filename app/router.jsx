@@ -8,9 +8,12 @@ import { redirectToLogin } from './util/authService'
 // App 入口
 import App from './containers/App'
 
-// home 页
+// Home 首页
 import Home from './containers/Home'
 import User from './containers/User'
+// Confirm 提交订单页
+// import Confirm from './containers/Confirm'
+                    // <Route path="confirm" component={Confirm} onEnter={redirectToLogin} />
 
 // 404
 import NotFound from './containers/404'
