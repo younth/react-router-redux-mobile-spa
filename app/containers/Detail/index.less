@@ -1,8 +1,7 @@
 @import '../../../static/styles/common.less';
 @gray: #f6f6f6; // 提单页背景
 @red: #ff2d4b; // 外卖红
-@font-gray: #808080;
-@font-gray2: #a9a9a9;
+@gray2: #a9a9a9;
 @black: #333;
 @white: #fff;
 @white2: #fffefe;
@@ -22,91 +21,76 @@
     }
 }
 
+.point-before(@size: 6px) {
+    &:before {
+        content: '';
+        width: @size;
+        height: @size;
+        border-radius: @size;
+        display: block;
+        margin-right: 16px;
+        background: @gray2;
+    }
+}
+
 html,
 body {
     background-color: @gray;
-    .confirmPage {
-        .city-show {
-            margin-bottom: 10px;
-            font-size: 32px;
-            color: @black;
-            font-weight: bold;
-            margin-left: 70px;
+    .detail-page {
+        .titlebar-wrap {
+            margin: 0;
+            padding: 35px 0 35px 30px;
         }
-        .select-period {
-            background-color: @white;
-            width: 720px;
-            height: 280px;
-            margin: 50px auto;
-            border-radius: 25px;
-            padding-top: 35px;
-            .radio-wrap {
-                // width: 660px;
-                width: 650px;
-                height: 220px;
-                margin-left: 60px;
-                .radio-item {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    .v-height(110px);
-                    border-bottom: 1px solid @font-gray;
-                    .text {
-                        font-size: 32px;
-                        color: @black;
-                        margin-left: 5px;
-                    }
-                    .radio {
-                        margin-right: 24px;
-                        .setBG('../../../static/img/i_unselected.png', 44px, 44px);
-                        [data-dpr=3]& {
-                            .setBG('../../../static/img/i_unselected3x.png', 66px, 66px);
-                        }
-                        &.selected {
-                            .setBG('../../../static/img/i_selected.png', 44px, 44px);
-                            [data-dpr=3]& {
-                                .setBG('../../../static/img/i_selected3x.png', 66px, 66px);
-                            }
-                        }
-                    }
-                    &:last-child {
-                        border: none;
+        .access-wrap {
+            margin: 90px 0 45px 0;
+            font-size: 24px;
+            .access-item {
+                .info {
+                    color: @red;
+                    .num {
+                        font-size: 60px;
                     }
                 }
             }
         }
-        .agree-wrap {
+        .access-rule {
             display: flex;
-            align-items: center;
-            color: @font-gray2;
-            margin-left: 35px;
-            .radio {
-                margin-right: 24px;
-                .setBG('../../../static/img/i_unagree.png', 29px, 29px);
-                [data-dpr=3]& {
-                    .setBG('../../../static/img/i_unagree3x.png', 44px, 44px);
+            width: 660px;
+            margin: 0 auto;
+            margin-top: 15px;
+            justify-content: space-between;
+            p {
+                display: flex;
+                align-items: center;
+                .point-before();
+                [data-dpr='3'] & {
+                    .point-before(9px);
                 }
-                &.selected {
-                    .setBG('../../../static/img/i_agree.png', 29px, 29px);
-                    [data-dpr=3]& {
-                        .setBG('../../../static/img/i_agree3x.png', 44px, 44px);
-                    }
-                }
-            }
-            a {
-                color: @font-gray2;
+                color: @gray2;
+                margin-bottom: 30px;
             }
         }
-        .buy-card {
-            width: 700px;
-            .v-height(90px);
-            text-align: center;
-            color: @white2;
-            font-size: 32px;
-            background-color: @red;
-            border-radius: 6px;
-            margin: 0 auto;
-            margin-top: 76px;
+        .discount-wrap {
+            .discount-item {
+                display: flex;
+                justify-content: space-between;
+                width: 680px;
+                padding: 40px 0;
+                margin-left: 70px;
+                border-top: 1px solid @gray2;
+                &:first-child {
+                    border-top: none;
+                }
+                .name {
+                    font-size: 28px;
+                    color: @black;
+                }
+                .desc {
+                    font-size: 24px;
+                    color: @gray2;
+                    margin-right: 76px;
+                }
+            }
         }
     }
 }

@@ -105,7 +105,7 @@ class SellCard extends Component {
                 <div className="section2 to-use-rule" onClick={this.unfoldRule}>{this.state.rulebtnval}</div>
                 {
                     !this.state.rulefold && <div className="section3 rule-wrap">
-                        <p>特权只在开通城市有效</p>
+                        <p>特权只在{card.city_name}有效</p>
                         <p>每单最高减免{card.privilege_rule && card.privilege_rule.max_discount}元配送费</p>
                         <p>每天最多可享{card.privilege_rule && card.privilege_rule.day_limit}单</p>
                         <p>每月最多可享{card.privilege_rule && card.privilege_rule.month_limit}单</p>

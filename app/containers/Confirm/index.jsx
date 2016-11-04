@@ -60,11 +60,9 @@ export default class Confirm extends Component {
             //     isVip: card.isVip
             // })
         return (
-            <div className = "confirmPage">
-                <TitleBar type = "accessTitle" title = "本卡特权" />
+            <div className = "confirm-page">
+                <TitleBar type = "access-title" title = "本卡特权(北京)"/>
                 <Access />
-                <TitleBar type = "cityTitle" title = "开通城市" />
-                <div className = "city-show">北京</div>
                 <div className = "select-period">
                     <TitleBar type = "periodTitle" title = "有效期" />
                     <div className = "radio-wrap">

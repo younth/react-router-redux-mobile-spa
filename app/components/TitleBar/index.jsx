@@ -18,9 +18,14 @@ class TitleBar extends Component {
     }
     render() {
         return (
-            <div className = { classNames("title-wrap", this.props.type) }>
-                <div className = "title">{this.props.title}</div>
-                {this.props.children}
+            <div className = { classNames("titlebar-wrap", this.props.type) }>
+                <div className = "title-wrap">
+                    <div className="title">{this.props.title}</div>
+                    <div className="value">{this.props.value}</div>
+                </div>
+                <div className="more-wrap">
+                    {this.props.children}
+                </div>
             </div>
         )
     }

@@ -60,29 +60,42 @@ export default class Detail extends Component {
             //     isVip: card.isVip
             // })
         return (
-            <div className = "detailPage">
+            <div className = "detail-page">
                 <Access />
-                <TitleBar type = "accessTitle" title = "本卡特权" />
-                <TitleBar type = "cityTitle" title = "开通城市" />
-                <div className = "city-show">北京</div>
-                <div className = "select-period">
-                    <TitleBar type = "periodTitle" title = "有效期" />
-                    <div className = "radio-wrap">
-                        <div className="radio-item">
-                            <div className = "text">一个月</div>
-                            <div className = "radio"></div>
-                        </div>
-                        <div className="radio-item">
-                            <div className = "text">一个月</div>
-                            <div className = "radio"></div>
-                        </div>
+                <TitleBar type = "city-name" title = "开通城市" value = "北京"/>
+                <TitleBar type = "end-time" title = "有效期至" value = "2016-12-01"/>
+                <TitleBar type = "access-title" title = "特权说明" />
+                <div className = "access-rule">
+                    <div className="section1">
+                        <p>每单最高减免4元配送费。</p>
+                        <p>每天最多可享4单。</p>
+                        <p>每月最多可享30单。</p>
+                    </div>
+                    <div className="section2">
+                        <p>特权只在开通城市有效。</p>
+                        <p>仅支持百度专送。</p>
                     </div>
                 </div>
-                <div className = "agree-wrap">
-                    <div className="radio"></div>
-                    同意并接受<Link to="rule">《百度外卖购卡协议》</Link>
+                <TitleBar type = "discount-title" title = "优惠明细" />
+                <div className="discount-wrap">
+                    <div className="discount-item">
+                        <div className="name">包点饺子（西二旗店）</div>
+                        <div className="desc">节省配送费 ￥5</div>
+                    </div>
+                    <div className="discount-item">
+                        <div className="name">包点饺子（西二旗店）</div>
+                        <div className="desc">节省配送费 ￥5</div>
+                    </div>
+                    <div className="discount-item">
+                        <div className="name">包点饺子（西二旗店）</div>
+                        <div className="desc">节省配送费 ￥5</div>
+                    </div>
+                    <div className="discount-item">
+                        <div className="name">包点饺子（西二旗店）</div>
+                        <div className="desc">节省配送费 ￥5</div>
+                    </div>
                 </div>
-                <div className="buy-card">去支付 ￥30</div>
+
             </div>
         )
     }

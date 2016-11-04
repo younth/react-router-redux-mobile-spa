@@ -1,6 +1,7 @@
 @import '../../../static/styles/common.less';
 @gray: #a9a9a9;
 @shallow-gray: #808080; // 文字浅灰色（活动规则）
+@black: #333;
 .setBG(@url, @w, @h) {
     background: url(@url) no-repeat;
     width: @w;
@@ -8,7 +9,7 @@
     background-size: 100% 100%;
 }
 
-.icon-before(@bg: '../../../static/img/i_usercard.png', @w: 30px, @h: 30px) {
+.icon-before(@bg, @w, @h) {
     &:before {
         content: '';
         display: block;
@@ -17,7 +18,7 @@
     }
 }
 
-.icon-after(@bg: '../../../static/img/i_right_gray.png', @w: 11px, @h: 20px) {
+.icon-after(@bg, @w, @h) {
     &:after {
         content: '';
         display: block;
@@ -26,45 +27,85 @@
     }
 }
 
-.title-wrap {
+.titlebar-wrap {
     display: flex;
     justify-content: space-between;
     margin: 40px 30px 0 30px;
     color: @shallow-gray;
-    .title {
-        font-size: 32px;
-        .icon-before();
-        [data-dpr=3] & {
-            .icon-before(@bg: '../../../static/img/i_usercard3x.png', @w: 45px, @h: 45px);
-        }
+    .title-wrap {
         display: flex;
-        align-items: center;
-    }
-    &.cityCard {
         .title {
-            .icon-before(@bg: '../../../static/img/i_hotsell.png', @w: 30px, @h: 30px);
+            display: flex;
+            align-items: center;
+            font-size: 32px;
+            .icon-before(@bg: '../../../static/img/i_usercard.png', @w: 30px, @h: 30px);
             [data-dpr=3] & {
-                .icon-before(@bg: '../../../static/img/i_hotsell3x.png', @w: 45px, @h: 45px);
+                .icon-before(@bg: '../../../static/img/i_usercard3x.png', @w: 45px, @h: 45px);
             }
+        }
+        .value {
+            font-size: 32px;
+            color: @black;
+            // font-weight: bold;
+            margin-left: 17px;
+        }
+    }
+    .more-wrap {
+        .to-all-card {
+            font-size: 32px;
+            color: @gray;
+            .icon-after(@bg: '../../../static/img/i_right_gray.png', @w: 11px, @h: 20px);
+            [data-dpr=3] & {
+                .icon-after(@bg: '../../../static/img/i_right_gray3x.png', @w: 17px, @h: 30px);
+            }
+            display: flex;
+            align-items: center;
+        }
+    }
+    // 首页
+    // 热卖商品
+    &.cityCard .title {
+        .icon-before(@bg: '../../../static/img/i_hotsell.png', @w: 30px, @h: 30px);
+        [data-dpr=3] & {
+            .icon-before(@bg: '../../../static/img/i_hotsell3x.png', @w: 45px, @h: 45px);
+        }
+    }
+    &.accessTitle .title {
+        .icon-before(@bg: '../../../static/img/i_access.png', @w: 30px, @h: 30px);
+        [data-dpr=3] & {
+            .icon-before(@bg: '../../../static/img/i_access3x.png', @w: 45px, @h: 45px);
+        }
+    }
+    // 特权详情页
+    // 开通城市
+    &.city-name .title {
+        .icon-before(@bg: '../../../static/img/i_city.png', @w: 30px, @h: 30px);
+        [data-dpr=3] & {
+            .icon-before(@bg: '../../../static/img/i_city3x.png', @w: 45px, @h: 45px);
+        }
+    }
+    // 有效期至
+    &.end-time .title {
+        .icon-before(@bg: '../../../static/img/i_period.png', @w: 30px, @h: 30px);
+        [data-dpr=3] & {
+            .icon-before(@bg: '../../../static/img/i_period3x.png', @w: 45px, @h: 45px);
+        }
+    }
+    // 特权说明
+    &.access-title .title {
+        .icon-before(@bg: '../../../static/img/i_access.png', @w: 30px, @h: 30px);
+        [data-dpr=3] & {
+            .icon-before(@bg: '../../../static/img/i_access3x.png', @w: 45px, @h: 45px);
+        }
+    }
+    // 优惠明细
+    &.discount-title .title {
+        .icon-before(@bg: '../../../static/img/i_discount.png', @w: 30px, @h: 30px);
+        [data-dpr=3] & {
+            .icon-before(@bg: '../../../static/img/i_discount3x.png', @w: 45px, @h: 45px);
         }
     }
     &.accessTitle {
-        .title {
-            .icon-before(@bg: '../../../static/img/i_access.png', @w: 30px, @h: 30px);
-            [data-dpr=3] & {
-                .icon-before(@bg: '../../../static/img/i_access3x.png', @w: 45px, @h: 45px);
-            }
-        }
-    }
-    &.cityTitle {
-        .title {
-            .icon-before(@bg: '../../../static/img/i_city.png', @w: 30px, @h: 30px);
-            [data-dpr=3] & {
-                .icon-before(@bg: '../../../static/img/i_city3x.png', @w: 45px, @h: 45px);
-            }
-        }
-    }
-    &.accessTitle, &.cityTitle {
         margin: 40px 30px;
     }
     &.periodTitle {
@@ -75,15 +116,5 @@
                 .icon-before(@bg: '../../../static/img/i_period3x.png', @w: 45px, @h: 45px);
             }
         }
-    }
-    .to-all-card {
-        font-size: 32px;
-        color: @gray;
-        .icon-after();
-        [data-dpr=3] & {
-            .icon-after(@bg: '../../../static/img/i_right_gray3x.png', @w: 17px, @h: 30px);
-        }
-        display: flex;
-        align-items: center;
     }
 }

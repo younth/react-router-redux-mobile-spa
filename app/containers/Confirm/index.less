@@ -25,13 +25,17 @@
 html,
 body {
     background-color: @gray;
-    .confirmPage {
-        .city-show {
-            margin-bottom: 10px;
-            font-size: 32px;
-            color: @black;
-            font-weight: bold;
-            margin-left: 70px;
+    .confirm-page {
+        .titlebar-wrap {
+            &.accessTitle {
+                margin-top: 70px;
+            }
+            &.periodTitle {
+                margin-top: 0;
+            }
+        }
+        .access-wrap {
+            margin: 50px 0 30px 0;
         }
         .select-period {
             background-color: @white;
