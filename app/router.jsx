@@ -41,6 +41,7 @@ export default class RouteMap extends Component {
                     <IndexRoute component={Home}/>
                     <Route path="confirm" component={Confirm} onEnter={redirectToLogin} />
                     <Route path="detail" component={Detail} onEnter={redirectToLogin} />
+                    <Route path="home/pay/success" component={Home} />
 
                     <Route path="user" component={User} onEnter={redirectToLogin} />
                     {/* 404 */}

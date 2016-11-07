@@ -1,0 +1,68 @@
+@import '../../../static/styles/common.less';
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    zIndex: 99999;
+    transition: opacity 200ms ease-in;
+    pointerEvents: auto;
+    overflowY: auto;
+}
+
+.modal-wrapper {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1px; /*no*/
+    background: #fff;
+    border-radius: 12px;
+    width: 650px;
+    .modal-header {
+        height: 80px;
+        line-height: 80px;
+        text-align: center;
+        font-size: 30px;
+        border-bottom: 1px solid #e5e5e5; /*no*/
+        color: #303030;
+    }
+    .modal-cont {
+        padding: 20px;
+        padding-bottom: 30px;
+        position: relative;
+        font-size: 28px;
+        h2 {
+            color: #333;
+            font-size: 32px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        input {
+            border-radius: 2px;
+            padding: 5px;
+            height: 4em;
+            width: 100%;
+        }
+    }
+    .modal-footer {
+        display: -webkit-box;
+        button {
+            display: block;
+            -webkit-box-flex: 1;
+            text-align: center;
+            border: none;
+            background: #fff;
+            height: 80px;
+            font-weight: normal;
+        }
+        button[data-type=cancel] {
+            border-bottom-left-radius: 6px;
+        }
+        button[data-type=confirm] {
+            border-bottom-right-radius: 6px;
+        }
+    }
+}

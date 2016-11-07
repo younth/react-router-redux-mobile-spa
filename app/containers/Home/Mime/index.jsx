@@ -1,5 +1,5 @@
 /*
- * @file 首页我的特权区组件 Mime
+ * @file 首页我的权益区组件 Mime
  */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
@@ -17,25 +17,25 @@ class Mime extends Component {
         super(props, context)
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     }
-    getCardNum(cardlist) {
-        let valid = cardlist && cardlist.valid || []
-        let expired = cardlist && cardlist.expired || []
+    getCardNum(cardList) {
+        let valid = cardList && cardList.valid || []
+        let expired = cardList && cardList.expired || []
         let num = valid && valid.length + expired && expired.length
         return num
     }
     render() {
-        let num = this.getCardNum(this.props.cardlist)
+        let num = this.getCardNum(this.props.cardList)
         return (
             <div>
             {
                 num ? 
-                <TitleBar type = "userCard" title = "已购买">
+                <TitleBar type = "user-card" title = "已购买">
                     { <Link className = "to-all-card" to = 'all'>查看全部</Link> }
                 </TitleBar>
-                : <TitleBar type = "userCard" title = "已购买" />
+                : <TitleBar type = "user-card" title = "已购买" />
             }
             {
-                num ? <SwipeCard cardlist = {this.props.cardlist} />
+                num ? <SwipeCard cardList = {this.props.cardList} />
                 : this.props.isVip 
                 ? <ImgTip type = "viptip" /> 
                 : <ImgTip type = "nousercard" /> 

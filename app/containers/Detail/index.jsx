@@ -1,5 +1,5 @@
 /*
- * @file Detail 组件, 特权使用详情
+ * @file Detail 组件, 权益使用详情
  */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
@@ -64,7 +64,7 @@ export default class Detail extends Component {
                 <Access />
                 <TitleBar type = "city-name" title = "开通城市" value = "北京"/>
                 <TitleBar type = "end-time" title = "有效期至" value = "2016-12-01"/>
-                <TitleBar type = "access-title" title = "特权说明" />
+                <TitleBar type = "access-title" title = "权益说明" />
                 <div className = "access-rule">
                     <div className="section1">
                         <p>每单最高减免4元配送费。</p>
@@ -72,7 +72,7 @@ export default class Detail extends Component {
                         <p>每月最多可享30单。</p>
                     </div>
                     <div className="section2">
-                        <p>特权只在开通城市有效。</p>
+                        <p>权益只在开通城市有效。</p>
                         <p>仅支持百度专送。</p>
                     </div>
                 </div>

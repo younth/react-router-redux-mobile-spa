@@ -14,6 +14,7 @@ class RenewCard extends Component {
     }
     render() {
         let card = this.props.card
+        console.log(card.notRenew);
         return (
             <div className = { classNames("card-item", this.props.cardType) }>
                 <div className="inner-card">
@@ -36,7 +37,7 @@ class RenewCard extends Component {
                     </div>
                     <div className="section3">
                         <div className="btn-wrap">
-                            <div className="btn renew">续费</div>
+                            {card.notRenew ? '' : <div className="btn renew">续费</div> }
                         </div>
                     </div>
                 </div>

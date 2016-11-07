@@ -26,59 +26,6 @@ html,
 body {
     background-color: @gray;
     .confirm-page {
-        .titlebar-wrap {
-            &.accessTitle {
-                margin-top: 70px;
-            }
-            &.periodTitle {
-                margin-top: 0;
-            }
-        }
-        .access-wrap {
-            margin: 50px 0 30px 0;
-        }
-        .select-period {
-            background-color: @white;
-            width: 720px;
-            height: 280px;
-            margin: 50px auto;
-            border-radius: 25px;
-            padding-top: 35px;
-            .radio-wrap {
-                // width: 660px;
-                width: 650px;
-                height: 220px;
-                margin-left: 60px;
-                .radio-item {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    .v-height(110px);
-                    border-bottom: 1px solid @font-gray;
-                    .text {
-                        font-size: 32px;
-                        color: @black;
-                        margin-left: 5px;
-                    }
-                    .radio {
-                        margin-right: 24px;
-                        .setBG('../../../static/img/i_unselected.png', 44px, 44px);
-                        [data-dpr=3]& {
-                            .setBG('../../../static/img/i_unselected3x.png', 66px, 66px);
-                        }
-                        &.selected {
-                            .setBG('../../../static/img/i_selected.png', 44px, 44px);
-                            [data-dpr=3]& {
-                                .setBG('../../../static/img/i_selected3x.png', 66px, 66px);
-                            }
-                        }
-                    }
-                    &:last-child {
-                        border: none;
-                    }
-                }
-            }
-        }
         .agree-wrap {
             display: flex;
             align-items: center;
@@ -111,6 +58,34 @@ body {
             border-radius: 6px;
             margin: 0 auto;
             margin-top: 76px;
+        }
+        .city-tip-dialog {
+            .tipmsg-wrap {
+                padding: 20px 0 30px 0;
+                p {
+                    color: @black;
+                    text-align: center;
+                    margin-bottom: 16px;
+                    span {
+                        color: @red;
+                    }
+                }
+            }
+            footer {
+                display: flex;
+                justify-content: center;
+                a {
+                    display: block;
+                    border: 2px solid @font-gray2;
+                    /*no*/
+                    border-radius: 10px;
+                    color: @black;
+                    width: 200px;
+                    .v-height(80px);
+                    text-align: center;
+                    margin: 0 20px;
+                }
+            }
         }
     }
 }

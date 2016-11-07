@@ -1,5 +1,5 @@
 /*
- * @file 提单页顶部特权展示组件 Access
+ * @file 提单页顶部权益展示组件 Access
  */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
@@ -16,20 +16,25 @@ class Access extends Component {
         }
     }
     render() {
+        let accessList = this.props.accessList
         return (
             <div className = "access-wrap">
                 <div className = "access-item">
-                    <div className = "info"><span className="num">4</span>元</div>
+                    <div className = "info"><span className="num">?</span>元</div>
                     <div className = "desc">每单最高减免</div>
                 </div>
                 <div className = "access-item">
-                    <div className = "info"><span className="num">4</span>元</div>
-                    <div className = "desc">每单最高减免</div>
+                    <div className = "info"><span className="num">?</span>单</div>
+                    <div className = "desc">每天减免</div>
                 </div>
-                <div className = "access-item">
-                    <div className = "info"><span className="num">4</span>元</div>
-                    <div className = "desc">每单最高减免</div>
-                </div>
+                {
+                    true ? 
+                    <div className = "access-item">
+                        <div className = "info"><span className="num">?</span>单</div>
+                        <div className = "desc">每月最多减免</div>
+                    </div>
+                    : ''
+                }
             </div>
         )
     }

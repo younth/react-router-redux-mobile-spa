@@ -15,13 +15,13 @@ class Onsell extends Component {
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     }
     render() {
-        let cardlist = this.props.cardlist
+        let cardList = this.props.cardList
         return (
             <div>
-                { cardlist.length ? <TitleBar type = "cityCard" title = "热卖中（北京）" /> : '' }
+                { cardList.length ? <TitleBar type = "city-card" title = "热卖中（北京）" /> : '' }
                 {
-                    cardlist.length
-                    ? <CardList cardlist = {cardlist} isVip = {this.props.isVip}/>
+                    cardList.length
+                    ? <CardList cardList = {cardList} isVip = {this.props.isVip}/>
                     : <ImgTip type = "nocitycard" /> 
                 }
             </div>

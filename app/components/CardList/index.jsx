@@ -14,12 +14,12 @@ class CardList extends Component {
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
     render() {
-        let length = this.props.cardlist && this.props.cardlist.length || 0
+        let length = this.props.cardList && this.props.cardList.length || 0
         let isVip = this.props.isVip
         return (
             <div className="sellcard-wrap">
                 {
-                    length && this.props.cardlist.map((item, index) => 
+                    length && this.props.cardList.map((item, index) => 
                         <SellCard key = {index} card = {item} isVip = {isVip}/>)
                 }
                 <MessageTip tip = {'更多惊喜敬请期待...'}/>

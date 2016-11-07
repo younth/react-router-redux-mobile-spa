@@ -30,6 +30,8 @@
 }
 
 .swipe-wrap {
+    overflow: hidden;
+    height: 390px;
     width: 10000px;
     display: flex;
     margin-left: 15px; // 不要删
@@ -59,8 +61,10 @@
             justify-content: space-between;
             .city {
                 .icon-before();
-                [data-dpr = '3'] & {
-                    .icon-before('../../../static/img/i_location3x.png', 23px, 29px);
+                [data-dpr='3'] & {
+                    .icon-before('../../../static/img/i_location3x.png',
+                    23px,
+                    29px);
                 }
                 display: flex;
                 align-items: center;
@@ -70,8 +74,10 @@
                 color: @white;
                 font-family: 'PingFangSC-Reqular';
                 .icon-after();
-                [data-dpr = '3'] & {
-                    .icon-after('../../../static/img/i_right_white3x.png', 15px, 26px);
+                [data-dpr='3'] & {
+                    .icon-after('../../../static/img/i_right_white3x.png',
+                    15px,
+                    26px);
                 }
                 display: flex;
                 align-items: center;

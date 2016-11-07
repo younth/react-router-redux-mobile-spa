@@ -15,13 +15,13 @@ module.exports = function(req, res, next) {
                 month_limit: 20
             },
             prices: [{
-                period: 6,
-                period_str: "半年",
-                price: 1.1
+                period: 31,
+                period_str: "一个月",
+                price: 10
             }, {
-                period: 6,
-                period_str: "半年",
-                price: 1.1
+                period: 93,
+                period_str: "三个月",
+                price: 30
             }]
         },
         _bdstoken: "e363037bbcb605758073b209fb81446e",

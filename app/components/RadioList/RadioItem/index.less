@@ -1,0 +1,40 @@
+@import '../../../../static/styles/common.less';
+@black: #333;
+@font-gray: #808080;
+.setBG(@url, @w, @h) {
+    background: url(@url) no-repeat;
+    width: @w;
+    height: @h;
+    background-size: 100% 100%;
+}
+
+.radio-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .v-height(110px);
+    border-bottom: 1px solid @font-gray;
+    .text {
+        font-size: 32px;
+        color: @black;
+        margin-left: 5px;
+    }
+    .radio {
+        margin-right: 24px;
+        .setBG('../../../../static/img/i_unselected.png', 44px, 44px);
+        [data-dpr=3]& {
+            .setBG('../../../../static/img/i_unselected3x.png', 66px, 66px);
+        }
+    }
+    &.selected {
+        .radio {
+            .setBG('../../../../static/img/i_selected.png', 44px, 44px);
+            [data-dpr=3]& {
+                .setBG('../../../../static/img/i_selected3x.png', 66px, 66px);
+            }
+        }
+    }
+    &:last-child {
+        border: none;
+    }
+}

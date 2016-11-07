@@ -25,18 +25,18 @@ class ImgTip extends Component {
                     {
                         this.props.type === 'novip' ?
                         <div className="tip-msg">
-                            <p>当前城市没有商品在售</p>
-                            <p>更多惊喜敬请期待...</p>
+                            <p>您已拥有会员面配送费特权</p>
+                            <p>用完再来买想新卡吧</p>
                         </div>
                         : this.props.type === 'nousercard' ?
                         <div className="tip-msg">
-                            <p>您还没有特权卡哦~</p>
+                            <p>还没有购卡哦</p>
                             <p>请从下方购买</p>
                         </div>
                         : this.props.type === 'nocitycard' ?
                         <div className="tip-msg">
-                            <p>当前城市没有商品在售</p>
-                            <p>更多惊喜敬请期待...</p>
+                            <p>北京市的商品正在紧锣密鼓的筹备中</p>
+                            <p>敬请期待...</p>
                         </div> 
                         : ''
                     }

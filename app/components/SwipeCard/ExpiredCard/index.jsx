@@ -34,7 +34,7 @@ class ExpiredCard extends Component {
                     </div>
                     <div className="section3">
                         <div className="btn-wrap">
-                            <div className="btn renew">续费</div>
+                            {card.notRenew ? '' : <div className="btn renew">续费</div>}
                         </div>
                     </div>
                 </div>

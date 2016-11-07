@@ -29,6 +29,7 @@
         display: block;
         .setBG(@bg, @w, @h);
         margin-left: 10px;
+        transform: rotate(0deg)
     }
 }
 
@@ -44,7 +45,7 @@
 .sellcard-item {
     width: 690px;
     margin: 0 auto;
-    padding: 40px 0;
+    padding: 35px 0;
     border-bottom: 1px solid @shallow-gray;
     .section1 {
         display: flex;
@@ -58,14 +59,12 @@
                 .stock {
                     font-size: 28px;
                     color: @yellow;
-                font-weight: normal;
-
+                    font-weight: normal;
                 }
             }
             .desc {
                 font-size: 28px;
                 color: @font-color;
-                margin-bottom: 4px;
             }
         }
         .other-info {
@@ -90,6 +89,7 @@
                     color: @red;
                 }
                 .conflict,
+                .notrenew,
                 .nostock {
                     border: 2px solid @shallow-gray2;
                     color: @shallow-gray2;
@@ -102,10 +102,14 @@
         color: @shallow-gray;
         display: flex;
         align-items: center;
-        margin-top: 16px;
+        padding-top: 20px;
+        padding-bottom: 10px;
         .icon-after();
-        [data-dpr = '3'] & {
+        [data-dpr='3'] & {
             .icon-after('../../../../static/img/i_bottom3x.png', 26px, 15px);
+        }
+        &.unfold:after {
+            transform: rotate(180deg)
         }
     }
     .section3.rule-wrap {
@@ -113,7 +117,7 @@
             display: flex;
             align-items: center;
             .point-before();
-            [data-dpr = '3'] & {
+            [data-dpr='3'] & {
                 .point-before(9px);
             }
             color: @shallow-gray2;
