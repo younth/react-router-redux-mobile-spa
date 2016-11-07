@@ -1,5 +1,5 @@
 @import '../../../static/styles/common.less';
-@gray: #a9a9a9;
+@gray: #808080;
 .setBG(@url, @w, @h) {
     background: url(@url) no-repeat;
     width: @w;
@@ -13,29 +13,33 @@
     text-align: center;
     .tip-img {
         margin: 0 auto;
+        margin-bottom: 20px;
     }
     .tip-msg {
         font-size: 28px;
         color: @gray;
         p {
-            margin-top: 15px;
+            margin-top: 10px;
         }
     }
-    &.viptip {
+    &.novipcard {
         .tip-img {
-            .setBG('./img/tip_nousercard.png', 194px, 184px);
+            .setBG('../../../static/img/bear-novipcard.png', 180px, 180px);
+            [data-dpr='3'] & {
+                .setBG('../../../static/img/bear-novipcard3x.png', 270px, 270px);
+            }
         }
     }
     &.nousercard {
-        // .tip-img {
-        //     .setBG('./img/tip_nousercard.png', 194px, 184px);
-        // }
+        .tip-img {
+            .setBG('../../../static/img/bear-nocard.png', 180px, 180px);
+            [data-dpr='3'] & {
+                .setBG('../../../static/img/bear-nocard3x.png', 270px, 270px);
+            }
+        }
     }
     &.nocitycard {
         margin-top: 80px;
         margin-bottom: 130px;
-        .tip-img {
-            .setBG('./img/tip_nocitycard.png', 220px, 220px);
-        }
     }
 }

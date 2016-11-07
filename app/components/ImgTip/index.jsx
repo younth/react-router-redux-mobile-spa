@@ -23,10 +23,10 @@ class ImgTip extends Component {
                 <div className={ classNames("tip-wrap", this.props.type) }>
                     <div className="tip-img"></div>
                     {
-                        this.props.type === 'novip' ?
+                        this.props.type === 'novipcard' ?
                         <div className="tip-msg">
-                            <p>您已拥有会员面配送费特权</p>
-                            <p>用完再来买想新卡吧</p>
+                            <p>您已拥有配送卡了</p>
+                            <p>用完再来买新卡吧</p>
                         </div>
                         : this.props.type === 'nousercard' ?
                         <div className="tip-msg">

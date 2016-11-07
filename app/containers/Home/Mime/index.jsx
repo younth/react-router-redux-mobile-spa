@@ -32,12 +32,12 @@ class Mime extends Component {
                 <TitleBar type = "user-card" title = "已购买">
                     { <Link className = "to-all-card" to = 'all'>查看全部</Link> }
                 </TitleBar>
-                : <TitleBar type = "user-card" title = "已购买" />
+                : ''
             }
             {
                 num ? <SwipeCard cardList = {this.props.cardList} />
                 : this.props.isVip 
-                ? <ImgTip type = "viptip" /> 
+                ? <ImgTip type = "novipcard" /> 
                 : <ImgTip type = "nousercard" /> 
             }
             </div>
