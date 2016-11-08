@@ -3,8 +3,8 @@ module.exports = function(req, res, next) {
         error_no: 0,
         error_msg: "",
         result: {
-            city_id: "131",
-            city_name: "北京市",
+            city_id: '132',
+            city_name: "上海市",
             last_city_id: 131,
             last_city_name: "北京市",
             privilege_no: "131201611000001",

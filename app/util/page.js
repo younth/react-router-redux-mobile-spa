@@ -8,6 +8,7 @@ window.WMApp.pay = {}
 window.WMApp.share = {}
 window.WMApp.location = {}
 window.WMApp.device = {}
+window.WMApp.address = {}
 window.WMAppReady = function(readyCallback) {
     if (readyCallback && typeof readyCallback == 'function') {
         if (window.WMApp && typeof window.WMApp === 'object') {
@@ -83,4 +84,10 @@ window.WMApp.location.getLocLng = window.WMApp.location.getLocLat = window.WMApp
 }
 window.WMApp.device.getAppVersion = function() {
     return '3.9.0'
+}
+window.WMApp.device.getFrom = function() {
+    return 'na-iphone'
+}
+window.WMApp.address.selectAddress = function(params, callback) {
+    
 }

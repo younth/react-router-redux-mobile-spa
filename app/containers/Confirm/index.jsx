@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link, hashHistory } from 'react-router'
 
-import Utils from '../../util/util.js';
+import Utils from '../../util/util.js'
 import { get } from '../../fetch/request'
 
 import './index.less'
@@ -46,6 +46,9 @@ export default class Confirm extends Component {
         this.changePeriod = this.changePeriod.bind(this)
         this.changeAgree = this.changeAgree.bind(this)
         this.buyCard = this.buyCard.bind(this)
+        this.changeCity = this.changeCity.bind(this)
+        this.sureToPay = this.sureToPay.bind(this)
+        
         this.state = {
             selectCityId: 0,
             selectCityName: '',
@@ -105,17 +108,13 @@ export default class Confirm extends Component {
     }
 
     buyCard() {
-        // 1. 检查信息完整度
-        if (!this.state.period) {
-            Utils.showToast('请选择卡片规格')
-            return false
-        }
-        if (!this.state.isAgree) {
-            Utils.showToast('请确认《百度外卖购卡协议》')
-            return false
-        }
-        // 2. 判断购卡城市与当前城市是否一致
-        
+        // 1. 检查信息完整度 2. 判断购卡城市与当前城市是否一致
+        let result = this.validInfo()
+        // 3. 拼装数据 4. 生成订单 5. 判断网络环境 6. 进行聚合收银台支付
+        result && this.confirmOrder()
+    }
+
+    confirmOrder() {
         // 3. 拼装数据
         let {globalVal} = this.props
         let params = {
@@ -144,26 +143,58 @@ export default class Confirm extends Component {
         })
     }
 
-    sendPayInfo() {
-        // 生成支付订单
+    validInfo() {
+        // 1. 检查信息完整度
+        if (!this.state.period) {
+            Utils.showToast('请选择卡片规格')
+            return false
+        }
+        if (!this.state.isAgree) {
+            Utils.showToast('请确认《百度外卖购卡协议》')
+            return false
+        }
+        // 2. 判断购卡城市与当前城市是否一致
+        if (this.state.selectCityId !== this.state.lastCityId) {
+            this.setState({
+                show: true
+            })
+            return false
+        }
+        return true
     }
 
     changeCity () {
-        // 调端内更改地址API
+        // 调端内更改地址API todo 端上测试 怎么回到当前页
+        var params = {
+            shopId: '4884822964606433285',
+            addressId: ''
+        }
+        window.WMApp.address.selectAddress(params, function(data) {
+            if (data.status) {
+                console.log(data.result.addressId)   // 返回地址id
+            }
+        })
     }
+
+    sureToPay() {
+        this.confirmOrder()
+    }
+
     render() {
         console.log('loading' + this.props.confirm.loading);
         let {confirm} = this.props
+        console.log(confirm);
         if (!confirm.loading) {
             Utils.loading(0)
-            this.state.accessTitle = `本卡权益（${confirm.data.city_name || ''}）`
             if (this.state.period === 0) {
                 this.state.period = confirm.radioList[0].period
                 this.state.price = confirm.radioList[0].price
-                this.state.selectCityId = 0
-                this.state.selectCityName = ''
-                this.state.lastCityId = 0
-                this.state.laseCityName = ''
+                this.state.selectCityId = Number.parseInt(confirm.data.city_id)
+                this.state.selectCityName = confirm.data.city_name
+                this.state.lastCityId = Number.parseInt(confirm.data.last_city_id)
+                this.state.laseCityName = confirm.data.last_city_name
+                console.log(this.state);
+                this.state.accessTitle = `本卡权益（${this.state.selectCityName || ''}）`
             }
         }
         return (
@@ -176,12 +207,12 @@ export default class Confirm extends Component {
                 <div className = "buy-card" onClick = {this.buyCard} >去支付 ￥{this.state.price}</div>
                 <DialogModal show = {this.state.show} el = 'city-tip-dialog' title = '温馨提示' closeOnOuterClick = {false}>
                     <div className="tipmsg-wrap">
-                        <p>您当前开通享有权益的城市是<span>北京</span>，</p>
+                        <p>您当前开通享有权益的城市是<span>{this.state.selectCityName}</span>，</p>
                         <p>如需更换请到首页更改定位</p>
                     </div>
                     <footer>
                         <a href="javascript:;" onClick = {this.changeCity}>更改城市</a>
-                        <a href="javascript:;" onClick = {this.sendPayInfo}>确认</a>
+                        <a href="javascript:;" onClick = {this.sureToPay}>确认</a>
                     </footer>
                 </DialogModal>
             </div>

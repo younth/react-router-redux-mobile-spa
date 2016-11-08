@@ -6,6 +6,8 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Link, hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { get } from '../../fetch/request'
+import Utils from '../../util/util.js'
 
 import ReactSwipe from 'react-swipes';
 
@@ -119,24 +121,22 @@ export default class SwipeCard extends Component {
     clickBtnWrap(type, privilege_no) {
         let {globalVal, globalActions} = this.props
         if (type === 'renew' || type === 'buy') {
-            // globalActions.savePrivilegeNo({
-            //     privilege_no: privilege_no
-            // })
             hashHistory.push(`/confirm/${privilege_no}`)
         } else if (type === 'delete') {
-
+            get('/wmall/privilege/del').then(res => {
+                return res.json()
+            }).then(json => {
+                let result = Number.parseInt(json.result)
+                if (result === 1) {
+                    Utils.showToast('删除成功~')
+                }
+            })
         }
     }
 
     componentDidMount () {
         let {globalVal, globalActions} = this.props
         console.log(globalVal)
-        // !card.data && cardActions.getHomeCard()
-
-        // globalActions.addressUpdate({
-        //     lat: '1111',
-        //     lng: '22222'
-        // })
     }
 
     render() {

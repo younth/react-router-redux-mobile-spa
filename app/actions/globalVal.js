@@ -10,14 +10,6 @@ export const addressUpdate = data => {
 	}
 }
 
-// 更新设备信息，自动触发store
-export const adeviceUpdate = data => {
-	return {
-		type: actionTypes.DEVICE_UPDATE,
-		data
-	}
-}
-
 // 二. 首页与提单页 权益卡ID传送
 
 // 保存点击的权益卡ID

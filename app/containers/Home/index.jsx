@@ -53,6 +53,9 @@ export default class Home extends Component {
     }
     componentWillMount() {
         console.log('打印不出来 啥也干不了')
+        if (this.props.params.payresult === 'success') {
+            this.state.show = true
+        }
         // Utils.setTitleBar({
             // titleText: 111
         // })
@@ -70,10 +73,20 @@ export default class Home extends Component {
             cardActions.getHomeCard()
             Utils.loading()
         }
-        
-        globalActions.addressUpdate({
-            lat: '1111',
-            lng: '22222'
+        // 获取定位等基础信息
+        WMAppReady(function() {
+            let lng = WMApp.location.getLocLng() || '1.295948313E7',
+                lat = WMApp.location.getLocLat() || '4849489.98',
+                cityId = WMApp.location.getCityId() || '131',
+                app_ver = window.WMApp.device.getAppVersion() || '4.1.0',
+                getFrom = window.WMApp.device.getFrom() || 'na-iphone'
+            globalActions.addressUpdate({
+                city_id: cityId,
+                lng: lng,
+                lat: lat,
+                app_ver: app_ver,
+                from: getFrom
+            })
         })
     }
     hideDialog() {
@@ -88,10 +101,6 @@ export default class Home extends Component {
         if (!card.loading) {
             Utils.loading(0)
         }
-        // 更新全局数据
-        globalActions.addressUpdate({
-            isVip: card.isVip
-        })
         return (
             <div>
                 { card.userPrivileges && <Mime cardList = {card.userPrivileges} isVip = {card.isVip} /> }
