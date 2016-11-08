@@ -153,6 +153,7 @@ export default class Confirm extends Component {
         // 调端内更改地址API
     }
     render() {
+        console.log('loading' + this.props.confirm.loading);
         let {confirm} = this.props
         if (!confirm.loading) {
             Utils.loading(0)

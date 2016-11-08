@@ -19,7 +19,7 @@ class UselessCard extends Component {
                 <div className="inner-card">
                     <div className="section1">
                         <div className="city">{card.city_name}</div>
-                        <Link className="to-use-detail" to='detail'>查看详情</Link>
+                        <Link className="to-use-detail" to={'detail/' + card.privilege_no}>查看详情</Link>
                     </div>
                     <div className="section2">
                         <div className="desc-wrap">

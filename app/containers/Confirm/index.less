@@ -1,32 +1,14 @@
 @import '../../../static/styles/common.less';
 @gray: #f6f6f6; // 提单页背景
 @red: #ff2d4b; // 外卖红
-@font-gray: #808080;
 @font-gray2: #a9a9a9;
 @black: #333;
-@white: #fff;
 @white2: #fffefe;
-.setBG(@url, @w, @h) {
-    background: url(@url) no-repeat;
-    width: @w;
-    height: @h;
-    background-size: 100% 100%;
-}
-
-.icon-before(@bg: './img/i_rule.png', @w: 28px, @h: 28px) {
-    &:before {
-        content: '';
-        display: block;
-        .setBG(@bg, @w, @h);
-        margin-right: 10px;
-    }
-}
 
 html,
 body {
     background-color: @gray;
     .confirm-page {
-        
         .buy-card {
             width: 700px;
             .v-height(90px);

@@ -53,12 +53,7 @@ export default class Detail extends Component {
     render() {
         let {detail} = this.props
         console.log(detail);
-            // 隐藏loading状态 todo
-            // loading(0)
-            // 更新全局数据
-            // globalActions.addressUpdate({
-            //     isVip: card.isVip
-            // })
+          
         return (
             <div className = "detail-page">
                 <Access />
