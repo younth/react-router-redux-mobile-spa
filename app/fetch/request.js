@@ -21,8 +21,13 @@ function obj2params(obj) {
     return result;
 }
 
-export function get(url) {
-  var result = fetch(url, {
+export function get(url, params) {
+  // 处理get 参数
+  let data = obj2params(params);
+  if (data) {
+      url += (url.indexOf('?') === -1 ? '?' : '&') + data;
+  }
+  let result = fetch(url, {
       credentials: 'include',// 请求默认带 cookie
       headers: {
           'Accept': 'application/json, text/plain, */*'

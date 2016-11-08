@@ -5,8 +5,7 @@ const initialState = {
     lng: '',
     city_id: '',
     from: '',
-    app_ver: '',
-    data: ''
+    app_ver: ''
 }
 
 export default function globalVal(state = initialState, action) {
@@ -17,8 +16,7 @@ export default function globalVal(state = initialState, action) {
                 ...state,
                 lat: action.lat || action.data.lat || state.lat,
                 lng: action.lng || action.data.lng || state.lng,
-                city_id: action.city_id || action.data.city_id || state.city_id,
-                data: action
+                city_id: action.city_id || action.data.city_id || state.city_id
             }
         case actionTypes.DEVICE_UPDATE:
             return {
