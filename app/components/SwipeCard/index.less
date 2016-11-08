@@ -11,7 +11,7 @@
     background-size: 100% 100%;
 }
 
-.icon-after(@bg: '../../../static/img/i_right_white.png', @w: 11px, @h: 20px) {
+.icon-after(@bg, @w, @h) {
     &:after {
         content: '';
         display: block;
@@ -20,7 +20,7 @@
     }
 }
 
-.icon-before(@bg: '../../../static/img/i_location.png', @w: 15px, @h: 19px) {
+.icon-before(@bg, @w, @h) {
     &:before {
         content: '';
         display: block;
@@ -32,7 +32,7 @@
 .swipe-wrap {
     overflow: hidden;
     height: 390px;
-    width: 10000px;
+    width: 10000px; //todo 
     display: flex;
     margin-left: 15px; // 不要删
     // width: 750px;
@@ -44,12 +44,9 @@
 .card-item {
     font-size: 22px;
     color: @white;
-    font-family: 'PingFangSC-Reqular';
     width: 620px; // 540px;
     height: 350px; // 290px;
     border-radius: 15px; // todo
-    background: url('img/bg-card.png');
-    background-color: @red;
     display: flex;
     float: left;
     .inner-card {
@@ -60,11 +57,9 @@
             display: flex;
             justify-content: space-between;
             .city {
-                .icon-before();
+                .icon-before(@bg: '../../../static/img/i_location.png', @w: 15px, @h: 19px);
                 [data-dpr='3'] & {
-                    .icon-before('../../../static/img/i_location3x.png',
-                    23px,
-                    29px);
+                    .icon-before('../../../static/img/i_location3x.png', 23px, 29px);
                 }
                 display: flex;
                 align-items: center;
@@ -72,12 +67,9 @@
             .to-use-detail {
                 font-size: 22px;
                 color: @white;
-                font-family: 'PingFangSC-Reqular';
-                .icon-after();
+                .icon-after(@bg: '../../../static/img/i_right_white.png', @w: 11px, @h: 20px);
                 [data-dpr='3'] & {
-                    .icon-after('../../../static/img/i_right_white3x.png',
-                    15px,
-                    26px);
+                    .icon-after('../../../static/img/i_right_white3x.png', 15px, 26px);
                 }
                 display: flex;
                 align-items: center;
@@ -95,7 +87,6 @@
             .discount-rule {
                 .name {
                     font-size: 40px;
-                    font-family: 'PingFangSc-Semibolds';
                     margin-bottom: 16px;
                 }
                 .desc {
@@ -169,8 +160,21 @@
             }
         }
     }
+    &.validCard,
+    &.renewCard,
+    &.unenforcedCard {
+        .setBG('./img/bg-valid.png', 620px, 350px);
+        [data-dpr=3] & {
+            .setBG('./img/bg-valid3x.png', 1030px, 580px);
+        }
+        background-color: @red;
+    }
     &.expiredCard,
     &.uselessCard {
+        .setBG('./img/bg-expired.png', 620px, 350px);
+        [data-dpr=3] & {
+            .setBG('./img/bg-expired3x.png', 1030px, 580px);
+        }
         background-color: @bg-gray;
         .section2 {
             .msg-tip {

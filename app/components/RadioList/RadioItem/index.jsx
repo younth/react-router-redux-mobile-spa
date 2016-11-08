@@ -16,7 +16,7 @@ class RadioItem extends Component {
     render() {
         let radio = this.props.radio
         return (
-            <div className = { classNames('radio-item', { selected: this.props.selected === radio.period }) } onClick={this.props.onSelectedValueChanged.bind(null, radio.period)} >
+            <div className = { classNames('radio-item', { selected: this.props.selected === radio.period }) } onClick={this.props.onSelectedValueChanged.bind(null, radio.period, radio.price)} >
                 <div className = "text">{radio.period_str}</div>
                 <div className = "radio"></div>
             </div>

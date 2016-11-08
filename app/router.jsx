@@ -15,6 +15,8 @@ import User from './containers/User'
 import Confirm from './containers/Confirm'
 // Detail 使用详情
 import Detail from './containers/Detail'
+// Rule 使用详情
+import Rule from './containers/Rule'
 
 // 404
 import NotFound from './containers/404'
@@ -41,6 +43,7 @@ export default class RouteMap extends Component {
                     <IndexRoute component={Home}/>
                     <Route path="confirm" component={Confirm} onEnter={redirectToLogin} />
                     <Route path="detail" component={Detail} onEnter={redirectToLogin} />
+                    <Route path="rule" component={Rule} onEnter={redirectToLogin} />
                     <Route path="home/pay/success" component={Home} />
 
                     <Route path="user" component={User} onEnter={redirectToLogin} />

@@ -31,7 +31,7 @@ class UselessCard extends Component {
                         </div>
                         <div className="msg-tip">已下架</div>
                     </div>
-                    <div className="section3">
+                    <div className="section3" onClick = {this.props.clickBtnWrap.bind(null, 'delete', card.privilege_no)}>
                         <div className="btn-wrap">
                             <div className="btn delete">删除</div>
                         </div>

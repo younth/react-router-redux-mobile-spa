@@ -32,11 +32,14 @@ class ExpiredCard extends Component {
                         </div>
                         <div className="msg-tip">已过期</div>
                     </div>
-                    <div className="section3">
-                        <div className="btn-wrap">
-                            {card.notRenew ? '' : <div className="btn renew">续费</div>}
+                    {
+                        card.notRenew ? '' :
+                        <div className="section3" onClick = {this.props.clickBtnWrap.bind(null, 'renew', card.privilege_no)}>
+                            <div className="btn-wrap">
+                                 <div className="btn renew">续费</div>
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
         )

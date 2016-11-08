@@ -29,9 +29,7 @@ class Mime extends Component {
             <div>
             {
                 num ? 
-                <TitleBar type = "user-card" title = "已购买">
-                    { <Link className = "to-all-card" to = 'all'>查看全部</Link> }
-                </TitleBar>
+                <TitleBar type = "user-card" title = "已购买" />
                 : ''
             }
             {

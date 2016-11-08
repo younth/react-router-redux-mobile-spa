@@ -8,7 +8,7 @@
     background-size: 100% 100%;
 }
 
-.icon-before(@bg: '../../../static/img/i_rule.png', @w: 28px, @h: 28px) {
+.icon-before(@bg, @w, @h) {
     &:before {
         content: '';
         display: block;
@@ -23,7 +23,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    .icon-before();
+    .icon-before(@bg: '../../../static/img/i_rule.png', @w: 28px, @h: 28px);
     [data-dpr=3]& {
         .icon-before(@bg: '../../../static/img/i_rule3x.png', @w: 42px, @h: 42px)
     }

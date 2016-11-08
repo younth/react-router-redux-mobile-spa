@@ -3,6 +3,9 @@
  */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { Link, hashHistory } from 'react-router'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 import ReactSwipe from 'react-swipes';
 
@@ -12,21 +15,28 @@ import UnenforcedCard from './UnenforcedCard';
 import ExpiredCard from './ExpiredCard';
 import UselessCard from './UselessCard';
 
+import * as globalActions from '../../actions/globalVal'
+
 import './index.less'
 
 // 组装 SwipeCard 组件
-class SwipeCard extends Component {
-    constructor(props, context) {
-        super(props, context);
-        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-        this.state = {
-            curCard: 0
-        }
+const mapStateToProps = state => {
+    return {
+        globalVal: state.globalVal
     }
-    swipeCallback(index, elem) {
-        this.setState({
-            curCard: index
-        })
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        globalActions: bindActionCreators(globalActions, dispatch)
+    }
+}
+// React & Redux 绑定
+@connect(mapStateToProps, mapDispatchToProps)
+export default class SwipeCard extends Component {
+    constructor(props, context) {
+        super(props, context)
+        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
+        this.clickBtnWrap = this.clickBtnWrap.bind(this)
     }
     // 区分有效卡、可续费卡、过期卡可续费卡和无用可删除卡
     // 存在的问题：先把用户已购卡片遍历一遍，区分有效卡与无效卡中的四种卡片状态，再在render中遍历并展示
@@ -90,25 +100,50 @@ class SwipeCard extends Component {
 
         return ranklist // 排序后的 cardList
     }
+
     renderCard(card, key, specialType = '') {
         specialType = specialType ? `${specialType} ${card.cardType}` : card.cardType;
         if (card.cardType === 'renewCard') {
-            return <RenewCard key = {key} card = {card} cardType = {specialType}/>
+            return <RenewCard key = {key} card = {card} cardType = {specialType} clickBtnWrap = {this.clickBtnWrap}/>
         } else if (card.cardType === 'validCard') {
-            return <ValidCard key = {key} card = {card} cardType = {specialType}/>
+            return <ValidCard key = {key} card = {card} cardType = {specialType} clickBtnWrap = {this.clickBtnWrap}/>
         } else if (card.cardType === 'unenforcedCard') {
-            return <UnenforcedCard key = {key} card = {card} cardType = {specialType}/>
+            return <UnenforcedCard key = {key} card = {card} cardType = {specialType} clickBtnWrap = {this.clickBtnWrap}/>
         } else if (card.cardType === 'expiredCard') {
-            return <ExpiredCard key = {key} card = {card} cardType = {specialType}/>
+            return <ExpiredCard key = {key} card = {card} cardType = {specialType} clickBtnWrap = {this.clickBtnWrap}/>
         } else if (card.cardType === 'uselessCard') {
-            return <UselessCard key = {key} card = {card} cardType = {specialType}/>
+            return <UselessCard key = {key} card = {card} cardType = {specialType} clickBtnWrap = {this.clickBtnWrap}/>
         }
     }
+
+    clickBtnWrap(type, privilege_no) {
+        let {globalVal, globalActions} = this.props
+        if (type === 'renew' || type === 'buy') {
+            globalActions.savePrivilegeNo({
+                privilege_no: privilege_no
+            })
+            hashHistory.push('/confirm')
+        } else if (type === 'delete') {
+
+        }
+    }
+
+    componentDidMount () {
+        let {globalVal, globalActions} = this.props
+        console.log(globalVal)
+        // !card.data && cardActions.getHomeCard()
+
+        // globalActions.addressUpdate({
+        //     lat: '1111',
+        //     lng: '22222'
+        // })
+    }
+
     render() {
         let cardList = this.distinguishCard(this.props.cardList)
         // swipes 的配置
         let opt = {
-            distance: wmflex.rem2px(8.666667), // 每次移动的距离，卡片的真实宽度，需要计算
+            distance: wmflex.rem2px(wmflex.px2rem(650, 75)), // 每次移动的距离，卡片的真实宽度，需要计算
             swTouchend: (ev) => {
                 let data = {
                     moved: ev.moved,
@@ -116,16 +151,11 @@ class SwipeCard extends Component {
                     newPoint: ev.newPoint,
                     cancelled: ev.cancelled
                 }
-                console.log(data)
-                this.setState({
-                    curCard: ev.newPoint
-                })
             }
         }
         return (
             <div>
             {
-                // todo length === 0时展示提示图案
                 cardList && cardList.length === 1
                 ? this.renderCard(cardList[0], 0, 'only-card')
                 : <div className = "swipe-wrap">

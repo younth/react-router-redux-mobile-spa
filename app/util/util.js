@@ -42,14 +42,21 @@ var Utils = {
     // 设置头部信息及右上角按钮事件
     setTitleBar(cfg = {}) {
         window.WMAppReady(function() {
+            // window.WMApp.page.setTitleBar({
+            //     titleText: cfg.titleText, // 
+            //     actionText: cfg.actionText || ' ',
+            //     actionClickAble: cfg.actionClickAble || 0
+            // })
             window.WMApp.page.setTitleBar({
-                titleText: cfg.titleText,
-                actionText: cfg.actionText || ' ',
-                actionClickAble: cfg.actionClickAble || 0
+                titleText: cfg.titleText,    // 标题
+                titleIcon: '', // 标题icon v4.1.0+
+                titleClickAble: 0,     // 是否可点击，0不可点，1可点，默认0
+                actionText: '',     // 右边操作文案，
+                actionClickAble: 0    // 右边按钮是否可点击
             })
-            window.WMApp.entry.setPageAction('onActionClick', function() {
-                cfg.shareParams ? window.WMApp.share.share(cfg.shareParams) : (location.href = cfg.url)
-            })
+            // cfg.actionClickAble && window.WMApp.entry.setPageAction('onActionClick', function() {
+            //     cfg.shareParams ? window.WMApp.share.share(cfg.shareParams) : (location.href = cfg.url || 'javascript:;')
+            // })
         })
     },
 

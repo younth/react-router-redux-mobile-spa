@@ -1,0 +1,37 @@
+@import '../../../static/styles/common.less';
+@gray: #808080;
+@black: #333; // 文字浅灰色（活动规则,tip,小度商城规则）
+
+#rule {
+    font-size: 28px;
+    color: @gray;
+    padding: 40px;
+    padding-top: 0;
+    color: @gray;
+    overflow: auto;
+    word-break: break-all;
+    word-wrap: break-word;
+    h2 {
+        color: @black;
+        padding: 40px 0;
+        font-size: 32px; /*px*/
+    }
+    p {
+        line-height: 48px;
+        &.info {
+            margin-top: 20px;
+        }
+        &>span {
+            display: block;
+            margin-bottom: 12px;
+            line-height: 44px;
+        }
+    }
+    .bold {
+        color: @black;
+    }
+    li {
+        margin-left: 20px;
+        line-height: 40px;
+    }
+}

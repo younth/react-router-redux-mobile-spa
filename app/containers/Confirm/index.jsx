@@ -7,6 +7,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
+import Utils from '../../util/util.js';
+
 import './index.less'
 
 import TitleBar from '../../components/TitleBar'
@@ -47,59 +49,52 @@ export default class Confirm extends Component {
             laseCityName: '北京市',
             accessTitle: '本卡权益',
             period: 0,
-            show: true // 城市提示框
+            show: false // 城市提示框
         }
     }
     compontentWillMount() {
         // 展示loading状态 todo
         // loading()
     }
+
     componentDidMount () {
-        let {confirm, cardActions, globalActions} = this.props
-        console.log(!confirm.data);
-        !confirm.data && cardActions.getConfirmInfo()
-        globalActions.addressUpdate({
-            lat: '1111',
-            lng: '22222'
-        })
+        let {globalVal, confirm, cardActions, globalActions} = this.props
+        console.log(globalVal);
+        if (globalVal.privilege_no) {
+            // 获取提单页信息
+            cardActions.getConfirmInfo(globalVal.privilege_no)
+        }
+        if (confirm.TYPE === 'INIT') {
+            Utils.loading()
+        }
     }
 
-    changePeriod (period) {
+    changePeriod (period, price) {
         this.setState({
             period: period
         })
     }
+
     sendPayInfo() {
         // 生成支付订单
     }
+
     changeCity () {
         // 调端内更改地址API
     }
     render() {
         let {confirm} = this.props
-        let accessList = {}, radioList = []
-        if (confirm.errno === 0) {
-            let data = confirm.data
-            let cityName = data.city_name
-            this.state.accessTitle = `本卡权益（${cityName}）`
-            accessList = data.privilege_rule
-            radioList = data.prices
-            this.state.period === 0 && (this.state.period =  radioList[0].period)
-        } else {
-            // todo
+        if (confirm.TYPE === 'SUCCESS') {
+            Utils.loading(0)
+            this.state.accessTitle = `本卡权益（${confirm.data.city_name || ''}）`
+            this.state.period === 0 && (this.state.period = confirm.radioList[0].period)
         }
-        // 隐藏loading状态 todo
-        // loading(0)
-        // 更新全局数据
-        // globalActions.addressUpdate({
-        //     isVip: card.isVip
-        // })
         return (
             <div className = "confirm-page">
                 <TitleBar type = "access-title" title = {this.state.accessTitle}/>
-                <Access accessList = {accessList}/>
+                <Access accessList = {confirm.accessList}/>
                 <TitleBar type = "period-title" title = "有效期" />
-                <RadioList radioList = {radioList} selected = {this.state.period} onSelectedValueChanged = {this.changePeriod}/>
+                <RadioList radioList = {confirm.radioList} selected = {this.state.period} onSelectedValueChanged = {this.changePeriod}/>
                 <div className = "agree-wrap">
                     <div className = "radio"></div>
                     同意并接受<Link to = "rule">《百度外卖购卡协议》</Link>

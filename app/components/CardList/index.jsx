@@ -3,6 +3,9 @@
  */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
 
 import SellCard from './SellCard';
 import MessageTip from './MessageTip';

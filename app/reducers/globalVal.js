@@ -2,19 +2,37 @@ import * as actionTypes from '../constants/types'
 
 const initialState = {
     lat: '',
-    lng: ''
+    lng: '',
+    city_id: '',
+    from: '',
+    app_ver: '',
+    data: ''
 }
 
-export default function userinfo(state = initialState, action) {
+export default function globalVal(state = initialState, action) {
     switch (action.type) {
 
         case actionTypes.ADRESS_UPDATE:
             return {
                 ...state,
-                lat: action.lat || action.data.lat,
-                lng: action.lng || action.data.lng
+                lat: action.lat || action.data.lat || state.lat,
+                lng: action.lng || action.data.lng || state.lng,
+                city_id: action.city_id || action.data.city_id || state.city_id,
+                data: action
+            }
+        case actionTypes.DEVICE_UPDATE:
+            return {
+                ...state,
+                from: action.from || action.data.from,
+                app_ver: action.app_ver || action.data.app_ver
+            }
+        case actionTypes.SAVE_PRIVILEGENO:
+            return {
+                ...state,
+                privilege_no: action.privilege_no || action.data.privilege_no
             }
         default:
             return state
     }
 }
+

@@ -48,24 +48,34 @@ export default class Home extends Component {
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
         this.hideDialog = this.hideDialog.bind(this)
         this.state = {
-            show: true
+            show: false
         }
     }
-    compontentWillMount() {
-        window.WMApp.page.setTitleBar = function(cfg) {
-            document.title = '111'
-        }
+    componentWillMount() {
+        console.log('打印不出来 啥也干不了')
+        // Utils.setTitleBar({
+            // titleText: 111
+        // })
         // 展示loading状态 todo
         // loading()
     }
     componentDidMount () {
-        let {card, cardActions, globalActions} = this.props
-        !card.data && cardActions.getHomeCard()
+        // 一执行就闪退
+        // Utils.setTitleBar({
+        //     titleText: 111
+        // })
+        let {card, globalVal, cardActions, globalActions} = this.props
+
+        if(card.TYPE === 'INIT') {
+            cardActions.getHomeCard()
+            Utils.loading()
+        }
 
         globalActions.addressUpdate({
             lat: '1111',
             lng: '22222'
         })
+        console.log(globalVal);
     }
     hideDialog() {
         this.setState({
@@ -76,38 +86,25 @@ export default class Home extends Component {
     render() {
         let {card} = this.props
         let userPrivileges = [], cityPrivileges = []
-        console.log(card);
-        if (card.errno === 0) {
-            // 隐藏loading状态 todo
-            // loading(0)
-            // console.log('请求成功')
-            userPrivileges = card.userPrivileges || {} // [valid = [{}, {}, {}], expired = [{}, {}, {}]]
-            cityPrivileges = card.cityPrivileges || [] // [{}, {}, {}]
-            console.log(cityPrivileges.length);
-            // 更新全局数据
-            globalActions.addressUpdate({
-                isVip: card.isVip
-            })
+        if (card.TYPE === 'SUCCESS' ) {
+            Utils.loading(0)
         }
-        // 获取支付状态
-        let hashArr = location.hash.split('/'),
-            result = hashArr[hashArr.length - 1]
-        let paySuccess = result.indexOf('success') === -1 ? false : true
+        // 更新全局数据
+        globalActions.addressUpdate({
+            isVip: card.isVip
+        })
         return (
             <div>
-                { userPrivileges && <Mime cardList = {userPrivileges} isVip = {card.isVip} /> }
-                { cityPrivileges && <Onsell cardList = {cityPrivileges} /> }
+                { card.userPrivileges && <Mime cardList = {card.userPrivileges} isVip = {card.isVip} /> }
+                { card.cityPrivileges && <Onsell cardList = {card.cityPrivileges} /> }
                 <Link className = "to-rule" to = "rule">配送折扣卡规则</Link>
-                {
-                    paySuccess ? 
-                    <DialogModal show = {this.state.show} el='pay-success-dialog' title='购买成功' closeOnOuterClick={false}>
-                        <div className="pay-success-img"></div>
-                        <div className="pay-success-msg">购买成功，享受权益</div>
-                        <footer>
-                            <a href="javascript:;" onClick = {this.hideDialog}>关闭</a>
-                        </footer>
-                    </DialogModal> : ''
-                }
+                <DialogModal show = {this.state.show} el='pay-success-dialog' title='购买成功' closeOnOuterClick={false}>
+                    <div className="pay-success-img"></div>
+                    <div className="pay-success-msg">购买成功，享受权益</div>
+                    <footer>
+                        <a href="javascript:;" onClick = {this.hideDialog}>关闭</a>
+                    </footer>
+                </DialogModal>
             </div>
         )
     }
