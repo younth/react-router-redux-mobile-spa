@@ -3,6 +3,7 @@
  */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { Link, hashHistory } from 'react-router'
 import classNames from 'classnames';
 
 import './index.less'
@@ -13,13 +14,14 @@ class SellCard extends Component {
         super(props, context)
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
         this.unfoldRule = this.unfoldRule.bind(this)
-        this.handBuyBtn = this.handBuyBtn.bind(this)
+        // this.handBuyBtn = this.handBuyBtn.bind(this)
         this.state = {
             rulefold: true, // 使用规则折叠true 展开false
             btnstatus: 'buy',
             conflictreason: ''
         }
     }
+
     unfoldRule() {
         console.log(this.state.rulefold);
         // this.state.rulefold = !this.state.rulefold;
@@ -28,16 +30,19 @@ class SellCard extends Component {
             rulefold: !this.state.rulefold
         })
     }
-    handBuyBtn() {
+
+    handBuyBtn(privilege_no) {
         let btnstatus = this.state.btnstatus
         if (btnstatus === 'buy' || btnstatus === 'renew') {
             // 开通或续费 跳到提单页
+            hashHistory.push(`/confirm/${privilege_no}`)
         } else {
             // 不可开通或不可续费 提示原因 dialog
             let conflictreason = this.state.conflictreason
             window.WMApp.nui.toast({text: conflictreason})
         }
     }
+
     getBtnStatus(card) {
         let btnstatus = 'buy', conflictreason = ''
         if (card.stock > 0) {
@@ -85,7 +90,7 @@ class SellCard extends Component {
                         <div className="price-wrap">
                             <div className="price">{card.price}</div>
                         </div>
-                        <div className="btn-wrap" onClick = {this.handBuyBtn}>
+                        <div className="btn-wrap" onClick = {this.handBuyBtn.bind(this, card.privilege_no)}>
                         {
                             this.state.btnstatus === 'buy'
                             ? <div className="btn buy">开通</div>

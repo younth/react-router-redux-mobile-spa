@@ -4,8 +4,7 @@ const initialState = {
     loading: true,
     userPrivileges: {},
     cityPrivileges: [],
-    isVip: 0,
-    TYPE: 'INIT'
+    isVip: 0
 }
 
 export default function card(state = initialState, action) {
@@ -14,8 +13,7 @@ export default function card(state = initialState, action) {
         case actionTypes.GET_HOMECARD_REQUEST:
             return {
                 ...state,
-                loading: true,
-                TYPE: 'REQUEST'
+                loading: true
             }
         case actionTypes.GET_HOMECARD_SUCCESS:
             let result = action.json.result;
@@ -24,8 +22,7 @@ export default function card(state = initialState, action) {
                 loading: false,
                 userPrivileges: result.user_privileges,
                 cityPrivileges: result.city_privileges,
-                isVip: result.is_vip,
-                TYPE: 'SUCCESS'
+                isVip: result.is_vip
             }
         case actionTypes.GET_HOMECARD_FAILURE:
             // error_no 不等于0
@@ -33,8 +30,7 @@ export default function card(state = initialState, action) {
                 ...state,
                 loading: false,
                 errno: action.json.error_no,
-                errmsg: action.json.error_msg,
-                TYPE: 'FAIL'
+                errmsg: action.json.error_msg
             }
         default:
             return state

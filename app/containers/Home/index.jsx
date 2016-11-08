@@ -66,16 +66,15 @@ export default class Home extends Component {
         // })
         let {card, globalVal, cardActions, globalActions} = this.props
 
-        if(card.TYPE === 'INIT') {
+        if(card.loading) {
             cardActions.getHomeCard()
             Utils.loading()
         }
-
+        
         globalActions.addressUpdate({
             lat: '1111',
             lng: '22222'
         })
-        console.log(globalVal);
     }
     hideDialog() {
         this.setState({
@@ -86,7 +85,7 @@ export default class Home extends Component {
     render() {
         let {card} = this.props
         let userPrivileges = [], cityPrivileges = []
-        if (card.TYPE === 'SUCCESS' ) {
+        if (!card.loading) {
             Utils.loading(0)
         }
         // 更新全局数据

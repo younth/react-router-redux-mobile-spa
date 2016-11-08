@@ -4,8 +4,7 @@ const initialState = {
     loading: true,
     data: {},
     accessList: {},
-    radioList: [],
-    TYPE: 'INIT'
+    radioList: []
 }
 
 export default function card(state = initialState, action) {
@@ -14,20 +13,16 @@ export default function card(state = initialState, action) {
         case actionTypes.GET_CONFIRMINFO_REQUEST:
             return {
                 ...state,
-                loading: true,
-                TYPE: 'REQUEST'
+                loading: true
             }
         case actionTypes.GET_CONFIRMINFO_SUCCESS:
-        console.log(action);
-
             let result = action.json.result;
             return {
                 ...state,
                 loading: false,
                 data: result,
                 accessList: result.privilege_rule,
-                radioList: result.prices,
-                TYPE: 'SUCCESS'
+                radioList: result.prices
             }
         case actionTypes.GET_CONFIRMINFO_FAILURE:
             // error_no 不等于0
@@ -35,8 +30,7 @@ export default function card(state = initialState, action) {
                 ...state,
                 loading: false,
                 errno: action.json.error_no,
-                errmsg: action.json.error_msg,
-                TYPE: 'FAIL'
+                errmsg: action.json.error_msg
             }
         default:
             return state

@@ -1,0 +1,11 @@
+{
+    "error_no": 0,
+    "error_msg": "",
+    "result": {
+        "pay_params": "service_code=1&sp_no=9000100005&order_create_time=20161103173142&order_no=201611031731422330&goods_name=%B0%D9%B6%C8%CD%E2%C2%F4-201611031731422330&goods_desc=%B0%D9%B6%C8%CD%E2%C2%F4-201611031731422330&total_amount=110&currency=1&buyer_sp_username=1415201671&return_url=http%3A%2F%2Fgzhxy-waimai-dcloud16.gzhxy.iwm.name%3A8059%2Fpay%3Fqt%3Dpayreturnwallet&pay_type=2&expire_time=20161103174642&input_charset=1&version=2&sign_method=1&goods_category=type:1;waimai_old&sp_pass_through=%257B%2522GMV%2522%253A%257B%2522vmgdb%2522%253A%252200520001%2522%252C%2522uno%2522%253A%2522OGmwow8XVv2KiBSGgdLpFWbd31nWObw1WrRvVZAuvx7eB0USm0Kc14Wh0ycdH%252Bk4%2522%257D%252C%2522offline_pay%2522%253A1%257D&city_code=0&sp_rcs=0%7Crcs_version%253D1%2526is_baidu_transport%253D0%2526deliver_balance_charge%253D2&sign=dd55896d89260f04be1798b97074e43d",
+        "pay_type": "1",
+        "order_id": "201611031731422330"
+    },
+    "_bdstoken": "e363037bbcb605758073b209fb81446e",
+    "_token_bindmobile": ""
+}

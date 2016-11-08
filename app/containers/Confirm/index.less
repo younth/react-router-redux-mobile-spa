@@ -26,28 +26,7 @@ html,
 body {
     background-color: @gray;
     .confirm-page {
-        .agree-wrap {
-            display: flex;
-            align-items: center;
-            color: @font-gray2;
-            margin-left: 35px;
-            .radio {
-                margin-right: 24px;
-                .setBG('../../../static/img/i_unagree.png', 29px, 29px);
-                [data-dpr=3]& {
-                    .setBG('../../../static/img/i_unagree3x.png', 44px, 44px);
-                }
-                &.selected {
-                    .setBG('../../../static/img/i_agree.png', 29px, 29px);
-                    [data-dpr=3]& {
-                        .setBG('../../../static/img/i_agree3x.png', 44px, 44px);
-                    }
-                }
-            }
-            a {
-                color: @font-gray2;
-            }
-        }
+        
         .buy-card {
             width: 700px;
             .v-height(90px);

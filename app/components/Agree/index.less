@@ -1,0 +1,33 @@
+@import '../../../static/styles/common.less';
+@black: #333;
+@font-gray2: #a9a9a9;
+
+.setBG(@url, @w, @h) {
+    background: url(@url) no-repeat;
+    width: @w;
+    height: @h;
+    background-size: 100% 100%;
+}
+
+.agree-wrap {
+    display: flex;
+    align-items: center;
+    color: @font-gray2;
+    margin-left: 35px;
+    .radio {
+        margin-right: 24px;
+        .setBG('../../../static/img/i_unagree.png', 29px, 29px);
+        [data-dpr=3]& {
+            .setBG('../../../static/img/i_unagree3x.png', 44px, 44px);
+        }
+        &.selected {
+            .setBG('../../../static/img/i_agree.png', 29px, 29px);
+            [data-dpr=3]& {
+                .setBG('../../../static/img/i_agree3x.png', 44px, 44px);
+            }
+        }
+    }
+    a {
+        color: @font-gray2;
+    }
+}

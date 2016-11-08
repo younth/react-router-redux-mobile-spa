@@ -41,10 +41,10 @@ export default class RouteMap extends Component {
                 {/* 先加载app组件 */}
                 <Route path="/" component={App}>
                     <IndexRoute component={Home}/>
-                    <Route path="confirm" component={Confirm} onEnter={redirectToLogin} />
-                    <Route path="detail" component={Detail} onEnter={redirectToLogin} />
+                    <Route path="home/:payresult" component={Home} />
+                    <Route path="confirm/:id" component={Confirm} onEnter={redirectToLogin} />
+                    <Route path="detail/:id" component={Detail} onEnter={redirectToLogin} />
                     <Route path="rule" component={Rule} onEnter={redirectToLogin} />
-                    <Route path="home/pay/success" component={Home} />
 
                     <Route path="user" component={User} onEnter={redirectToLogin} />
                     {/* 404 */}

@@ -6,7 +6,8 @@ const initialState = {
     city_id: '',
     from: '',
     app_ver: '',
-    data: ''
+    data: '',
+    privilege_no: ''
 }
 
 export default function globalVal(state = initialState, action) {
@@ -17,19 +18,18 @@ export default function globalVal(state = initialState, action) {
                 ...state,
                 lat: action.lat || action.data.lat || state.lat,
                 lng: action.lng || action.data.lng || state.lng,
-                city_id: action.city_id || action.data.city_id || state.city_id,
-                data: action
+                city_id: action.city_id || action.data.city_id || state.city_id
             }
         case actionTypes.DEVICE_UPDATE:
             return {
                 ...state,
-                from: action.from || action.data.from,
-                app_ver: action.app_ver || action.data.app_ver
+                from: action.from || action.data.from || state.from,
+                app_ver: action.app_ver || action.data.app_ver || state.app_ver
             }
         case actionTypes.SAVE_PRIVILEGENO:
             return {
                 ...state,
-                privilege_no: action.privilege_no || action.data.privilege_no
+                privilege_no: action.privilege_no || action.data.privilege_no || state.privilege_no
             }
         default:
             return state
