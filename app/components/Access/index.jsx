@@ -17,24 +17,46 @@ class Access extends Component {
     }
     render() {
         let accessList = this.props.accessList
+        let type = this.props.type
         return (
-            <div className = "access-wrap">
-                <div className = "access-item">
-                    <div className = "info"><span className="num">{accessList.max_discount || '?' }</span>元</div>
-                    <div className = "desc">每单最高减免</div>
-                </div>
-                <div className = "access-item">
-                    <div className = "info"><span className="num">{accessList.day_limit || '?' }</span>单</div>
-                    <div className = "desc">每天减免</div>
-                </div>
-                {
-                    accessList.month_limit ? 
+            <div>
+            {
+                (type === 'privilege-detail') ?
+                <div className = "access-wrap">
                     <div className = "access-item">
-                        <div className = "info"><span className="num">{accessList.month_limit || '?' }</span>单</div>
-                        <div className = "desc">每月最多减免</div>
+                        <div className = "info"><span className="num">{accessList.max_discount || '?' }</span>元</div>
+                        <div className = "desc">每单最高减免</div>
                     </div>
-                    : ''
-                }
+                    <div className = "access-item">
+                        <div className = "info"><span className="num">{accessList.day_limit || '?' }</span>单</div>
+                        <div className = "desc">每天减免</div>
+                    </div>
+                    {
+                        accessList.month_limit ? 
+                        <div className = "access-item">
+                            <div className = "info"><span className="num">{accessList.month_limit || '?' }</span>单</div>
+                            <div className = "desc">每月最多减免</div>
+                        </div>
+                        : ''
+                    }
+                </div>
+                : (type === 'discount-detail') ?
+                <div className = "access-wrap">
+                    <div className = "access-item">
+                        <div className = "info"><span className="num">{accessList.time_days || '?' }</span>天</div>
+                        <div className = "desc">特权时间</div>
+                    </div>
+                    <div className = "access-item">
+                        <div className = "info"><span className="num">{accessList.total_save || '?' }</span>元</div>
+                        <div className = "desc">为您节省</div>
+                    </div>
+                    <div className = "access-item">
+                        <div className = "info"><span className="num">{accessList.delivery_times || '?' }</span>单</div>
+                        <div className = "desc">配送单量</div>
+                    </div>
+                </div>
+                : ''
+            }
             </div>
         )
     }

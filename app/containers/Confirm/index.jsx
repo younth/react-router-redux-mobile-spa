@@ -59,8 +59,7 @@ export default class Confirm extends Component {
         }
     }
     componentWillMount() {
-        console.log(this.props.params);
-        let {globalVal, confirm, cardActions, globalActions} = this.props
+        let {confirm, cardActions} = this.props
         // 展示loading
         if (confirm.loading) {
             Utils.loading()
@@ -68,20 +67,17 @@ export default class Confirm extends Component {
         // 获取权益id
         if (this.props.params.id) {
             // 获取提单页信息
-            cardActions.getConfirmInfo(this.props.params.id)
+            cardActions.getConfirmInfo({
+                privilege_no: this.props.params.id
+            })
         }
-        console.log('compontentWillMount');
-        // 展示loading状态 todo
-        // loading()
     }
 
     componentDidMount () {
-        console.log('componentDidMount');
 
     }
 
     componentDidUpdate () {
-        console.log('componentDidUpdate');
     }
 
     changePeriod (period, price) {
@@ -110,26 +106,29 @@ export default class Confirm extends Component {
 
     buyCard() {
         // 1. 检查信息完整度
-        if (this.state.period) {
+        if (!this.state.period) {
             Utils.showToast('请选择卡片规格')
+            return false
         }
-        if (this.state.isAgree) {
+        if (!this.state.isAgree) {
             Utils.showToast('请确认《百度外卖购卡协议》')
+            return false
         }
-        // 2. 拼装数据
+        // 2. 判断购卡城市与当前城市是否一致
+        
+        // 3. 拼装数据
         let {globalVal} = this.props
         let params = {
             ...globalVal,
             period: this.state.period,
             pay_type: 2 // 聚合收银台
         }
-        // 3. 生成订单
+        // 4. 生成订单
         get('/wmall/privilege/buy').then(res => {
             return res.json()
         }).then(json => {
             let result = json.result
-            console.log(json.result)
-            // 4. 判断网络环境
+            // 5. 判断网络环境
             let params = {
                 payType: 2,// 1表示钱包，2表示聚合收银台
                 payParams: result.pay_params   // 聚合收银台服务端下发的是json串，不需要encode
@@ -138,7 +137,7 @@ export default class Confirm extends Component {
                 if (data.status && data.result.network === 'unreachable') {
                     Utils.showToast('网络不可用');
                 } else {
-                    // 5. 进行聚合收银台支付
+                    // 6. 进行聚合收银台支付
                     this.doPay(params)
                 }
             })
@@ -161,12 +160,16 @@ export default class Confirm extends Component {
             if (this.state.period === 0) {
                 this.state.period = confirm.radioList[0].period
                 this.state.price = confirm.radioList[0].price
+                this.state.selectCityId = 0
+                this.state.selectCityName = ''
+                this.state.lastCityId = 0
+                this.state.laseCityName = ''
             }
         }
         return (
             <div className = "confirm-page">
                 <TitleBar type = "access-title" title = {this.state.accessTitle}/>
-                <Access accessList = {confirm.accessList}/>
+                <Access accessList = {confirm.accessList} type = "privilege-detail"/>
                 <TitleBar type = "period-title" title = "有效期" />
                 <RadioList radioList = {confirm.radioList} selected = {this.state.period} onSelectedValueChanged = {this.changePeriod}/>
                 <Agree isAgree = {this.state.isAgree} onSelectedValueChanged = {this.changeAgree}/>

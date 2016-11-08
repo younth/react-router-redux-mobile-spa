@@ -11,6 +11,8 @@ import './index.less'
 
 import TitleBar from '../../components/TitleBar'
 import Access from '../../components/Access'
+import DiscountList from './DiscountList'
+import AccessRule from './AccessRule'
 
 import * as globalActions from '../../actions/globalVal'
 import * as cardActions from '../../actions/card'
@@ -43,54 +45,20 @@ export default class Detail extends Component {
         // loading()
     }
     componentDidMount () {
-        let {detail, cardActions, globalActions} = this.props
-        !detail.data && cardActions.getDiscountDetail()
-        globalActions.addressUpdate({
-            lat: '1111',
-            lng: '22222'
-        })
+        let {detail, cardActions} = this.props
+        detail.loading && cardActions.getDiscountDetail()
     }
     render() {
         let {detail} = this.props
-        console.log(detail);
-          
         return (
             <div className = "detail-page">
-                <Access />
-                <TitleBar type = "city-name" title = "开通城市" value = "北京"/>
-                <TitleBar type = "end-time" title = "有效期至" value = "2016-12-01"/>
+                <Access accessList = {detail.accessList} type = "discount-detail" />
+                <TitleBar type = "city-name" title = "开通城市" value = {detail.city_name || ''}/>
+                <TitleBar type = "end-time" title = "有效期至" value = {detail.end_time || ''}/>
                 <TitleBar type = "access-title" title = "权益说明" />
-                <div className = "access-rule">
-                    <div className="section1">
-                        <p>每单最高减免4元配送费。</p>
-                        <p>每天最多可享4单。</p>
-                        <p>每月最多可享30单。</p>
-                    </div>
-                    <div className="section2">
-                        <p>权益只在开通城市有效。</p>
-                        <p>仅支持百度专送。</p>
-                    </div>
-                </div>
+                <AccessRule accessList = {detail.privilege_rule}/>
                 <TitleBar type = "discount-title" title = "优惠明细" />
-                <div className="discount-wrap">
-                    <div className="discount-item">
-                        <div className="name">包点饺子（西二旗店）</div>
-                        <div className="desc">节省配送费 ￥5</div>
-                    </div>
-                    <div className="discount-item">
-                        <div className="name">包点饺子（西二旗店）</div>
-                        <div className="desc">节省配送费 ￥5</div>
-                    </div>
-                    <div className="discount-item">
-                        <div className="name">包点饺子（西二旗店）</div>
-                        <div className="desc">节省配送费 ￥5</div>
-                    </div>
-                    <div className="discount-item">
-                        <div className="name">包点饺子（西二旗店）</div>
-                        <div className="desc">节省配送费 ￥5</div>
-                    </div>
-                </div>
-
+                <DiscountList list = {detail.list} />
             </div>
         )
     }

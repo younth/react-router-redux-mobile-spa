@@ -1,0 +1,31 @@
+@import '../../../../static/styles/common.less';
+@gray2: #a9a9a9;
+.point-before(@size: 6px) {
+    &:before {
+        content: '';
+        width: @size;
+        height: @size;
+        border-radius: @size;
+        display: block;
+        margin-right: 16px;
+        background: @gray2;
+    }
+}
+
+.access-rule {
+    display: flex;
+    width: 660px;
+    margin: 0 auto;
+    margin-top: 15px;
+    justify-content: space-between;
+    p {
+        display: flex;
+        align-items: center;
+        .point-before();
+        [data-dpr='3'] & {
+            .point-before(9px);
+        }
+        color: @gray2;
+        margin-bottom: 30px;
+    }
+}

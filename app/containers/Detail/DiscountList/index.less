@@ -1,0 +1,28 @@
+@import '../../../../static/styles/common.less';
+@gray2: #a9a9a9;
+@black: #333;
+.discount-wrap {
+    text-align: center;
+    font-size: 26px;
+    color: #808080;
+    .discount-item {
+        display: flex;
+        justify-content: space-between;
+        width: 680px;
+        padding: 40px 0;
+        margin-left: 70px;
+        border-top: 1px solid @gray2;
+        &:first-child {
+            border-top: none;
+        }
+        .name {
+            font-size: 28px;
+            color: @black;
+        }
+        .desc {
+            font-size: 24px;
+            color: @gray2;
+            margin-right: 76px;
+        }
+    }
+}

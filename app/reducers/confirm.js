@@ -7,7 +7,7 @@ const initialState = {
     radioList: []
 }
 
-export default function card(state = initialState, action) {
+export default function confirm(state = initialState, action) {
     switch (action.type) {
 
         case actionTypes.GET_CONFIRMINFO_REQUEST:

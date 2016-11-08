@@ -12,27 +12,6 @@
     background-size: 100% 100%;
 }
 
-.icon-before(@bg: './img/i_rule.png', @w: 28px, @h: 28px) {
-    &:before {
-        content: '';
-        display: block;
-        .setBG(@bg, @w, @h);
-        margin-right: 10px;
-    }
-}
-
-.point-before(@size: 6px) {
-    &:before {
-        content: '';
-        width: @size;
-        height: @size;
-        border-radius: @size;
-        display: block;
-        margin-right: 16px;
-        background: @gray2;
-    }
-}
-
 html,
 body {
     background-color: @gray;
@@ -53,44 +32,7 @@ body {
                 }
             }
         }
-        .access-rule {
-            display: flex;
-            width: 660px;
-            margin: 0 auto;
-            margin-top: 15px;
-            justify-content: space-between;
-            p {
-                display: flex;
-                align-items: center;
-                .point-before();
-                [data-dpr='3'] & {
-                    .point-before(9px);
-                }
-                color: @gray2;
-                margin-bottom: 30px;
-            }
-        }
-        .discount-wrap {
-            .discount-item {
-                display: flex;
-                justify-content: space-between;
-                width: 680px;
-                padding: 40px 0;
-                margin-left: 70px;
-                border-top: 1px solid @gray2;
-                &:first-child {
-                    border-top: none;
-                }
-                .name {
-                    font-size: 28px;
-                    color: @black;
-                }
-                .desc {
-                    font-size: 24px;
-                    color: @gray2;
-                    margin-right: 76px;
-                }
-            }
-        }
+
+        
     }
 }
