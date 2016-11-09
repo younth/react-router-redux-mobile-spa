@@ -53,7 +53,7 @@ export default class Home extends Component {
     }
     componentWillMount() {
         // 获取支付状态
-        let {globalVal} = this.props
+        let {globalVal, card} = this.props
         if (globalVal.payResult === 'success') {
             this.state.show = true
         }
@@ -62,6 +62,7 @@ export default class Home extends Component {
         Utils.setTitleBar({
             titleText: '小度商城'
         })
+        
         // 展示loading状态 todo
         // loading()
     }
@@ -73,14 +74,13 @@ export default class Home extends Component {
         let {card, cardActions, globalActions} = this.props
 
         if(card.loading) {
-            cardActions.getHomeCard()
             Utils.loading()
         }
         // 获取定位等基础信息
-        WMAppReady(function() {
-            let lng = WMApp.location.getLocLng() || '1.295948313E7',
-                lat = WMApp.location.getLocLat() || '4849489.98',
-                cityId = WMApp.location.getCityId() || '131',
+        window.WMAppReady(function() {
+            let lng = window.WMApp.location.getLocLng() || '1.295948313E7',
+                lat = window.WMApp.location.getLocLat() || '4849489.98',
+                cityId = window.WMApp.location.getCityId() || '131',
                 app_ver = window.WMApp.device.getAppVersion() || '4.1.0',
                 getFrom = window.WMApp.device.getFrom() || 'na-iphone'
             globalActions.addressUpdate({
@@ -90,8 +90,15 @@ export default class Home extends Component {
                 app_ver: app_ver,
                 from: getFrom
             })
+            cardActions.getHomeCard()
         })
     }
+
+    componentDidUpdate () {
+        let {card} = this.props
+        console.log(card)
+    }
+
     hideDialog() {
         this.setState({
             show: false
@@ -109,16 +116,14 @@ export default class Home extends Component {
                 { card.userPrivileges && <Mime cardList = {card.userPrivileges} isVip = {card.isVip} /> }
                 { card.cityPrivileges && <Onsell cardList = {card.cityPrivileges} /> }
                 <Link className = "to-rule" to = "rule">配送折扣卡规则</Link>
-                <DialogModal show = {this.state.show} el='pay-success-dialog' title='购买成功' closeOnOuterClick={false}>
-                    <div className="pay-success-img"></div>
-                    <div className="pay-success-msg">购买成功，享受权益</div>
+                <DialogModal show = {this.state.show} el='pay-success-dialog' title = '购买成功' closeOnOuterClick = {false}>
+                    <div className = "pay-success-img"></div>
+                    <div className = "pay-success-msg">购买成功，享受权益</div>
                     <footer>
-                        <a href="javascript:;" onClick = {this.hideDialog}>关闭</a>
+                        <a href = "javascript:;" onClick = {this.hideDialog}>关闭</a>
                     </footer>
                 </DialogModal>
             </div>
         )
     }
 }
-
-export default Home

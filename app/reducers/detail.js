@@ -11,14 +11,13 @@ const initialState = {
 
 export default function detail(state = initialState, action) {
     switch (action.type) {
-
         case actionTypes.GET_DISCOUNTDETAIL_REQUEST:
             return {
                 ...state,
-                loading: true,
+                loading: true
             }
         case actionTypes.GET_DISCOUNTDETAIL_SUCCESS:
-            let result = action.json.result;
+            let result = action.json.result
             return {
                 ...state,
                 loading: false,

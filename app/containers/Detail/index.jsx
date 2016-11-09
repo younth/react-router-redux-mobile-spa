@@ -38,7 +38,7 @@ export default class Detail extends Component {
         cardActions: PropTypes.object.isRequired
     }
     constructor(props, context) {
-        super(props, context);
+        super(props, context)
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     }
     componentWillMount() {
@@ -71,5 +71,3 @@ export default class Detail extends Component {
         )
     }
 }
-
-export default Detail

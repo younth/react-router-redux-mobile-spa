@@ -9,14 +9,13 @@ const initialState = {
 
 export default function confirm(state = initialState, action) {
     switch (action.type) {
-
         case actionTypes.GET_CONFIRMINFO_REQUEST:
             return {
                 ...state,
                 loading: true
             }
         case actionTypes.GET_CONFIRMINFO_SUCCESS:
-            let result = action.json.result;
+            let result = action.json.result
             return {
                 ...state,
                 loading: false,

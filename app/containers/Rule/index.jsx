@@ -16,11 +16,11 @@ class Rule extends Component {
 
     componentWillMount() {
         Utils.setTitleBar({
-            titleText: '规则详解',
-        });
-        Utils.loading(0);
-        Utils.setBack();
-        return null;
+            titleText: '规则详解'
+        })
+        Utils.loading(0)
+        Utils.setBack()
+        return false
     }
 
     render() {

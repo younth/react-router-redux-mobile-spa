@@ -117,4 +117,3 @@ export default class DiscountList extends Component {
     }
 }
 
-export default DiscountList

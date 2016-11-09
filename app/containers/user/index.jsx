@@ -37,7 +37,7 @@ export default class User extends Component {
         super(props, context);
         //this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         this.state = {
-            name: '',
+            name: ''
         }
     }
     

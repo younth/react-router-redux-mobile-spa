@@ -6,7 +6,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Link, hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { get } from '../../fetch/request'
+import { post } from '../../fetch/request'
 import Utils from '../../util/util.js'
 
 import ReactSwipe from 'react-swipes';
@@ -123,7 +123,7 @@ export default class SwipeCard extends Component {
         if (type === 'renew' || type === 'buy') {
             hashHistory.push(`/confirm/${privilege_no}`)
         } else if (type === 'delete') {
-            get('/wmall/privilege/del').then(res => {
+            post('/wmall/privilege/del?display=json').then(res => {
                 return res.json()
             }).then(json => {
                 let result = Number.parseInt(json.result)
@@ -143,7 +143,7 @@ export default class SwipeCard extends Component {
         let cardList = this.distinguishCard(this.props.cardList)
         // swipes 的配置
         let opt = {
-            distance: wmflex.rem2px(wmflex.px2rem(650, 75)), // 每次移动的距离，卡片的真实宽度，需要计算
+            distance: window.wmflex.rem2px(window.wmflex.px2rem(650, 75)), // 每次移动的距离，卡片的真实宽度，需要计算
             swTouchend: (ev) => {
                 let data = {
                     moved: ev.moved,
@@ -170,5 +170,3 @@ export default class SwipeCard extends Component {
         )
     }
 }
-
-export default SwipeCard

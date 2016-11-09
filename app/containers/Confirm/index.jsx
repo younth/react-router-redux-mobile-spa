@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { Link, hashHistory } from 'react-router'
 
 import Utils from '../../util/util.js'
-import { get } from '../../fetch/request'
+import { get, post } from '../../fetch/request'
 
 import './index.less'
 
@@ -118,7 +118,7 @@ export default class Confirm extends Component {
             pay_type: 2 // 聚合收银台
         }
         // 4. 生成订单
-        get('/wmall/privilege/buy').then(res => {
+        post('/wmall/privilege/buy?display=json').then(res => {
             return res.json()
         }).then(json => {
             let result = json.result
@@ -127,7 +127,7 @@ export default class Confirm extends Component {
                 payType: 2,// 1表示钱包，2表示聚合收银台
                 payParams: result.pay_params   // 聚合收银台服务端下发的是json串，不需要encode
             }
-            WMApp.network.getNetwork((data) => {
+            window.WMApp.network.getNetwork((data) => {
                 if (data.status && data.result.network === 'unreachable') {
                     Utils.showToast('网络不可用');
                 } else {
@@ -139,7 +139,7 @@ export default class Confirm extends Component {
     }
 
     doPay(params) {
-        WMApp.pay.doPay(params, data => {
+        window.WMApp.pay.doPay(params, data => {
             if (data.status) {
                 let {globalActions} = this.props
                 globalActions.savePayResult({
@@ -226,4 +226,3 @@ export default class Confirm extends Component {
     }
 }
 
-export default Confirm

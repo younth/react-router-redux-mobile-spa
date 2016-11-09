@@ -31,7 +31,8 @@ export function get(url, params) {
       credentials: 'include',// 请求默认带 cookie
       headers: {
           'Accept': 'application/json, text/plain, */*'
-      }
+      },
+      mode: 'no-cors'
   });
 
   return result;
