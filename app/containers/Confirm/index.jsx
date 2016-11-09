@@ -74,6 +74,12 @@ export default class Confirm extends Component {
                 privilege_no: this.props.params.id
             })
         }
+        // 点击返回回到上一页
+        Utils.setBack()
+
+        Utils.setTitleBar({
+            titleText: '开通卡名字todo'
+        })
     }
 
     componentDidMount () {
@@ -93,17 +99,6 @@ export default class Confirm extends Component {
     changeAgree(isAgree) {
         this.setState({
             isAgree: isAgree
-        })
-    }
-
-    doPay(params) {
-        WMApp.pay.doPay(params, function(data) {
-            if (data.status) {
-                console.log('支付成功')
-                hashHistory.push('/home/success')
-            } else {
-                console.log('支付失败')
-            }
         })
     }
 
@@ -140,6 +135,20 @@ export default class Confirm extends Component {
                     this.doPay(params)
                 }
             })
+        })
+    }
+
+    doPay(params) {
+        WMApp.pay.doPay(params, data => {
+            if (data.status) {
+                let {globalActions} = this.props
+                globalActions.savePayResult({
+                    payResult: 'success'
+                })
+                hashHistory.push('/home')
+            } else {
+                console.log('支付失败')
+            }
         })
     }
 
@@ -181,9 +190,7 @@ export default class Confirm extends Component {
     }
 
     render() {
-        console.log('loading' + this.props.confirm.loading);
         let {confirm} = this.props
-        console.log(confirm);
         if (!confirm.loading) {
             Utils.loading(0)
             if (this.state.period === 0) {
@@ -193,7 +200,6 @@ export default class Confirm extends Component {
                 this.state.selectCityName = confirm.data.city_name
                 this.state.lastCityId = Number.parseInt(confirm.data.last_city_id)
                 this.state.laseCityName = confirm.data.last_city_name
-                console.log(this.state);
                 this.state.accessTitle = `本卡权益（${this.state.selectCityName || ''}）`
             }
         }

@@ -6,6 +6,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import Utils from '../../util/util.js'
 
 import './index.less'
 
@@ -40,7 +41,14 @@ export default class Detail extends Component {
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     }
-    compontentWillMount() {
+    componentWillMount() {
+        // 点击返回回到上一页
+        Utils.setBack()
+
+        Utils.setTitleBar({
+            titleText: '优惠详情'
+        })
+
         // 展示loading状态 todo
         // loading()
     }

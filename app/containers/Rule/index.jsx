@@ -16,7 +16,7 @@ class Rule extends Component {
 
     componentWillMount() {
         Utils.setTitleBar({
-            titleText: '会员规则详解',
+            titleText: '规则详解',
         });
         Utils.loading(0);
         Utils.setBack();

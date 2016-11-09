@@ -32,7 +32,7 @@ export default class RouteMap extends Component {
 
     updateHandle() {
         // biglog的pv打点统计
-        console.log('update');
+        // console.log('update');
     }
 
     render() {
@@ -41,7 +41,7 @@ export default class RouteMap extends Component {
                 {/* 先加载app组件 */}
                 <Route path="/" component={App}>
                     <IndexRoute component={Home}/>
-                    <Route path="home/:payresult" component={Home} />
+                    <Route path="home" component={Home} />
                     <Route path="confirm/:id" component={Confirm} onEnter={redirectToLogin} />
                     <Route path="detail/:id" component={Detail} onEnter={redirectToLogin} />
                     <Route path="rule" component={Rule} onEnter={redirectToLogin} />

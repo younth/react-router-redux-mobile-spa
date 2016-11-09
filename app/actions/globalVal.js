@@ -19,3 +19,11 @@ export const savePrivilegeNo = data => {
 		data
 	}
 }
+
+// 提单页成功支付后调到首页 传递状态值
+export const savePayResult = data => {
+	return {
+		type: actionTypes.SAVE_PAYRESULT,
+		data
+	}
+}

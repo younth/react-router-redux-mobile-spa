@@ -21,10 +21,10 @@ export default function globalVal(state = initialState, action) {
                 from: action.from || action.data.from || state.from,
                 app_ver: action.app_ver || action.data.app_ver || state.app_ver
             }
-        case actionTypes.SAVE_PRIVILEGENO:
+        case actionTypes.SAVE_PAYRESULT:
             return {
                 ...state,
-                privilege_no: action.privilege_no || action.data.privilege_no || state.privilege_no
+                payResult: action.payResult || action.data.payResult
             }
         default:
             return state

@@ -52,13 +52,16 @@ export default class Home extends Component {
         }
     }
     componentWillMount() {
-        console.log('打印不出来 啥也干不了')
-        if (this.props.params.payresult === 'success') {
+        // 获取支付状态
+        let {globalVal} = this.props
+        if (globalVal.payResult === 'success') {
             this.state.show = true
         }
-        // Utils.setTitleBar({
-            // titleText: 111
-        // })
+        // 点击返回直接关闭
+        Utils.setBack({type: 1})
+        Utils.setTitleBar({
+            titleText: '小度商城'
+        })
         // 展示loading状态 todo
         // loading()
     }
@@ -67,7 +70,7 @@ export default class Home extends Component {
         // Utils.setTitleBar({
         //     titleText: 111
         // })
-        let {card, globalVal, cardActions, globalActions} = this.props
+        let {card, cardActions, globalActions} = this.props
 
         if(card.loading) {
             cardActions.getHomeCard()
