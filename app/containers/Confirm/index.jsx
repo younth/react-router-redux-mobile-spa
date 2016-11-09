@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { Link, hashHistory } from 'react-router'
 
 import Utils from '../../util/util.js'
-import { get, post } from '../../fetch/request'
+import { get, post, getJsonp } from '../../fetch/request'
 
 import './index.less'
 
@@ -77,9 +77,6 @@ export default class Confirm extends Component {
         // 点击返回回到上一页
         Utils.setBack()
 
-        Utils.setTitleBar({
-            titleText: '开通卡名字todo'
-        })
     }
 
     componentDidMount () {
@@ -87,6 +84,26 @@ export default class Confirm extends Component {
     }
 
     componentDidUpdate () {
+        let {confirm} = this.props
+        if (!confirm.loading) {
+            Utils.loading(0)
+            // 以下代码只会执行一次
+            if (this.state.period === 0 && confirm.radioList.length) {
+                this.setState({
+                    period: confirm.radioList[0].period,
+                    price: confirm.radioList[0].price,
+                    selectCityId: Number.parseInt(confirm.data.city_id),
+                    selectCityName: confirm.data.city_name,
+                    lastCityId: Number.parseInt(confirm.data.last_city_id),
+                    laseCityName: confirm.data.last_city_name,
+                    accessTitle: `本卡权益（${confirm.data.city_name || ''}）`
+                })
+                // 设置title
+                Utils.setTitleBar({
+                    titleText: `开通${confirm.data.privilege_name}`
+                })
+            }
+        }
     }
 
     changePeriod (period, price) {
@@ -114,27 +131,34 @@ export default class Confirm extends Component {
         let {globalVal} = this.props
         let params = {
             ...globalVal,
+            privilege_no: this.props.params.id,
             period: this.state.period,
             pay_type: 2 // 聚合收银台
         }
         // 4. 生成订单
-        post('/wmall/privilege/buy?display=json').then(res => {
+        getJsonp('http://waimai.baidu.com:80/wmall/privilege/buy?display=json', params).then(res => {
             return res.json()
         }).then(json => {
-            let result = json.result
-            // 5. 判断网络环境
-            let params = {
-                payType: 2,// 1表示钱包，2表示聚合收银台
-                payParams: result.pay_params   // 聚合收银台服务端下发的是json串，不需要encode
-            }
-            window.WMApp.network.getNetwork((data) => {
-                if (data.status && data.result.network === 'unreachable') {
-                    Utils.showToast('网络不可用');
-                } else {
-                    // 6. 进行聚合收银台支付
-                    this.doPay(params)
+            let errno = json.error_no,
+                errmsg = json.error_msg,
+                result = json.result
+            if (Number.parseInt(errno) === 0) {
+                // 5. 判断网络环境
+                let params = {
+                    payType: 2,// 1表示钱包，2表示聚合收银台
+                    payParams: result.pay_params   // 聚合收银台服务端下发的是json串，不需要encode
                 }
-            })
+                window.WMApp.network.getNetwork((data) => {
+                    if (data.status && data.result.network === 'unreachable') {
+                        Utils.showToast({text: '网络不可用'});
+                    } else {
+                        // 6. 进行聚合收银台支付
+                        this.doPay(params)
+                    }
+                })
+            } else {
+                Utils.showToast(errmsg)
+            }
         })
     }
 
@@ -191,18 +215,7 @@ export default class Confirm extends Component {
 
     render() {
         let {confirm} = this.props
-        if (!confirm.loading) {
-            Utils.loading(0)
-            if (this.state.period === 0) {
-                this.state.period = confirm.radioList[0].period
-                this.state.price = confirm.radioList[0].price
-                this.state.selectCityId = Number.parseInt(confirm.data.city_id)
-                this.state.selectCityName = confirm.data.city_name
-                this.state.lastCityId = Number.parseInt(confirm.data.last_city_id)
-                this.state.laseCityName = confirm.data.last_city_name
-                this.state.accessTitle = `本卡权益（${this.state.selectCityName || ''}）`
-            }
-        }
+        
         return (
             <div className = "confirm-page">
                 <TitleBar type = "access-title" title = {this.state.accessTitle}/>

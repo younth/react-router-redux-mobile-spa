@@ -15,8 +15,8 @@ class Agree extends Component {
     }
     render() {
         return (
-            <div className = "agree-wrap">
-                <div className = { classNames('radio', { selected: this.props.isAgree }) } onClick = {this.props.onSelectedValueChanged.bind(null, !this.props.isAgree)} ></div>
+            <div className = { classNames('agree-wrap', { selected: this.props.isAgree }) } onClick = {this.props.onSelectedValueChanged.bind(null, !this.props.isAgree)} >
+                <div className = "radio" ></div>
                 同意并接受<Link to = "rule">《百度外卖购卡协议》</Link>
             </div>
         )

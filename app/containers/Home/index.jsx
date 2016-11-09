@@ -96,13 +96,13 @@ export default class Home extends Component {
 
     componentDidUpdate () {
         let {card} = this.props
-        console.log(card)
     }
 
     hideDialog() {
-        this.setState({
-            show: false
-        })
+        window.location.reload()
+        // this.setState({
+        //     show: false
+        // })
         // 关闭对话框不代表页面最新 应该重新加载并且关掉对话框
     }
     render() {

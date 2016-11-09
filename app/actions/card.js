@@ -29,7 +29,7 @@ export function getConfirmInfo(params) {
         }
         return dispatch({
             type: actionTypes.GET_CONFIRMINFO,
-            promise: get('http://waimai.baidu.com:8059/wmall/privilege/view?display=json', params)
+            promise: getJsonp('http://waimai.baidu.com/wmall/privilege/view?display=json', params)
         })
     }
 }
@@ -46,7 +46,7 @@ export function getDiscountDetail(params) {
         }
         return dispatch({
             type: actionTypes.GET_DISCOUNTDETAIL,
-            promise: get('http://waimai.baidu.com:8059/wmall/privilege/promotiondetail?display=json', params)
+            promise: getJsonp('http://waimai.baidu.com/wmall/privilege/promotiondetail?display=json', params)
         })
     }
 }

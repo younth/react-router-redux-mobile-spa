@@ -2,32 +2,36 @@
 @black: #333;
 @font-gray2: #a9a9a9;
 
+// 宽高与可自由设置，大于图片本身宽度即可
 .setBG(@url, @w, @h) {
     background: url(@url) no-repeat;
     width: @w;
     height: @h;
-    background-size: 100% 100%;
+    background-size: inherit;
+    background-position: center center;
 }
 
 .agree-wrap {
     display: flex;
     align-items: center;
     color: @font-gray2;
-    margin-left: 35px;
+    margin-left: 30px;
     .radio {
-        margin-right: 24px;
-        .setBG('../../../static/img/i_unagree.png', 29px, 29px);
+        margin-right: 19px;
+        .setBG('../../../static/img/i_unagree.png', 39px, 59px);
         [data-dpr=3]& {
-            .setBG('../../../static/img/i_unagree3x.png', 44px, 44px);
+            .setBG('../../../static/img/i_unagree3x.png', 54px, 74px);
         }
-        &.selected {
-            .setBG('../../../static/img/i_agree.png', 29px, 29px);
-            [data-dpr=3]& {
-                .setBG('../../../static/img/i_agree3x.png', 44px, 44px);
-            }
+    }
+    &.selected .radio{
+        .setBG('../../../static/img/i_agree.png', 39px, 59px);
+        [data-dpr=3]& {
+            .setBG('../../../static/img/i_agree3x.png', 54px, 74px);
         }
     }
     a {
         color: @font-gray2;
+        display: block;
+        .v-height(59px);
     }
 }
