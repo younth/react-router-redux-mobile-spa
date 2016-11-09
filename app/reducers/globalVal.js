@@ -5,9 +5,7 @@ const initialState = {
     lng: '',
     city_id: '',
     from: '',
-    app_ver: '',
-    data: '',
-    privilege_no: ''
+    app_ver: ''
 }
 
 export default function globalVal(state = initialState, action) {

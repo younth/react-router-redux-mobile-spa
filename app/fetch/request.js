@@ -4,7 +4,7 @@
  */
 import 'whatwg-fetch'
 import 'es6-promise'
-// import fetchJsonp from 'fetch-jsonp'
+import fetchJsonp from 'fetch-jsonp'
 
 
 // 将对象拼接成 key1=val1&key2=val2&key3=val3 的字符串形式
@@ -54,14 +54,14 @@ export function post(url, paramsObj) {
 }
 
 // jsonp保持与fetch一致的API
-// export function getJsonp (url, data) {
-//     data = obj2params(data);
-//     if (data) {
-//         url += (url.indexOf('?') === -1 ? '?' : '&') + data;
-//     }
-//     let result = fetchJsonp(url, {
-//         // jsonpCallback: 'jsoncallback',
-//         timeout: 3000
-//     });
-//     return result;
-// }
+export function getJsonp (url, data) {
+    data = obj2params(data);
+    if (data) {
+        url += (url.indexOf('?') === -1 ? '?' : '&') + data;
+    }
+    let result = fetchJsonp(url, {
+        // jsonpCallback: 'jsoncallback',
+        timeout: 3000
+    });
+    return result;
+}

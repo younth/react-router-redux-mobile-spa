@@ -1,5 +1,5 @@
 import * as actionTypes from '../constants/types'
-import { get, post } from '../fetch/request'
+import { get, post, getJsonp } from '../fetch/request'
 
 //获取首页全部卡片信息（包括我的权益与在售卡片），promise形式
 export function getHomeCard(params) {
@@ -13,7 +13,7 @@ export function getHomeCard(params) {
         }
         return dispatch({
             type: actionTypes.GET_HOMECARD,
-            promise: get('http://waimai.baidu.com:8059/wmall/privilege/center?display=json', params)
+            promise: getJsonp('http://waimai.baidu.com/wmall/privilege/center?display=json', params)
         })
     }
 }
