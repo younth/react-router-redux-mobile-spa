@@ -14,7 +14,6 @@ class SellCard extends Component {
         super(props, context)
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
         this.unfoldRule = this.unfoldRule.bind(this)
-        // this.handBuyBtn = this.handBuyBtn.bind(this)
         this.state = {
             rulefold: true, // 使用规则折叠true 展开false
             btnstatus: 'buy',
@@ -29,18 +28,6 @@ class SellCard extends Component {
         this.setState({
             rulefold: !this.state.rulefold
         })
-    }
-
-    handBuyBtn(privilege_no) {
-        let btnstatus = this.state.btnstatus
-        if (btnstatus === 'buy' || btnstatus === 'renew') {
-            // 开通或续费 跳到提单页
-            hashHistory.push(`/confirm/${privilege_no}`)
-        } else {
-            // 不可开通或不可续费 提示原因 dialog
-            let conflictreason = this.state.conflictreason
-            window.WMApp.nui.toast({text: conflictreason})
-        }
     }
 
     getBtnStatus(card) {
@@ -90,7 +77,7 @@ class SellCard extends Component {
                         <div className="price-wrap">
                             <div className="price">{card.price}</div>
                         </div>
-                        <div className="btn-wrap" onClick = {this.handBuyBtn.bind(this, card.privilege_no)}>
+                        <div className="btn-wrap" onClick = {this.props.clickBtn.bind(null, this.state.btnstatus, card.privilege_no, this.state.conflictreason)}>
                         {
                             this.state.btnstatus === 'buy'
                             ? <div className="btn buy">开通</div>
@@ -120,5 +107,5 @@ class SellCard extends Component {
         )
     }
 }
-
 export default SellCard
+

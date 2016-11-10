@@ -119,7 +119,7 @@ export default class SwipeCard extends Component {
     }
 
     clickBtnWrap(type, privilege_no) {
-        let {globalVal, globalActions} = this.props
+        let {globalVal} = this.props
         if (type === 'renew' || type === 'buy') {
             hashHistory.push(`/confirm/${privilege_no}`)
         } else if (type === 'delete') {

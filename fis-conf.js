@@ -77,6 +77,13 @@ fis.match('*.{js,es,es6,jsx,ts,tsx}', {
     ]
 });
 
+// fis.match('*.{js,jsx}', {
+//     optimizer: fis.plugin('uglify-js')
+// })
+// fis.match('*.{css,less}', {
+//     optimizer: fis.plugin('clean-css')
+// })
+
 // 以下两个 match ，最终将所有的 js、css、图片都打包到 static/dumall/webappreact 目录下，静态文件都在那个目录
 fis.match('**/(*.{png,jpg,jpeg,gif})', {
     release: '/static/dumall/imgs/$1'
@@ -97,15 +104,15 @@ fis.match('::package', {
         'static/dumall/lib.js': '/static/**.js',
 
         // 在此打包 css，因为 fis.match('::packager') 配置的打包优先级更高
-        'static/dumall/aio.css': '*.{less,css}'
+        'static/dumall/aio.css': '*.{less,css}',
 
         // 将 /app 中的依赖项，打包成 static/dumall/app.js
-        // 'static/dumall/app.js': [
-        //     // 将 /app/index.jsx 加入队列
-        //     '/app/index.jsx',
-        //     // 将 /app/index/jsx 的所有依赖项加入队列，因为第一步中已经命中了 /node_module 中的所有依赖项，因此这里只打包 /app 中的依赖项
-        //     '/app/index.jsx:deps'
-        // ],
+        'static/dumall/app.js': [
+            // 将 /app/index.jsx 加入队列
+            '/app/index.jsx',
+            // 将 /app/index/jsx 的所有依赖项加入队列，因为第一步中已经命中了 /node_module 中的所有依赖项，因此这里只打包 /app 中的依赖项
+            '/app/index.jsx:deps'
+        ],
     }),
 
     // 本项目为纯前端项目，所以用 loader 编译器加载 如果用后端运行时框架，请不要使用

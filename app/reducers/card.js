@@ -21,7 +21,10 @@ export default function card(state = initialState, action) {
                 loading: false,
                 userPrivileges: result.user_privileges,
                 cityPrivileges: result.city_privileges,
-                isVip: result.is_vip
+                city_name: result.city_name,
+                isVip: result.is_vip,
+                isLogin: result.is_login,
+                isNew: result.is_new
             }
         case actionTypes.GET_HOMECARD_FAILURE:
             // error_no 不等于0

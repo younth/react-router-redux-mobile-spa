@@ -20,7 +20,7 @@ class Mime extends Component {
     getCardNum(cardList) {
         let valid = cardList && cardList.valid || []
         let expired = cardList && cardList.expired || []
-        let num = valid && valid.length + expired && expired.length
+        let num = (valid && valid.length) + (expired && expired.length)
         return num
     }
     render() {
@@ -33,7 +33,7 @@ class Mime extends Component {
                 : ''
             }
             {
-                num ? <SwipeCard cardList = {this.props.cardList} />
+                num ? <SwipeCard cardList = {this.props.cardList} clickBtn = {this.props.clickBtn} />
                 : this.props.isVip 
                 ? <ImgTip type = "novipcard" /> 
                 : <ImgTip type = "nousercard" /> 

@@ -5,9 +5,10 @@ import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
+import { Link, hashHistory } from 'react-router'
 
-import Utils from '../../util/util.js';
+import Utils from '../../util/util.js'
+import localStorage from '../../util/localStorage.js'
 
 import './title.less'
 import './index.less'
@@ -47,11 +48,14 @@ export default class Home extends Component {
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
         this.hideDialog = this.hideDialog.bind(this)
+        this.clickBtn = this.clickBtn.bind(this)
         this.state = {
             show: false
         }
     }
     componentWillMount() {
+        // 展示loading
+        Utils.loading()
         // 获取支付状态
         let {globalVal, card} = this.props
         if (globalVal.payResult === 'success') {
@@ -62,20 +66,12 @@ export default class Home extends Component {
         Utils.setTitleBar({
             titleText: '小度商城'
         })
-        
-        // 展示loading状态 todo
-        // loading()
     }
-    componentDidMount () {
-        // 一执行就闪退
-        // Utils.setTitleBar({
-        //     titleText: 111
-        // })
+    componentDidMount() {
         let {card, cardActions, globalActions} = this.props
-
-        if(card.loading) {
-            Utils.loading()
-        }
+        // if(card.loading) {
+        //     Utils.loading()
+        // }
         // 获取定位等基础信息
         window.WMAppReady(function() {
             let lng = window.WMApp.location.getLocLng() || '1.295948313E7',
@@ -91,11 +87,14 @@ export default class Home extends Component {
                 from: getFrom
             })
             cardActions.getHomeCard()
+            localStorage.setItem('city_id', cityId)
         })
     }
 
-    componentDidUpdate () {
+    componentDidUpdate() {
         let {card} = this.props
+        localStorage.setItem('is_login', card.isLogin && card.isLogin === true ? 1 : 0)
+        localStorage.setItem('is_new', card.isNew && card.isNew === true ? 1 : 0)
     }
 
     hideDialog() {
@@ -105,16 +104,27 @@ export default class Home extends Component {
         // })
         // 关闭对话框不代表页面最新 应该重新加载并且关掉对话框
     }
+
+    // 统一管理点击按钮
+    clickBtn(type, privilege_no, toastText) {
+        if (type === 'buy' || type === 'renew') {
+            // 开通或续费 跳到提单页
+            hashHistory.push(`/confirm/${privilege_no}`)
+        } else {
+            // 不可开通或不可续费 提示原因 dialog
+            Utils.showToast(toastText)
+        }
+    }
+
     render() {
         let {card} = this.props
-        let userPrivileges = [], cityPrivileges = []
         if (!card.loading) {
             Utils.loading(0)
         }
         return (
             <div>
-                { card.userPrivileges && <Mime cardList = {card.userPrivileges} isVip = {card.isVip} /> }
-                { card.cityPrivileges && <Onsell cardList = {card.cityPrivileges} /> }
+                { card.userPrivileges && <Mime cardList = {card.userPrivileges} isVip = {card.isVip} clickBtn = {this.clickBtn}/> }
+                { card.cityPrivileges && <Onsell cardList = {card.cityPrivileges} clickBtn = {this.clickBtn}/> }
                 <Link className = "to-rule" to = "rule">配送折扣卡规则</Link>
                 <DialogModal show = {this.state.show} el='pay-success-dialog' title = '购买成功' closeOnOuterClick = {false}>
                     <div className = "pay-success-img"></div>

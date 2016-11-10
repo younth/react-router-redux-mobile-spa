@@ -8,6 +8,8 @@ import { connect } from 'react-redux'
 import { Link, hashHistory } from 'react-router'
 
 import Utils from '../../util/util.js'
+import localStorage from '../../util/localStorage.js'
+
 import { get, post, getJsonp } from '../../fetch/request'
 
 import './index.less'
@@ -71,7 +73,8 @@ export default class Confirm extends Component {
         if (this.props.params.id) {
             // 获取提单页信息
             cardActions.getConfirmInfo({
-                privilege_no: this.props.params.id
+                privilege_no: this.props.params.id,
+                city_id: localStorage.getItem('city_id')
             })
         }
         // 点击返回回到上一页
@@ -133,7 +136,7 @@ export default class Confirm extends Component {
             ...globalVal,
             privilege_no: this.props.params.id,
             period: this.state.period,
-            pay_type: 2 // 聚合收银台
+            pay_type: 6 // 独立收银台
         }
         // 4. 生成订单
         getJsonp('http://waimai.baidu.com:80/wmall/privilege/buy?display=json', params).then(res => {
@@ -145,7 +148,7 @@ export default class Confirm extends Component {
             if (Number.parseInt(errno) === 0) {
                 // 5. 判断网络环境
                 let params = {
-                    payType: 2,// 1表示钱包，2表示聚合收银台
+                    payType: result.pay_type,// 1表示钱包，2表示聚合收银台
                     payParams: result.pay_params   // 聚合收银台服务端下发的是json串，不需要encode
                 }
                 window.WMApp.network.getNetwork((data) => {

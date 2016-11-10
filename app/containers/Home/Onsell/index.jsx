@@ -18,10 +18,10 @@ class Onsell extends Component {
         let cardList = this.props.cardList
         return (
             <div>
-                { cardList.length ? <TitleBar type = "city-card" title = "热卖中（北京）" /> : '' }
+                { cardList.length ? <TitleBar type = "city-card" title = "热卖中（todo）" /> : '' }
                 {
                     cardList.length
-                    ? <CardList cardList = {cardList} isVip = {this.props.isVip}/>
+                    ? <CardList cardList = {cardList} clickBtn = {this.props.clickBtn} />
                     : <ImgTip type = "nocitycard" /> 
                 }
             </div>

@@ -18,12 +18,11 @@ class CardList extends Component {
     }
     render() {
         let length = this.props.cardList && this.props.cardList.length || 0
-        let isVip = this.props.isVip
         return (
             <div className="sellcard-wrap">
                 {
                     length && this.props.cardList.map((item, index) => 
-                        <SellCard key = {index} card = {item} isVip = {isVip}/>)
+                        <SellCard key = {index} card = {item} clickBtn = {this.props.clickBtn}/>)
                 }
                 <MessageTip tip = {'更多惊喜敬请期待...'}/>
             </div>
