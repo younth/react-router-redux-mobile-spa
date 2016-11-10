@@ -77,12 +77,12 @@ fis.match('*.{js,es,es6,jsx,ts,tsx}', {
     ]
 });
 
-// fis.match('*.{js,jsx}', {
-//     optimizer: fis.plugin('uglify-js')
-// })
-// fis.match('*.{css,less}', {
-//     optimizer: fis.plugin('clean-css')
-// })
+fis.match('*.{js,jsx}', {
+    optimizer: fis.plugin('uglify-js')
+})
+fis.match('*.{css,less}', {
+    optimizer: fis.plugin('clean-css')
+})
 
 // 以下两个 match ，最终将所有的 js、css、图片都打包到 static/dumall/webappreact 目录下，静态文件都在那个目录
 fis.match('**/(*.{png,jpg,jpeg,gif})', {

@@ -22,7 +22,6 @@ class SellCard extends Component {
     }
 
     unfoldRule() {
-        console.log(this.state.rulefold);
         // this.state.rulefold = !this.state.rulefold;
         // 展开使用规则
         this.setState({
@@ -76,6 +75,7 @@ class SellCard extends Component {
                     <div className="other-info">
                         <div className="price-wrap">
                             <div className="price">{card.price}</div>
+                            <div className="origin-price">100</div>
                         </div>
                         <div className="btn-wrap" onClick = {this.props.clickBtn.bind(null, this.state.btnstatus, card.privilege_no, this.state.conflictreason)}>
                         {
@@ -94,7 +94,10 @@ class SellCard extends Component {
                         </div>
                     </div>
                 </div>
-                <div className={ classNames('section2 to-use-rule', { unfold: !this.state.rulefold }) } onClick={this.unfoldRule}>使用规则</div>
+                <div className="section2">
+                    <div className={ classNames('to-use-rule', { unfold: !this.state.rulefold }) } onClick={this.unfoldRule}>使用规则</div>
+                    <div className="new-tip">新用户首次购卡专享</div>
+                </div>
                 {
                     !this.state.rulefold && <div className="section3 rule-wrap">
                         <p>权益只在{card.city_name}有效</p>

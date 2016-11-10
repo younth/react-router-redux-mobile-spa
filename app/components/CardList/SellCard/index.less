@@ -33,11 +33,10 @@
     }
 }
 
-.yuan() {
+.yuan(@size, @color) {
     &:before {
         content: '￥';
-        color: @red;
-        font-size: 22px;
+        color: @color;
         display: block;
     }
 }
@@ -46,11 +45,12 @@
     width: 690px;
     margin: 0 auto;
     padding: 35px 0;
-    border-bottom: 1px solid @shallow-gray; /*no*/
+    border-bottom: 1px solid @shallow-gray;
+    /*no*/
     .section1 {
         display: flex;
+        justify-content: space-between;
         .base-info {
-            flex: 2;
             .name {
                 font-size: 32px;
                 color: @font-color;
@@ -68,15 +68,25 @@
             }
         }
         .other-info {
-            flex: 1;
             display: flex;
             justify-content: flex-end;
             align-items: flex-end;
             .price-wrap {
-                margin-right: 30px;
+                margin-right: 20px;
                 display: flex;
                 align-items: flex-end;
-                .yuan();
+                .origin-price {
+                    display: flex;
+                    .yuan(22px, @shallow-gray2);
+                    font-size: 28px;
+                    color: @shallow-gray2;
+                    text-decoration: line-through;
+                    margin-left: 20px;
+                }
+                .price {
+                    display: flex;
+                    .yuan(22px, @red);
+                }
                 font-size: 38px;
                 color: @red;
             }
@@ -97,19 +107,27 @@
             }
         }
     }
-    .section2.to-use-rule {
-        font-size: 24px;
-        color: @shallow-gray;
+    .section2 {
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        padding-top: 20px;
-        padding-bottom: 10px;
-        .icon-after();
-        [data-dpr='3'] & {
-            .icon-after('../../../../static/img/i_bottom3x.png', 26px, 15px);
+        .to-use-rule {
+            font-size: 24px;
+            color: @shallow-gray;
+            padding-top: 20px;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            .icon-after();
+            [data-dpr='3'] & {
+                .icon-after('../../../../static/img/i_bottom3x.png', 26px, 15px);
+            }
+            &.unfold:after {
+                transform: rotate(180deg)
+            }
         }
-        &.unfold:after {
-            transform: rotate(180deg)
+        .new-tip {
+            color: @red;
         }
     }
     .section3.rule-wrap {

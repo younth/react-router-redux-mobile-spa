@@ -65,10 +65,6 @@ export default class Confirm extends Component {
     }
     componentWillMount() {
         let {confirm, cardActions} = this.props
-        // 展示loading
-        if (confirm.loading) {
-            Utils.loading()
-        }
         // 获取权益id
         if (this.props.params.id) {
             // 获取提单页信息
@@ -218,25 +214,29 @@ export default class Confirm extends Component {
 
     render() {
         let {confirm} = this.props
-        
         return (
-            <div className = "confirm-page">
-                <TitleBar type = "access-title" title = {this.state.accessTitle}/>
-                <Access accessList = {confirm.accessList} type = "privilege-detail"/>
-                <TitleBar type = "period-title" title = "有效期" />
-                <RadioList radioList = {confirm.radioList} selected = {this.state.period} onSelectedValueChanged = {this.changePeriod}/>
-                <Agree isAgree = {this.state.isAgree} onSelectedValueChanged = {this.changeAgree}/>
-                <div className = "buy-card" onClick = {this.buyCard} >去支付 ￥{this.state.price}</div>
-                <DialogModal show = {this.state.show} el = 'city-tip-dialog' title = '温馨提示' closeOnOuterClick = {false}>
-                    <div className="tipmsg-wrap">
-                        <p>您当前开通享有权益的城市是<span>{this.state.selectCityName}</span>，</p>
-                        <p>如需更换请到首页更改定位</p>
-                    </div>
-                    <footer>
-                        <a href="javascript:;" onClick = {this.changeCity}>更改城市</a>
-                        <a href="javascript:;" onClick = {this.sureToPay}>确认</a>
-                    </footer>
-                </DialogModal>
+            <div>
+                {
+                this.state.period === 0 ? '' :
+                <div className = "confirm-page">
+                    <TitleBar type = "access-title" title = {this.state.accessTitle}/>
+                    <Access accessList = {confirm.accessList} type = "privilege-detail"/>
+                    <TitleBar type = "period-title" title = "有效期" />
+                    <RadioList radioList = {confirm.radioList} selected = {this.state.period} onSelectedValueChanged = {this.changePeriod}/>
+                    <Agree isAgree = {this.state.isAgree} onSelectedValueChanged = {this.changeAgree}/>
+                    <div className = "buy-card" onClick = {this.buyCard} >去支付 ￥{this.state.price}</div>
+                    <DialogModal show = {this.state.show} el = 'city-tip-dialog' title = '温馨提示' closeOnOuterClick = {false}>
+                        <div className="tipmsg-wrap">
+                            <p>您当前开通享有权益的城市是<span>{this.state.selectCityName}</span>，</p>
+                            <p>如需更换请到首页更改定位</p>
+                        </div>
+                        <footer>
+                            <a href="javascript:;" onClick = {this.changeCity}>更改城市</a>
+                            <a href="javascript:;" onClick = {this.sureToPay}>确认</a>
+                        </footer>
+                    </DialogModal>
+                </div>
+                }
             </div>
         )
     }

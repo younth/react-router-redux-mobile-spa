@@ -56,7 +56,7 @@ export default class Home extends Component {
     }
     componentWillMount() {
         // 展示loading
-        Utils.loading()
+        // Utils.loading()
         // 获取支付状态
         let {globalVal, card} = this.props
         if (globalVal.payResult === 'success') {
@@ -70,9 +70,6 @@ export default class Home extends Component {
     }
     componentDidMount() {
         let {card, cardActions, globalActions} = this.props
-        // if(card.loading) {
-        //     Utils.loading()
-        // }
         // 获取定位等基础信息
         window.WMAppReady(function() {
             let lng = window.WMApp.location.getLocLng() || '1.295948313E7',
@@ -94,6 +91,9 @@ export default class Home extends Component {
 
     componentDidUpdate() {
         let {card} = this.props
+        if (!card.loading) {
+            Utils.loading(0)
+        }
         localStorage.setItem('is_login', card.isLogin && card.isLogin === true ? 1 : 0)
         localStorage.setItem('is_new', card.isNew && card.isNew === true ? 1 : 0)
     }
@@ -108,9 +108,11 @@ export default class Home extends Component {
 
     // 统一管理点击按钮
     clickBtn(type, privilege_no, toastText) {
-        let {card} = this.props
+        let {card, globalActions} = this.props
         if (card.isLogin) {
             if (type === 'buy' || type === 'renew') {
+                // 提单页提前展示loading
+                Utils.loading()
                 // 通用: 开通或续费 跳到提单页
                 hashHistory.push(`/confirm/${privilege_no}`)
             } else if (type === 'delete') {
@@ -131,8 +133,12 @@ export default class Home extends Component {
             window.WMAppReady(() => {
                 window.WMApp.account.login(data => {
                     if (data.status) {   // 1表示成功，0表示登录取消，登录失败NA会处理
-                        window.location.reload()
-                    }else {
+                        // 解决方法1. 页面加载太慢了，在手机上reload的效果是过了好半天页面才刷新了一下（此时用户可能已经进行某些点击操作），因此这里提前展示loading
+                        // Utils.loading()
+                        // window.location.reload()
+                        // 解决方法2. 重新请求页面数据，重新渲染，此时应该展示页面内loading
+                        cardActions.getHomeCard()
+                    } else {
                         console.log('登录取消')
                     }
                 })
@@ -142,9 +148,6 @@ export default class Home extends Component {
 
     render() {
         let {card} = this.props
-        if (!card.loading) {
-            Utils.loading(0)
-        }
         return (
             <div>
                 { card.userPrivileges && <Mime cardList = {card.userPrivileges} isVip = {card.isVip} clickBtn = {this.clickBtn}/> }

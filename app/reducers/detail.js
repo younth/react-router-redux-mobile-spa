@@ -4,7 +4,7 @@ const initialState = {
     loading: true,
     accessList: {},
     privilege_info: {},
-    end_time: '',
+    valid_date: '',
     city_name: '',
     list: []
 }
@@ -28,7 +28,7 @@ export default function detail(state = initialState, action) {
                 },
                 list: result.list,
                 privilege_info: result.privilege_info,
-                end_time: result.end_time,
+                valid_date: `${result.date_start} - ${result.date_end}`,
                 city_name: result.city_name
             }
         case actionTypes.GET_DISCOUNTDETAIL_FAILURE:

@@ -45,7 +45,6 @@ export default class User extends Component {
         let {userinfo} = this.props
         if (userinfo.data && userinfo.data.data) {
             console.log('数据已经请求过了~')
-            console.log(userinfo.data.data)
         } else {
             console.log('还未请求')
         }

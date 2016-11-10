@@ -40,6 +40,7 @@ export default class Detail extends Component {
     constructor(props, context) {
         super(props, context)
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
+        this.times = ''
     }
     componentWillMount() {
         // 点击返回回到上一页
@@ -51,33 +52,40 @@ export default class Detail extends Component {
 
         let {detail, cardActions} = this.props
         // 展示loading
-        if (detail.loading) {
-            Utils.loading()
-        }
+        !detail.city_name && Utils.loading()
         // 获取权益id
         if (this.props.params.id) {
+            this.privilegeNo = this.props.params.id
             // 获取提单页信息
             cardActions.getDiscountDetail({
-                privilege_no: this.props.params.id
+                privilege_no: this.privilegeNo,
+                limit: 10,
+                page: 1
             })
         }
     }
-    componentDidMount () {
-        // let {detail, cardActions} = this.props
-        // detail.loading && cardActions.getDiscountDetail()
+    componentDidUpdate () {
     }
     render() {
         let {detail} = this.props
-        console.log(detail.accessList);
+        if (!detail.loading) {
+            Utils.loading(0)
+        }
         return (
-            <div className = "detail-page">
-                <Access accessList = {detail.accessList} type = "discount-detail" />
-                <TitleBar type = "city-name" title = "开通城市" value = {detail.city_name || ''}/>
-                <TitleBar type = "end-time" title = "有效期至" value = {detail.end_time || ''}/>
-                <TitleBar type = "access-title" title = "权益说明" />
-                <AccessInfo accessList = {detail.privilege_info}/>
-                <TitleBar type = "discount-title" title = "优惠明细" />
-                <DiscountList list = {detail.list} />
+            <div>
+                {
+                    detail.city_name ? 
+                    <div className = "detail-page">
+                        <Access accessList = {detail.accessList} type = "discount-detail" />
+                        <TitleBar type = "city-name" title = "开通城市" value = {detail.city_name || ''}/>
+                        <TitleBar type = "valid_date" title = "有效时间" value = {detail.valid_date}/>
+                        <TitleBar type = "access-title" title = "权益说明" />
+                        <AccessInfo accessList = {detail.privilege_info}/>
+                        <TitleBar type = "discount-title" title = "优惠明细" />
+                        <DiscountList list = {detail.list} privilegeNo = {this.privilegeNo} />
+                    </div>
+                    : ''
+                }
             </div>
         )
     }

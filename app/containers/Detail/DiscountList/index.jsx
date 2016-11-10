@@ -41,9 +41,15 @@ export default class DiscountList extends Component {
             loading: false,
             noMore: false,
             page: 1,
-            limit: 5, //10, todo
+            limit: 10,
             list: []
         }
+    }
+
+    componentWillMount() {
+        // 获取数据
+        // this.privilege_no = this.props.params.id
+        this.city_id = localStorage.getItem('city_id')
     }
 
     componentDidMount() {
@@ -65,18 +71,23 @@ export default class DiscountList extends Component {
 
         // 打开加载锁
         this.state.lock = false
+        // console.log(this.props.params); // 这里取不到url参数，不知道为什么
     }
 
     doLoadmore() {
+        let {globalVal} = this.props
         if(!this.state.noMore && !this.state.lock) {
             this.state.lock = true
             this.setState({
                 loading: true
             })
             // 获取分页数据
-            get('/wmall/promotiondetail', {
+            get('/wmall/privilege/promotiondetail', {
+                ...globalVal,
                 page: ++this.state.page,
-                limit: this.state.limit
+                limit: this.state.limit,
+                privilege_no: this.props.privilegeNo,
+                city_id: this.city_id
             }).then(res => {
                 return res.json()
             }).then(json => {
