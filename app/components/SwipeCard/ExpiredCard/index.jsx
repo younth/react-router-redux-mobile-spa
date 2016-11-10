@@ -33,7 +33,7 @@ class ExpiredCard extends Component {
                     </div>
                     {
                         card.notRenew ? '' :
-                        <div className="section3" onClick = {this.props.clickBtnWrap.bind(null, 'renew', card.privilege_no)}>
+                        <div className="section3" onClick = {this.props.clickBtn.bind(null, 'renew', card.privilege_no)}>
                             <div className="btn-wrap">
                                  <div className="btn renew">续费</div>
                             </div>

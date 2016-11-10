@@ -3,7 +3,7 @@ import * as actionTypes from '../constants/types'
 const initialState = {
     loading: true,
     accessList: {},
-    privilege_rule: {},
+    privilege_info: {},
     end_time: '',
     city_name: '',
     list: []
@@ -27,7 +27,7 @@ export default function detail(state = initialState, action) {
                     delivery_times: result.delivery_times
                 },
                 list: result.list,
-                privilege_rule: result.privilege_rule,
+                privilege_info: result.privilege_info,
                 end_time: result.end_time,
                 city_name: result.city_name
             }

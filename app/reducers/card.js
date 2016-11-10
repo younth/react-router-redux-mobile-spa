@@ -4,7 +4,8 @@ const initialState = {
     loading: true,
     userPrivileges: {},
     cityPrivileges: [],
-    isVip: 0
+    isVip: 0,
+    cityName: ''
 }
 
 export default function card(state = initialState, action) {
@@ -21,7 +22,7 @@ export default function card(state = initialState, action) {
                 loading: false,
                 userPrivileges: result.user_privileges,
                 cityPrivileges: result.city_privileges,
-                city_name: result.city_name,
+                cityName: result.city_name,
                 isVip: result.is_vip,
                 isLogin: result.is_login,
                 isNew: result.is_new

@@ -16,13 +16,15 @@ class Onsell extends Component {
     }
     render() {
         let cardList = this.props.cardList
+        let cityName = this.props.cityName
+        let title = cityName === '' ? "热卖中" : `热卖中（${cityName}）`
         return (
             <div>
-                { cardList.length ? <TitleBar type = "city-card" title = "热卖中（todo）" /> : '' }
+                { cardList.length ? <TitleBar type = "city-card" title = {title} /> : '' }
                 {
                     cardList.length
                     ? <CardList cardList = {cardList} clickBtn = {this.props.clickBtn} />
-                    : <ImgTip type = "nocitycard" /> 
+                    : <ImgTip type = "nocitycard" cityName = {cityName} /> 
                 }
             </div>
         )

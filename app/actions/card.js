@@ -1,5 +1,5 @@
 import * as actionTypes from '../constants/types'
-import { get, post, getJsonp } from '../fetch/request'
+import { get, post } from '../fetch/request'
 
 //获取首页全部卡片信息（包括我的权益与在售卡片），promise形式
 export function getHomeCard(params) {
@@ -13,7 +13,7 @@ export function getHomeCard(params) {
         }
         return dispatch({
             type: actionTypes.GET_HOMECARD,
-            promise: getJsonp('/wmall/privilege/center?display=json', params)
+            promise: get('/wmall/privilege/center?display=json', params)
         })
     }
 }
@@ -29,7 +29,7 @@ export function getConfirmInfo(params) {
         }
         return dispatch({
             type: actionTypes.GET_CONFIRMINFO,
-            promise: getJsonp('/wmall/privilege/view?display=json', params)
+            promise: get('/wmall/privilege/view?display=json', params)
         })
     }
 }
@@ -46,7 +46,7 @@ export function getDiscountDetail(params) {
         }
         return dispatch({
             type: actionTypes.GET_DISCOUNTDETAIL,
-            promise: getJsonp('/wmall/privilege/promotiondetail?display=json', params)
+            promise: get('/wmall/privilege/promotiondetail?display=json', params)
         })
     }
 }

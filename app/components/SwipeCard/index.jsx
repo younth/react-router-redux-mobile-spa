@@ -6,7 +6,6 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Link, hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { post } from '../../fetch/request'
 import Utils from '../../util/util.js'
 
 import ReactSwipe from 'react-swipes';
@@ -38,7 +37,9 @@ export default class SwipeCard extends Component {
     constructor(props, context) {
         super(props, context)
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
-        this.clickBtnWrap = this.clickBtnWrap.bind(this)
+        // this.state = {
+        //     curCard: 0
+        // }
     }
     // 区分有效卡、可续费卡、过期卡可续费卡和无用可删除卡
     // 存在的问题：先把用户已购卡片遍历一遍，区分有效卡与无效卡中的四种卡片状态，再在render中遍历并展示
@@ -106,31 +107,15 @@ export default class SwipeCard extends Component {
     renderCard(card, key, specialType = '') {
         specialType = specialType ? `${specialType} ${card.cardType}` : card.cardType;
         if (card.cardType === 'renewCard') {
-            return <RenewCard key = {key} card = {card} cardType = {specialType} clickBtnWrap = {this.clickBtnWrap}/>
+            return <RenewCard key = {key} card = {card} cardType = {specialType} clickBtn = {this.props.clickBtn}/>
         } else if (card.cardType === 'validCard') {
-            return <ValidCard key = {key} card = {card} cardType = {specialType} clickBtnWrap = {this.clickBtnWrap}/>
+            return <ValidCard key = {key} card = {card} cardType = {specialType} clickBtn = {this.props.clickBtn}/>
         } else if (card.cardType === 'unenforcedCard') {
-            return <UnenforcedCard key = {key} card = {card} cardType = {specialType} clickBtnWrap = {this.clickBtnWrap}/>
+            return <UnenforcedCard key = {key} card = {card} cardType = {specialType} clickBtn = {this.props.clickBtn}/>
         } else if (card.cardType === 'expiredCard') {
-            return <ExpiredCard key = {key} card = {card} cardType = {specialType} clickBtnWrap = {this.clickBtnWrap}/>
+            return <ExpiredCard key = {key} card = {card} cardType = {specialType} clickBtn = {this.props.clickBtn}/>
         } else if (card.cardType === 'uselessCard') {
-            return <UselessCard key = {key} card = {card} cardType = {specialType} clickBtnWrap = {this.clickBtnWrap}/>
-        }
-    }
-
-    clickBtnWrap(type, privilege_no) {
-        let {globalVal} = this.props
-        if (type === 'renew' || type === 'buy') {
-            hashHistory.push(`/confirm/${privilege_no}`)
-        } else if (type === 'delete') {
-            post('/wmall/privilege/del?display=json').then(res => {
-                return res.json()
-            }).then(json => {
-                let result = Number.parseInt(json.result)
-                if (result === 1) {
-                    Utils.showToast('删除成功~')
-                }
-            })
+            return <UselessCard key = {key} card = {card} cardType = {specialType} clickBtn = {this.props.clickBtn}/>
         }
     }
 
@@ -151,7 +136,11 @@ export default class SwipeCard extends Component {
                     newPoint: ev.newPoint,
                     cancelled: ev.cancelled
                 }
+                // this.setState({
+                //     curCard: ev.newPoint
+                // })
             }
+
         }
         return (
             <div>

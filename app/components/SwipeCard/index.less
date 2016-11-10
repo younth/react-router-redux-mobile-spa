@@ -33,7 +33,6 @@
     overflow: hidden;
     height: 390px;
     width: 10000px; //todo 
-    display: flex;
     margin-left: 15px; // 不要删
     // width: 750px;
     // overflow: hidden;
@@ -48,6 +47,8 @@
     height: 350px; // 290px;
     border-radius: 15px; // todo
     display: flex;
+    margin: 40px 15px 0 15px;
+    float: left;
     .inner-card {
         width: 100%;
         height: 100%;
@@ -83,6 +84,7 @@
                 font-size: 200px;
                 margin-right: 20px;
                 margin-left: 10px;
+                margin-bottom: -10px;
             }
             .discount-rule {
                 .name {
@@ -105,11 +107,11 @@
 }
 
 .card-item {
-    margin: 40px 15px 0 15px;
     &.only-card {
         width: 690px !important; // 610px;
         margin: 0 auto;
         margin-top: 40px;
+        float: none;
     }
     &.unenforcedCard {
         .section3 {

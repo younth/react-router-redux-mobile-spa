@@ -139,7 +139,7 @@ export default class Confirm extends Component {
             pay_type: 6 // 独立收银台
         }
         // 4. 生成订单
-        getJsonp('http://waimai.baidu.com:80/wmall/privilege/buy?display=json', params).then(res => {
+        get('http://waimai.baidu.com:80/wmall/privilege/buy?display=json', params).then(res => {
             return res.json()
         }).then(json => {
             let errno = json.error_no,

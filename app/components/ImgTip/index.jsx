@@ -32,7 +32,7 @@ class ImgTip extends Component {
                         </div>
                         : this.props.type === 'nocitycard' ?
                         <div className = "tip-msg">
-                            <p>北京市的商品正在紧锣密鼓的筹备中</p>
+                            <p>{this.props.cityName ? this.props.cityName + '的' : ''}商品正在紧锣密鼓的筹备中</p>
                             <p>敬请期待...</p>
                         </div> 
                         : ''

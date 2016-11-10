@@ -13,7 +13,7 @@ import './index.less'
 import TitleBar from '../../components/TitleBar'
 import Access from '../../components/Access'
 import DiscountList from './DiscountList'
-import AccessRule from './AccessRule'
+import AccessInfo from './AccessInfo'
 
 import * as globalActions from '../../actions/globalVal'
 import * as cardActions from '../../actions/card'
@@ -49,22 +49,33 @@ export default class Detail extends Component {
             titleText: '优惠详情'
         })
 
-        // 展示loading状态 todo
-        // loading()
+        let {detail, cardActions} = this.props
+        // 展示loading
+        if (detail.loading) {
+            Utils.loading()
+        }
+        // 获取权益id
+        if (this.props.params.id) {
+            // 获取提单页信息
+            cardActions.getDiscountDetail({
+                privilege_no: this.props.params.id
+            })
+        }
     }
     componentDidMount () {
-        let {detail, cardActions} = this.props
-        detail.loading && cardActions.getDiscountDetail()
+        // let {detail, cardActions} = this.props
+        // detail.loading && cardActions.getDiscountDetail()
     }
     render() {
         let {detail} = this.props
+        console.log(detail.accessList);
         return (
             <div className = "detail-page">
                 <Access accessList = {detail.accessList} type = "discount-detail" />
                 <TitleBar type = "city-name" title = "开通城市" value = {detail.city_name || ''}/>
                 <TitleBar type = "end-time" title = "有效期至" value = {detail.end_time || ''}/>
                 <TitleBar type = "access-title" title = "权益说明" />
-                <AccessRule accessList = {detail.privilege_rule}/>
+                <AccessInfo accessList = {detail.privilege_info}/>
                 <TitleBar type = "discount-title" title = "优惠明细" />
                 <DiscountList list = {detail.list} />
             </div>

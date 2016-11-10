@@ -6,6 +6,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link, hashHistory } from 'react-router'
+import { get } from '../../fetch/request'
 
 import Utils from '../../util/util.js'
 import localStorage from '../../util/localStorage.js'
@@ -107,12 +108,35 @@ export default class Home extends Component {
 
     // 统一管理点击按钮
     clickBtn(type, privilege_no, toastText) {
-        if (type === 'buy' || type === 'renew') {
-            // 开通或续费 跳到提单页
-            hashHistory.push(`/confirm/${privilege_no}`)
+        let {card} = this.props
+        if (card.isLogin) {
+            if (type === 'buy' || type === 'renew') {
+                // 通用: 开通或续费 跳到提单页
+                hashHistory.push(`/confirm/${privilege_no}`)
+            } else if (type === 'delete') {
+                // 已购卡: 用户删除已下架卡片
+                get('/wmall/privilege/del?display=json').then(res => {
+                    return res.json()
+                }).then(json => {
+                    let result = Number.parseInt(json.result)
+                    if (result === 1) {
+                        Utils.showToast('删除成功~')
+                    }
+                })
+            } else {
+                // 热卖中: 不可开通或不可续费 提示原因 dialog
+                Utils.showToast(toastText)
+            }
         } else {
-            // 不可开通或不可续费 提示原因 dialog
-            Utils.showToast(toastText)
+            window.WMAppReady(() => {
+                window.WMApp.account.login(data => {
+                    if (data.status) {   // 1表示成功，0表示登录取消，登录失败NA会处理
+                        window.location.reload()
+                    }else {
+                        console.log('登录取消')
+                    }
+                })
+            })
         }
     }
 
@@ -124,7 +148,7 @@ export default class Home extends Component {
         return (
             <div>
                 { card.userPrivileges && <Mime cardList = {card.userPrivileges} isVip = {card.isVip} clickBtn = {this.clickBtn}/> }
-                { card.cityPrivileges && <Onsell cardList = {card.cityPrivileges} clickBtn = {this.clickBtn}/> }
+                { card.cityPrivileges && <Onsell cardList = {card.cityPrivileges} cityName = {card.cityName} clickBtn = {this.clickBtn}/> }
                 <Link className = "to-rule" to = "rule">配送折扣卡规则</Link>
                 <DialogModal show = {this.state.show} el='pay-success-dialog' title = '购买成功' closeOnOuterClick = {false}>
                     <div className = "pay-success-img"></div>

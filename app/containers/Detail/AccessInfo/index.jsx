@@ -1,13 +1,13 @@
 /*
- * @file 详情页权益规则展示组件 AccessRule
+ * @file 详情页权益规则展示组件 AccessInfo
  */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import './index.less'
 
-// 组装 AccessRule 组件
-class AccessRule extends Component {
+// 组装 AccessInfo 组件
+class AccessInfo extends Component {
     constructor(props, context) {
         super(props, context)
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
@@ -31,4 +31,4 @@ class AccessRule extends Component {
     }
 }
 
-export default AccessRule
+export default AccessInfo
