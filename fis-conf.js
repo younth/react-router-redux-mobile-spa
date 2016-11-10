@@ -5,7 +5,7 @@
  */
 
 // 按需编译，根据入口index.html寻找依赖编译
-fis.set('project.files', ['/index.html', '/test/**', '/config/**']);
+fis.set('project.files', ['/index.html', '/mock/**']);
 
 // mock数据，server.conf 必须放在 /config 文件夹下才生效
 fis.match('/test/**', {

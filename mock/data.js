@@ -1,4 +1,4 @@
-// // 注意，本文件必须放在 /test 文件夹下面
+// // 注意这里面的.js，不是一般的.js 文件，而是相当于 express 的 route.
 
 // var http = require('http');
 // var url = require('url');

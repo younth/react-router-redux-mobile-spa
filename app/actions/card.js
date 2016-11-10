@@ -13,7 +13,7 @@ export function getHomeCard(params) {
         }
         return dispatch({
             type: actionTypes.GET_HOMECARD,
-            promise: getJsonp('http://waimai.baidu.com/wmall/privilege/center?display=json', params)
+            promise: getJsonp('/wmall/privilege/center?display=json', params)
         })
     }
 }
@@ -29,7 +29,7 @@ export function getConfirmInfo(params) {
         }
         return dispatch({
             type: actionTypes.GET_CONFIRMINFO,
-            promise: getJsonp('http://waimai.baidu.com/wmall/privilege/view?display=json', params)
+            promise: getJsonp('/wmall/privilege/view?display=json', params)
         })
     }
 }
@@ -46,7 +46,7 @@ export function getDiscountDetail(params) {
         }
         return dispatch({
             type: actionTypes.GET_DISCOUNTDETAIL,
-            promise: getJsonp('http://waimai.baidu.com/wmall/privilege/promotiondetail?display=json', params)
+            promise: getJsonp('/wmall/privilege/promotiondetail?display=json', params)
         })
     }
 }
