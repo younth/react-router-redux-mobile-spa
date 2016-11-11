@@ -15,7 +15,6 @@ export default function confirm(state = initialState, action) {
                 loading: true
             }
         case actionTypes.GET_CONFIRMINFO_SUCCESS:
-        console.log('GET_CONFIRMINFO_SUCCESS');
             let result = action.json.result
             return {
                 ...state,
@@ -25,7 +24,6 @@ export default function confirm(state = initialState, action) {
                 radioList: result.prices
             }
         case actionTypes.GET_CONFIRMINFO_FAILURE:
-        console.log('GET_CONFIRMINFO_FAILURE');
             // error_no 不等于0
             return {
                 ...state,

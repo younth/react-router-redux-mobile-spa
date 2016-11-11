@@ -8,6 +8,8 @@ module.exports = function(req, res, next) {
             city_name: "北京市",
             displayname: "chenchuanbao01",
             is_vip: false,
+            is_login: true,
+            is_new: true,
             city_privileges: [{
                 city_id: "131",
                 city_name: "北京市",

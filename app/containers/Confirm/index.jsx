@@ -48,7 +48,7 @@ export default class Confirm extends Component {
         this.changePeriod = this.changePeriod.bind(this)
         this.changeAgree = this.changeAgree.bind(this)
         this.buyCard = this.buyCard.bind(this)
-        this.changeCity = this.changeCity.bind(this)
+        this.toChangeCity = this.toChangeCity.bind(this)
         this.sureToPay = this.sureToPay.bind(this)
         
         this.state = {
@@ -135,7 +135,7 @@ export default class Confirm extends Component {
             pay_type: 6 // 独立收银台
         }
         // 4. 生成订单
-        get('http://waimai.baidu.com:80/wmall/privilege/buy?display=json', params).then(res => {
+        get('/wmall/privilege/buy?display=json', params).then(res => {
             return res.json()
         }).then(json => {
             let errno = json.error_no,
@@ -195,16 +195,9 @@ export default class Confirm extends Component {
         return true
     }
 
-    changeCity () {
-        // 调端内更改地址API todo 端上测试 怎么回到当前页
-        var params = {
-            shopId: '4884822964606433285',
-            addressId: ''
-        }
-        window.WMApp.address.selectAddress(params, function(data) {
-            if (data.status) {
-                console.log(data.result.addressId)   // 返回地址id
-            }
+    toChangeCity () {
+        window.WMApp.page.changePage({
+            pageName: 'home'
         })
     }
 
@@ -231,7 +224,7 @@ export default class Confirm extends Component {
                             <p>如需更换请到首页更改定位</p>
                         </div>
                         <footer>
-                            <a href="javascript:;" onClick = {this.changeCity}>更改城市</a>
+                            <a href="javascript:;" onClick = {this.toChangeCity}>更改城市</a>
                             <a href="javascript:;" onClick = {this.sureToPay}>确认</a>
                         </footer>
                     </DialogModal>

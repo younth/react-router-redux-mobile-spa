@@ -20,7 +20,7 @@ import Router from './router'
 const renderPage = function () {
     window.WMAppReady(function () {
         // 提前打开loading, 解决白页时间过长问题
-        Utils.loading()
+        // Utils.loading()
         // 打开上拉刷新
         // WMApp.page.openPageRefresh();
         // WMApp.entry.setPageAction('onPageRefresh', function () {

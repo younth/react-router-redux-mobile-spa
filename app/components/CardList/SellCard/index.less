@@ -4,6 +4,7 @@
 @font-color: #333; // 基本文字颜色
 @shallow-gray: #808080; // 文字浅灰色（活动规则）
 @shallow-gray2: #a9a9a9;
+@origin-price: #999;
 .setBG(@url, @w, @h) {
     background: url(@url) no-repeat;
     width: @w;
@@ -38,6 +39,7 @@
         content: '￥';
         color: @color;
         display: block;
+        margin-bottom: -2px;
     }
 }
 
@@ -77,9 +79,9 @@
                 align-items: flex-end;
                 .origin-price {
                     display: flex;
-                    .yuan(22px, @shallow-gray2);
+                    .yuan(22px, @origin-price);
                     font-size: 28px;
-                    color: @shallow-gray2;
+                    color: @origin-price;
                     text-decoration: line-through;
                     margin-left: 20px;
                 }
@@ -127,6 +129,7 @@
             }
         }
         .new-tip {
+            font-size: 24px;
             color: @red;
         }
     }
