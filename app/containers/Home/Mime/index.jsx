@@ -5,6 +5,8 @@ import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Link } from 'react-router'
 
+import localStorage from '../../../util/localStorage.js'
+
 import SwipeCard from '../../../components/SwipeCard'
 import TitleBar from '../../../components/TitleBar'
 import ImgTip from '../../../components/ImgTip'
@@ -16,6 +18,9 @@ class Mime extends Component {
     constructor(props, context) {
         super(props, context)
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
+    }
+    componentWillMount() {
+        this.isVip = localStorage.getItem('is_vip') === '1' ? true : false
     }
     getCardNum(cardList) {
         let valid = cardList && cardList.valid || []
@@ -34,7 +39,7 @@ class Mime extends Component {
             }
             {
                 num ? <SwipeCard cardList = {this.props.cardList} clickBtn = {this.props.clickBtn} />
-                : this.props.isVip 
+                : this.isVip 
                 ? <ImgTip type = "novipcard" /> 
                 : <ImgTip type = "nousercard" /> 
             }

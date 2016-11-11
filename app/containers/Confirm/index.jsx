@@ -26,7 +26,8 @@ import * as cardActions from '../../actions/card'
 const mapStateToProps = state => {
     return {
         confirm: state.confirm,
-        globalVal: state.globalVal
+        globalVal: state.globalVal,
+        baseInfo: state.baseInfo
     }
 }
 const mapDispatchToProps = dispatch => {

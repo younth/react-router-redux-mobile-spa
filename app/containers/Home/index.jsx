@@ -19,7 +19,6 @@ import Onsell from './Onsell'
 import ImgTip from '../../components/ImgTip'
 import DialogModal from '../../components/DialogModal'
 
-import * as demoActions from '../../actions/demo'
 import * as userInfoActions from '../../actions/userinfo'
 import * as globalActions from '../../actions/globalVal'
 import * as cardActions from '../../actions/card'
@@ -27,12 +26,12 @@ import * as cardActions from '../../actions/card'
 const mapStateToProps = state => {
     return {
         card: state.card,
+        baseInfo: state.baseInfo,
         globalVal: state.globalVal
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        demoActions: bindActionCreators(demoActions, dispatch),
         globalActions: bindActionCreators(globalActions, dispatch),
         cardActions: bindActionCreators(cardActions, dispatch)
     }
@@ -42,8 +41,7 @@ const mapDispatchToProps = dispatch => {
 export default class Home extends Component {
     static propTypes = {
         globalActions: PropTypes.object.isRequired,
-        cardActions: PropTypes.object.isRequired,
-        demoActions: PropTypes.object.isRequired
+        cardActions: PropTypes.object.isRequired
     }
     constructor(props, context) {
         super(props, context);
@@ -58,8 +56,8 @@ export default class Home extends Component {
         // 展示loading
         // Utils.loading()
         // 获取支付状态
-        let {globalVal, card} = this.props
-        if (globalVal.payResult === 'success') {
+        let {baseInfo} = this.props
+        if (baseInfo.payResult === 'success') {
             this.state.show = true
         }
         // 点击返回直接关闭
@@ -96,6 +94,7 @@ export default class Home extends Component {
         }
         localStorage.setItem('is_login', card.isLogin && card.isLogin === true ? 1 : 0)
         localStorage.setItem('is_new', card.isNew && card.isNew === true ? 1 : 0)
+        localStorage.setItem('is_vip', card.isVip && card.isVip === true ? 1 : 0)
     }
 
     hideDialog() {
@@ -150,7 +149,7 @@ export default class Home extends Component {
         let {card} = this.props
         return (
             <div>
-                { card.userPrivileges && <Mime cardList = {card.userPrivileges} isVip = {card.isVip} clickBtn = {this.clickBtn}/> }
+                { card.userPrivileges && <Mime cardList = {card.userPrivileges} clickBtn = {this.clickBtn}/> }
                 { card.cityPrivileges && <Onsell cardList = {card.cityPrivileges} cityName = {card.cityName} clickBtn = {this.clickBtn}/> }
                 <Link className = "to-rule" to = "rule">配送折扣卡规则</Link>
                 <DialogModal show = {this.state.show} el='pay-success-dialog' title = '购买成功' closeOnOuterClick = {false}>
