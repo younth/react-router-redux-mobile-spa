@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux'
 
-import demo from './demo'
-import userinfo from './userinfo'
 import globalVal from './globalVal'
 import baseInfo from './baseInfo'
 import card from './card'
@@ -10,8 +8,6 @@ import detail from './detail'
 
 // 聚合reducer
 const rootReducer = combineReducers({
-	demo,
-	userinfo,
 	card,
 	globalVal,
 	baseInfo,

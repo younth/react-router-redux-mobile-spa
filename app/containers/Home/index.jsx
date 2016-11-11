@@ -19,7 +19,6 @@ import Onsell from './Onsell'
 import ImgTip from '../../components/ImgTip'
 import DialogModal from '../../components/DialogModal'
 
-import * as userInfoActions from '../../actions/userinfo'
 import * as globalActions from '../../actions/globalVal'
 import * as cardActions from '../../actions/card'
 
