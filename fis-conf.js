@@ -60,6 +60,21 @@ fis.media('publish')
         useHash: true
     });
 
+fis.media('qa')
+    .match('*.{js,jsx}', {
+        optimizer: fis.plugin('uglify-js')
+    })
+    .match('*.{css,less}', {
+        optimizer: fis.plugin('clean-css')
+    })
+    // 定义modile的id，即打包之后的代码中的 `defind('node_module/react/lib/index.js')`这种相对路径改为 `define('xxxxxx')` 这种ID的形式
+    // 这个配置是上线之后又作为优化配置上去的，会是打包的代码更小一些
+    .match('/{node_modules,app}/**.{js,jsx}', {
+        moduleId: function(m, path) {
+            return fis.util.md5(path);
+        }
+    })
+
 // fis3 中预设的是 fis-components，这里使用 fis3-hook-node_modules，所以先关了。
 fis.unhook('components');
 fis.hook('node_modules');
