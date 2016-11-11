@@ -53,7 +53,7 @@ export default class Home extends Component {
     }
     componentWillMount() {
         // 展示loading
-        // Utils.loading()
+        Utils.loading()
         // 获取支付状态
         let {baseInfo} = this.props
         if (baseInfo.payResult === 'success') {

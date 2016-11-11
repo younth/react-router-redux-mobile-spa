@@ -30,8 +30,6 @@ export default class RouteMap extends Component {
     }
 
     updateHandle() {
-        // biglog的pv打点统计
-        // console.log('update');
     }
 
     render() {

@@ -23,7 +23,7 @@ class App extends Component {
 
     componentDidMount() {
         // 只会执行一次，合适公共数据请求
-       console.log('layout Didmount');
+       // console.log('layout Didmount');
     }
 
     // 路由切换时会触发
