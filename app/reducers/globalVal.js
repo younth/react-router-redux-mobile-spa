@@ -19,11 +19,6 @@ export default function globalVal(state = initialState, action) {
                 from: action.from || action.data.from || state.from,
                 app_ver: action.app_ver || action.data.app_ver || state.app_ver
             }
-        case actionTypes.SAVE_PAYRESULT:
-            return {
-                ...state,
-                payResult: action.payResult || action.data.payResult
-            }
         default:
             return state
     }

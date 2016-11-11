@@ -22,7 +22,6 @@ class SellCard extends Component {
     }
 
     unfoldRule() {
-        // this.state.rulefold = !this.state.rulefold;
         // 展开使用规则
         this.setState({
             rulefold: !this.state.rulefold
