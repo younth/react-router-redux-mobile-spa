@@ -24,6 +24,7 @@ export default function promiseMiddleware() {
                 if (Number(json.error_no) === 0) {
                     next({...rest, json, type: SUCCESS })
                 } else {
+                    // error_no 不等于当失败处理
                     next({...rest, json, type: FAILURE })
                 }
                 return true
