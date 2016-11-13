@@ -103,7 +103,7 @@ class SellCard extends Component {
                 </div>
                 <div className="section2">
                     <div className={ classNames('to-use-rule', { unfold: !this.state.rulefold }) } onClick={this.unfoldRule}>使用规则</div>
-                    {this.props.isNew && (card.price !== card.new_price)? <div className="new-tip">新用户首次购卡专享</div> : ''}
+                    {this.props.isNew && (card.price !== card.newuser_price) ? <div className="new-tip">新用户首次购卡专享</div> : ''}
                 </div>
                 {
                     !this.state.rulefold && <div className="section3 rule-wrap">
