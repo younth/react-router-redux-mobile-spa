@@ -10,7 +10,7 @@ import * as Perf from 'react-addons-perf'
 window.Perf = Perf
 
 import Utils from './util/util';
-
+import '../static/styles/common.less'
 // 创建 Redux 的 store 对象
 const store = configureStore()
 
