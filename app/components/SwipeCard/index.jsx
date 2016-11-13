@@ -121,7 +121,6 @@ export default class SwipeCard extends Component {
 
     componentDidMount () {
         let {globalVal, globalActions} = this.props
-        console.log(globalVal)
     }
 
     render() {
@@ -142,12 +141,16 @@ export default class SwipeCard extends Component {
             }
 
         }
+        let swipeWrapWidth = wmflex.px2rem(650 * cardList.length, 75)
+        let swipeStyle = {
+            width: `${swipeWrapWidth}rem`
+        }
         return (
             <div>
             {
                 cardList && cardList.length === 1
                 ? this.renderCard(cardList[0], 0, 'only-card')
-                : <div className = "swipe-wrap">
+                : <div className = "swipe-wrap" style = {swipeStyle}>
                     <ReactSwipe className = "card-slide" options = {opt}>
                     {
                         cardList.map((item, index) => this.renderCard(item, index))

@@ -121,7 +121,6 @@ export default class Home extends Component {
                     let errno = json.error_no,
                         errmsg = json.error_msg,
                         result = json.result
-                    alert(JSON.stringify(data))
                     if (Number(errno) === 0) {
                         if (Number(result) === 1) {
                             Utils.showToast('删除成功~')
