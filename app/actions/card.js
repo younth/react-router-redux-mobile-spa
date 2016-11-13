@@ -13,7 +13,7 @@ export function getHomeCard(params) {
         }
         return dispatch({
             type: actionTypes.GET_HOMECARD,
-            promise: get('/wmall/privilege/center', params)
+            promise: post('/wmall/privilege/center', params)
         })
     }
 }

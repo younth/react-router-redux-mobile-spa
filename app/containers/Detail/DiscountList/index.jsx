@@ -121,7 +121,7 @@ export default class DiscountList extends Component {
                 this.state.list.map((item, index) => <DiscountItem data = {item} key = {index} />)
                 : <div className="msg-tip">您还没有享受优惠哦~快去订餐吧</div>
             }
-            <div className = { classNames('loading-more', { hide: !this.state.loading }) }>加载中...</div>
+            <div className = { classNames('loading-more', { hide: !this.state.loading }) }><i></i>努力加载中...</div>
             <div className = { classNames('no-more', { hide: !this.state.noMore }) }>全部加载完了~</div>
             </div>
         )
