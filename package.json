@@ -6,6 +6,7 @@
   "scripts": {
     "start": "fis3 release -cw",
     "qa": "fis3 release qa -cw",
+    "clean": "fis3 server clean",
     "watch": "fis3 release -cwL",
     "lint": "eslint --ext \".js,.jsx\" app",
     "test": "echo \"Error: no test specified\" && exit 1",
