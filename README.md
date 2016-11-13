@@ -238,3 +238,9 @@ dumall
 - 项目链接 http://172.17.101.144:8080/
 - 代码规范检查 npm run lint
 
+
+### 联调部署
+
+针对QA/RD机器，静态资源发布到 `/home/map/odp_cater/webroot` ， index.html发布到`/home/map/odp_cater/webroot/static/dumall`。（纯前端项目，为了确保静态资源与模板在同一目录）
+
+

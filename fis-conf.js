@@ -7,13 +7,10 @@
 // 按需编译，根据入口index.html寻找依赖编译
 fis.set('project.files', ['/index.html', '/mock/**']);
 
-// mock数据，server.conf 必须放在 /config 文件夹下才生效
-fis.match('/test/**', {
-    release: '$0'
-});
-fis.match('/config/**', {
-    release: '$0'
-});
+// mock数据，必须放在mock下面才生效，并且不编译
+fis.match('/mock/**', {
+    useCompile: false
+})
 
 // 采用 commonjs 模块化方案。需要 npm install fis3-hook-commonjs --save-dev
 fis.hook('commonjs', {
@@ -26,7 +23,7 @@ fis.match('{/app/**.js,*.jsx}', {
         blacklist: ['regenerator'],
         optional: ["es7.decorators", "es7.classProperties"],
         stage: 2, // 为了支持解构赋值
-        sourceMaps: true
+        sourceMaps: false
     }),
     rExt: '.js'
 });
@@ -92,12 +89,13 @@ fis.match('*.{js,es,es6,jsx,ts,tsx}', {
     ]
 });
 
-// 以下两个 match ，最终将所有的 js、css、图片都打包到 static/dumall/webappreact 目录下，静态文件都在那个目录
+// 以下两个 match ，最终将所有的 js、css、图片都打包到 static/dumall 目录下，静态文件都在那个目录
 fis.match('**/(*.{png,jpg,jpeg,gif})', {
     release: '/static/dumall/imgs/$1'
 });
 fis.match('::package', {
     // 需要 npm install fis3-packager-deps-pack --save-dev
+    // 测试环境发布相对目录，线上走CDN
     packager: fis.plugin('deps-pack', {
         // 将 /node_module 中的依赖项，打包成 static/dumall/webappreact/third.js
         'static/dumall/third.js': [
@@ -115,16 +113,47 @@ fis.match('::package', {
         'static/dumall/aio.css': '*.{less,css}',
 
         // 将 /app 中的依赖项，打包成 static/dumall/app.js
-        // 'static/dumall/app.js': [
-        //     // 将 /app/index.jsx 加入队列
-        //     '/app/index.jsx',
-        //     // 将 /app/index/jsx 的所有依赖项加入队列，因为第一步中已经命中了 /node_module 中的所有依赖项，因此这里只打包 /app 中的依赖项
-        //     '/app/index.jsx:deps'
-        // ],
+        'static/dumall/app.js': [
+            // 将 /app/index.jsx 加入队列
+            '/app/index.jsx',
+            // 将 /app/index/jsx 的所有依赖项加入队列，因为第一步中已经命中了 /node_module 中的所有依赖项，因此这里只打包 /app 中的依赖项
+            '/app/index.jsx:deps'
+        ],
+        'static/dumall/page.js': '/app/util/page.js',
     }),
 
     // 本项目为纯前端项目，所以用 loader 编译器加载 如果用后端运行时框架，请不要使用
     postpackager: fis.plugin('loader', {
-        useInlineMap: false
+        // source map 内联
+        useInlineMap: true
+    })
+});
+
+// 发送到测试机
+var deployConfig = {
+    receiver: 'http://10.19.161.92:8059/receiver.php',  // 该文件的位置在 /home/work/odp/webroot/receiver.php
+    to: '/home/map/odp_cater/webroot/static/dumall'
+};
+fis.media('chuanbao')
+.match('*.{js,css,jsx,es6,less}', {
+    domain: ['http://waimai.baidu.com']
+})
+
+.match('*', {
+    // domain: null,
+    // optimizer: null,
+    useHash: false,
+    useSprite: false,
+    deploy: fis.plugin('http-push', {
+        receiver: 'http://10.19.161.92:8059/receiver.php',  // 该文件的位置在 /home/work/odp/webroot/receiver.php
+        to: '/home/map/odp_cater/webroot'
+    })
+})
+// index.html单独发布到一个目录下
+.match('*.html', {
+    // optimizer: fis.plugin('compress'),
+    deploy: fis.plugin('http-push', {
+        receiver: 'http://10.19.161.92:8059/receiver.php',  // 该文件的位置在 /home/work/odp/webroot/receiver.php
+        to: '/home/map/odp_cater/webroot/static/dumall'
     })
 });
