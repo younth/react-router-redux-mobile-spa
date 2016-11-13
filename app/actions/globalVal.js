@@ -10,17 +10,7 @@ export const addressUpdate = data => {
 	}
 }
 
-// 二. 首页与提单页 权益卡ID传送
-
-// 保存点击的权益卡ID
-export const savePrivilegeNo = data => {
-	return {
-		type: actionTypes.SAVE_PRIVILEGENO,
-		data
-	}
-}
-
-// 提单页成功支付后调到首页 传递状态值
+// 二. 首页与提单页 提单页成功支付后调到首页 传递状态值
 export const savePayResult = data => {
 	return {
 		type: actionTypes.SAVE_PAYRESULT,

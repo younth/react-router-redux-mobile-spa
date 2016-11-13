@@ -27,11 +27,13 @@ class SellCard extends Component {
             rulefold: !this.state.rulefold
         })
     }
+    
+    componentDidUpdate() {
+    }
 
     getBtnStatus(card) {
         let btnstatus = 'buy', conflictreason = ''
         if (card.stock > 0) {
-            // todo 同类权益卡冲突待补充
             let btn_state = Number.parseInt(card.btn_state)
             if (btn_state === 1) {
                 // 可开通
@@ -58,7 +60,9 @@ class SellCard extends Component {
     }
     render() {
         let card = this.props.card
+
         this.getBtnStatus(card)
+
         return (
             <div className="sellcard-item">
                 <div className="section1">
@@ -73,8 +77,12 @@ class SellCard extends Component {
                     </div>
                     <div className="other-info">
                         <div className="price-wrap">
-                            <div className="price">{card.price}</div>
-                            <div className="origin-price">100</div>
+                            <div className="price">{card.newuser_price}</div>
+                            {
+                                this.props.isNew ?  
+                                <div className="origin-price">{card.price}</div>
+                                : ''
+                            }
                         </div>
                         <div className="btn-wrap" onClick = {this.props.clickBtn.bind(null, this.state.btnstatus, card.privilege_no, this.state.conflictreason)}>
                         {
@@ -95,7 +103,7 @@ class SellCard extends Component {
                 </div>
                 <div className="section2">
                     <div className={ classNames('to-use-rule', { unfold: !this.state.rulefold }) } onClick={this.unfoldRule}>使用规则</div>
-                    <div className="new-tip">新用户首次购卡专享</div>
+                    {this.props.isNew ? <div className="new-tip">新用户首次购卡专享</div> : ''}
                 </div>
                 {
                     !this.state.rulefold && <div className="section3 rule-wrap">

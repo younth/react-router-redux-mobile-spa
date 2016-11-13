@@ -4,7 +4,6 @@ const initialState = {
     loading: true,
     userPrivileges: {},
     cityPrivileges: [],
-    isVip: 0,
     cityName: ''
 }
 

@@ -53,7 +53,7 @@ export default class Home extends Component {
     }
     componentWillMount() {
         // 展示loading
-        // Utils.loading()
+        Utils.loading()
         // 获取支付状态
         let {baseInfo} = this.props
         if (baseInfo.payResult === 'success') {
@@ -91,9 +91,6 @@ export default class Home extends Component {
         if (!card.loading) {
             Utils.loading(0)
         }
-        localStorage.setItem('is_login', card.isLogin && card.isLogin === true ? 1 : 0)
-        localStorage.setItem('is_new', card.isNew && card.isNew === true ? 1 : 0)
-        localStorage.setItem('is_vip', card.isVip && card.isVip === true ? 1 : 0)
     }
 
     hideDialog() {
@@ -118,9 +115,15 @@ export default class Home extends Component {
                 get('/wmall/privilege/del?display=json').then(res => {
                     return res.json()
                 }).then(json => {
-                    let result = Number.parseInt(json.result)
-                    if (result === 1) {
-                        Utils.showToast('删除成功~')
+                    let errno = json.error_no,
+                        errmsg = json.error_msg,
+                        result = json.result
+                    if (Number.parseInt(errno) === 0) {
+                        if (Number.parseInt(result) === 1) {
+                            Utils.showToast('删除成功~')
+                        }
+                    } else {
+                        Utils.showToast(errmsg)
                     }
                 })
             } else {
@@ -148,8 +151,8 @@ export default class Home extends Component {
         let {card} = this.props
         return (
             <div>
-                { card.userPrivileges && <Mime cardList = {card.userPrivileges} clickBtn = {this.clickBtn}/> }
-                { card.cityPrivileges && <Onsell cardList = {card.cityPrivileges} cityName = {card.cityName} clickBtn = {this.clickBtn}/> }
+                { card.userPrivileges && <Mime cardList = {card.userPrivileges} isVip = {card.isVip} clickBtn = {this.clickBtn}/> }
+                { card.cityPrivileges && <Onsell cardList = {card.cityPrivileges} isNew = {card.isNew} cityName = {card.cityName} clickBtn = {this.clickBtn}/> }
                 <Link className = "to-rule" to = "rule">配送折扣卡规则</Link>
                 <DialogModal show = {this.state.show} el='pay-success-dialog' title = '购买成功' closeOnOuterClick = {false}>
                     <div className = "pay-success-img"></div>

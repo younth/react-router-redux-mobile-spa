@@ -22,7 +22,7 @@ class CardList extends Component {
             <div className="sellcard-wrap">
                 {
                     length && this.props.cardList.map((item, index) => 
-                        <SellCard key = {index} card = {item} clickBtn = {this.props.clickBtn}/>)
+                        <SellCard key = {index} card = {item} clickBtn = {this.props.clickBtn} isNew = {this.props.isNew} />)
                 }
                 <MessageTip tip = {'更多惊喜敬请期待...'}/>
             </div>

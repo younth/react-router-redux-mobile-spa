@@ -10,10 +10,12 @@ import ImgTip from '../../../components/ImgTip'
 
 // 组装 Onsell 组件
 class Onsell extends Component {
+
     constructor(props, context) {
         super(props, context)
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     }
+
     render() {
         let cardList = this.props.cardList
         let cityName = this.props.cityName
@@ -23,7 +25,7 @@ class Onsell extends Component {
                 { cardList.length ? <TitleBar type = "city-card" title = {title} /> : '' }
                 {
                     cardList.length
-                    ? <CardList cardList = {cardList} clickBtn = {this.props.clickBtn} />
+                    ? <CardList cardList = {cardList} clickBtn = {this.props.clickBtn} isNew = {this.props.isNew} />
                     : <ImgTip type = "nocitycard" cityName = {cityName} /> 
                 }
             </div>
