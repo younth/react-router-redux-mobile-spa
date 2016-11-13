@@ -10,7 +10,7 @@ import { Link, hashHistory } from 'react-router'
 import Utils from '../../util/util.js'
 import localStorage from '../../util/localStorage.js'
 
-import { get, post, getJsonp } from '../../fetch/request'
+import { post } from '../../fetch/request'
 
 import './index.less'
 
@@ -90,7 +90,6 @@ export default class Confirm extends Component {
             // 以下代码只会执行一次
             if (this.state.period === 0 && confirm.radioList.length) {
                 let firstCard = confirm.radioList[0]
-                console.log(firstCard);
                 this.setState({
                     period: firstCard.period,
                     price: confirm.is_new && (firstCard.newuser_price !== firstCard.price) ? firstCard.price : firstCard.newuser_price,
@@ -138,7 +137,7 @@ export default class Confirm extends Component {
             pay_type: 6 // 独立收银台
         }
         // 4. 生成订单
-        get('/wmall/privilege/buy?display=json', params).then(res => {
+        post('/wmall/privilege/buy?display=json', params).then(res => {
             return res.json()
         }).then(json => {
             let errno = json.error_no,

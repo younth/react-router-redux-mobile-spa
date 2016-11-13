@@ -6,7 +6,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link, hashHistory } from 'react-router'
-import { get } from '../../fetch/request'
+import { get, post } from '../../fetch/request'
 
 import Utils from '../../util/util.js'
 import localStorage from '../../util/localStorage.js'
@@ -53,7 +53,7 @@ export default class Home extends Component {
     }
     componentWillMount() {
         // 展示loading
-        // Utils.loading()
+        Utils.loading()
         // 获取支付状态
         let {baseInfo} = this.props
         if (baseInfo.payResult === 'success') {
@@ -94,16 +94,17 @@ export default class Home extends Component {
     }
 
     hideDialog() {
-        window.location.reload()
-        // this.setState({
-        //     show: false
-        // })
+        let {cardActions} = this.props
+        cardActions.getHomeCard()
+        this.setState({
+            show: false
+        })
         // 关闭对话框不代表页面最新 应该重新加载并且关掉对话框
     }
 
     // 统一管理点击按钮
     clickBtn(type, privilege_no, toastText) {
-        let {card, globalActions} = this.props
+        let {card, cardActions} = this.props
         if (card.isLogin) {
             if (type === 'buy' || type === 'renew') {
                 // 提单页提前展示loading
@@ -112,15 +113,19 @@ export default class Home extends Component {
                 hashHistory.push(`/confirm/${privilege_no}`)
             } else if (type === 'delete') {
                 // 已购卡: 用户删除已下架卡片
-                get('/wmall/privilege/del?display=json').then(res => {
+                get('/wmall/privilege/del?display=json', {
+                    privilege_no: privilege_no
+                }).then(res => {
                     return res.json()
                 }).then(json => {
                     let errno = json.error_no,
                         errmsg = json.error_msg,
                         result = json.result
+                    alert(JSON.stringify(data))
                     if (Number(errno) === 0) {
                         if (Number(result) === 1) {
                             Utils.showToast('删除成功~')
+                            cardActions.getHomeCard()
                         }
                     } else {
                         Utils.showToast(errmsg)
@@ -134,10 +139,7 @@ export default class Home extends Component {
             window.WMAppReady(() => {
                 window.WMApp.account.login(data => {
                     if (data.status) {   // 1表示成功，0表示登录取消，登录失败NA会处理
-                        // 解决方法1. 页面加载太慢了，在手机上reload的效果是过了好半天页面才刷新了一下（此时用户可能已经进行某些点击操作），因此这里提前展示loading
-                        // Utils.loading()
-                        // window.location.reload()
-                        // 解决方法2. 重新请求页面数据，重新渲染，此时应该展示页面内loading
+                        Utils.loading()
                         cardActions.getHomeCard()
                     } else {
                         console.log('登录取消')
@@ -149,6 +151,9 @@ export default class Home extends Component {
 
     render() {
         let {card} = this.props
+        if (!card.loading) {
+            Utils.loading(0)
+        }
         return (
             <div>
                 { card.userPrivileges && <Mime cardList = {card.userPrivileges} isVip = {card.isVip} clickBtn = {this.clickBtn}/> }
