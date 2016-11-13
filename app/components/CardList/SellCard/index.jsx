@@ -60,9 +60,7 @@ class SellCard extends Component {
     }
     render() {
         let card = this.props.card
-
         this.getBtnStatus(card)
-
         return (
             <div className="sellcard-item">
                 <div className="section1">
@@ -76,14 +74,16 @@ class SellCard extends Component {
                         <div className="desc">仅支持百度专送</div>
                     </div>
                     <div className="other-info">
-                        <div className="price-wrap">
-                            <div className="price">{card.newuser_price}</div>
-                            {
-                                this.props.isNew ?  
+                        {
+                            (this.props.isNew && (card.price !== card.newuser_price)) ?
+                            <div className="price-wrap">
+                                <div className="price">{card.newuser_price}</div>
                                 <div className="origin-price">{card.price}</div>
-                                : ''
-                            }
-                        </div>
+                            </div>
+                            : <div className="price-wrap">
+                                <div className="price">{card.price}</div>
+                            </div>
+                        }
                         <div className="btn-wrap" onClick = {this.props.clickBtn.bind(null, this.state.btnstatus, card.privilege_no, this.state.conflictreason)}>
                         {
                             this.state.btnstatus === 'buy'
@@ -103,7 +103,7 @@ class SellCard extends Component {
                 </div>
                 <div className="section2">
                     <div className={ classNames('to-use-rule', { unfold: !this.state.rulefold }) } onClick={this.unfoldRule}>使用规则</div>
-                    {this.props.isNew ? <div className="new-tip">新用户首次购卡专享</div> : ''}
+                    {this.props.isNew && (card.price !== card.new_price)? <div className="new-tip">新用户首次购卡专享</div> : ''}
                 </div>
                 {
                     !this.state.rulefold && <div className="section3 rule-wrap">

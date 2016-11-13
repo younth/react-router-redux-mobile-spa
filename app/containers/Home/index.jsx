@@ -53,7 +53,7 @@ export default class Home extends Component {
     }
     componentWillMount() {
         // 展示loading
-        Utils.loading()
+        // Utils.loading()
         // 获取支付状态
         let {baseInfo} = this.props
         if (baseInfo.payResult === 'success') {
@@ -107,8 +107,7 @@ export default class Home extends Component {
         if (card.isLogin) {
             if (type === 'buy' || type === 'renew') {
                 // 提单页提前展示loading
-                // Utils.loading()
-                alert(privilege_no)
+                Utils.loading()
                 // 通用: 开通或续费 跳到提单页
                 hashHistory.push(`/confirm/${privilege_no}`)
             } else if (type === 'delete') {
