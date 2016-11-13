@@ -92,9 +92,9 @@ export default class Confirm extends Component {
                 this.setState({
                     period: confirm.radioList[0].period,
                     price: confirm.radioList[0].price,
-                    selectCityId: Number.parseInt(confirm.data.city_id),
+                    selectCityId: Number(confirm.data.city_id),
                     selectCityName: confirm.data.city_name,
-                    lastCityId: Number.parseInt(confirm.data.last_city_id),
+                    lastCityId: Number(confirm.data.last_city_id),
                     laseCityName: confirm.data.last_city_name,
                     accessTitle: `本卡权益（${confirm.data.city_name || ''}）`
                 })
@@ -142,7 +142,7 @@ export default class Confirm extends Component {
             let errno = json.error_no,
                 errmsg = json.error_msg,
                 result = json.result
-            if (Number.parseInt(errno) === 0) {
+            if (Number(errno) === 0) {
                 // 5. 判断网络环境
                 let params = {
                     payType: result.pay_type,// 1表示钱包，2表示聚合收银台

@@ -34,7 +34,7 @@ class SellCard extends Component {
     getBtnStatus(card) {
         let btnstatus = 'buy', conflictreason = ''
         if (card.stock > 0) {
-            let btn_state = Number.parseInt(card.btn_state)
+            let btn_state = Number(card.btn_state)
             if (btn_state === 1) {
                 // 可开通
                 btnstatus = 'buy'

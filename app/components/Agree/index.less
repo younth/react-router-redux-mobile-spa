@@ -3,11 +3,11 @@
 @font-gray2: #a9a9a9;
 
 // 宽高与可自由设置，大于图片本身宽度即可
-.setBG(@url, @w, @h) {
+.setBG(@url, @w, @h, @imgW, @imgH: auto) {
     background: url(@url) no-repeat;
     width: @w;
     height: @h;
-    background-size: inherit;
+    background-size: @imgW @imgH;
     background-position: center center;
 }
 
@@ -18,15 +18,15 @@
     margin-left: 30px;
     .radio {
         margin-right: 19px;
-        .setBG('../../../static/img/i_unagree.png', 39px, 59px);
+        .setBG('../../../static/img/i_unagree.png', 39px, 59px, 29px);
         [data-dpr=3]& {
-            .setBG('../../../static/img/i_unagree3x.png', 54px, 74px);
+            .setBG('../../../static/img/i_unagree3x.png', 54px, 74px, 44px);
         }
     }
     &.selected .radio{
-        .setBG('../../../static/img/i_agree.png', 39px, 59px);
+        .setBG('../../../static/img/i_agree.png', 39px, 59px, 29px);
         [data-dpr=3]& {
-            .setBG('../../../static/img/i_agree3x.png', 54px, 74px);
+            .setBG('../../../static/img/i_agree3x.png', 54px, 74px, 44px);
         }
     }
     a {

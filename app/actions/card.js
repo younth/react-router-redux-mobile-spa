@@ -7,13 +7,10 @@ export function getHomeCard(params) {
     return (dispatch, getState) => {
         // action执行的时候，会传递dispatch getState参数，属于store方法
         let globalParams = getState().globalVal
-        params = {
-            ...globalParams,
-            ...params
-        }
+        params = Object.assign(globalParams, params)
         return dispatch({
             type: actionTypes.GET_HOMECARD,
-            promise: post('/wmall/privilege/center', params)
+            promise: get('/wmall/privilege/center', params)
         })
     }
 }
@@ -23,11 +20,7 @@ export function getConfirmInfo(params) {
     return (dispatch, getState) => {
         // action执行的时候，会传递dispatch getState参数，属于store方法
         let globalParams = getState().globalVal
-        params = Object.assign(params, globalParams)
-        // params = {
-        //     ...globalParams,
-        //     ...params
-        // }
+        params = Object.assign(globalParams, params)
         return dispatch({
             type: actionTypes.GET_CONFIRMINFO,
             promise: get('/wmall/privilege/view', params)
@@ -41,10 +34,7 @@ export function getDiscountDetail(params) {
     return (dispatch, getState) => {
         // action执行的时候，会传递dispatch getState参数，属于store方法
         let globalParams = getState().globalVal
-        params = {
-            ...globalParams,
-            ...params
-        }
+        params = Object.assign(globalParams, params)
         return dispatch({
             type: actionTypes.GET_DISCOUNTDETAIL,
             promise: get('/wmall/privilege/promotiondetail', params)

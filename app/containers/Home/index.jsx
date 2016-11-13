@@ -107,7 +107,8 @@ export default class Home extends Component {
         if (card.isLogin) {
             if (type === 'buy' || type === 'renew') {
                 // 提单页提前展示loading
-                Utils.loading()
+                // Utils.loading()
+                alert(privilege_no)
                 // 通用: 开通或续费 跳到提单页
                 hashHistory.push(`/confirm/${privilege_no}`)
             } else if (type === 'delete') {
@@ -118,8 +119,8 @@ export default class Home extends Component {
                     let errno = json.error_no,
                         errmsg = json.error_msg,
                         result = json.result
-                    if (Number.parseInt(errno) === 0) {
-                        if (Number.parseInt(result) === 1) {
+                    if (Number(errno) === 0) {
+                        if (Number(result) === 1) {
                             Utils.showToast('删除成功~')
                         }
                     } else {
