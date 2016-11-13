@@ -27,7 +27,7 @@
 .icon-after(@bg: '../../../../static/img/i_bottom.png', @w: 17px, @h: 10px) {
     &:after {
         content: '';
-        display: block;
+        display: inline-block;
         .setBG(@bg, @w, @h);
         margin-left: 10px;
         transform: rotate(0deg)
@@ -38,7 +38,7 @@
     &:before {
         content: '￥';
         color: @color;
-        display: block;
+        display: inline-block;
         margin-bottom: -2px;
     }
 }
@@ -112,7 +112,6 @@
             color: @shallow-gray;
             padding-top: 20px;
             padding-bottom: 10px;
-            display: flex;
             align-items: center;
             .icon-after();
             [data-dpr='3'] & {

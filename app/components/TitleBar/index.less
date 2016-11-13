@@ -12,7 +12,7 @@
 .icon-before(@bg, @w, @h) {
     &:before {
         content: '';
-        display: block;
+        display: inline-block;
         .setBG(@bg, @w, @h);
         margin-right: 10px;
     }
@@ -21,7 +21,7 @@
 .icon-after(@bg, @w, @h) {
     &:after {
         content: '';
-        display: block;
+        display: inline-block;
         .setBG(@bg, @w, @h);
         margin-left: 10px;
     }
@@ -35,7 +35,6 @@
     .title-wrap {
         display: flex;
         .title {
-            display: flex;
             align-items: center;
             font-size: 32px;
             .icon-before(@bg: '../../../static/img/i_usercard.png', @w: 30px, @h: 30px);
@@ -58,7 +57,6 @@
             [data-dpr=3] & {
                 .icon-after(@bg: '../../../static/img/i_right_gray3x.png', @w: 17px, @h: 30px);
             }
-            display: flex;
             align-items: center;
         }
     }
