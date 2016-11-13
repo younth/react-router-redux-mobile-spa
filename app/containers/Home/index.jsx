@@ -53,7 +53,7 @@ export default class Home extends Component {
     }
     componentWillMount() {
         // 展示loading
-        Utils.loading()
+        // Utils.loading()
         // 获取支付状态
         let {baseInfo} = this.props
         if (baseInfo.payResult === 'success') {
@@ -118,8 +118,8 @@ export default class Home extends Component {
                     let errno = json.error_no,
                         errmsg = json.error_msg,
                         result = json.result
-                    if (Number.parseInt(errno) === 0) {
-                        if (Number.parseInt(result) === 1) {
+                    if (Number(errno) === 0) {
+                        if (Number(result) === 1) {
                             Utils.showToast('删除成功~')
                         }
                     } else {

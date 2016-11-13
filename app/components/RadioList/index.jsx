@@ -20,7 +20,7 @@ class RadioList extends Component {
             <div className = "radio-list">
                 <div className = "radio-wrap">
                 {
-                    radioList.map((item, index) => <RadioItem key = {index} radio = {item} selected = {this.props.selected} onSelectedValueChanged = {this.props.onSelectedValueChanged}/>)
+                    radioList.map((item, index) => <RadioItem key = {index} radio = {item} selected = {this.props.selected} isNew = {this.props.isNew} onSelectedValueChanged = {this.props.onSelectedValueChanged}/>)
                 }
                 </div>
             </div>

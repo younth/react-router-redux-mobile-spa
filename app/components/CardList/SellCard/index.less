@@ -47,8 +47,7 @@
     width: 690px;
     margin: 0 auto;
     padding: 35px 0;
-    border-bottom: 1px solid #e1e1e1;
-    /*no*/
+    border-bottom: 1px solid #e1e1e1; /*no*/
     .section1 {
         display: flex;
         justify-content: space-between;
@@ -96,15 +95,10 @@
                 .btn {
                     .btn();
                 }
-                .buy {
-                    border: 2px solid @red;
-                    color: @red;
-                }
                 .conflict,
                 .notrenew,
                 .nostock {
-                    border: 2px solid @shallow-gray2;
-                    color: @shallow-gray2;
+                    .btn(@shallow-gray2);
                 }
             }
         }

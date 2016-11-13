@@ -61,17 +61,22 @@
 //     background: @background;
 // }
 // 通用按钮 透明有边距
-.btn(@red: @red) {
+.btn(@color: @red) {
     width: 110px;
     .v-height(50px);
     border-radius: 25px;
     text-align: center;
     font-size: 28px;
-    border: 2px solid @red;
-    color: @red;
+    border: 2px solid @color; /*no*/
+    color: @color;
+    [data-dpr='1'] & {
+        border: 1px solid @color; /*no*/
+    }
+    [data-dpr='3'] & {
+        border: 3px solid @color; /*no*/
+    }
 }
 
 .pixel-border(@color) {
-    border: 1px solid @color;
-    /*px*/
+    border: 1px solid @color; /*px*/
 }

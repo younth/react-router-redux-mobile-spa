@@ -89,12 +89,14 @@ export default class Confirm extends Component {
             Utils.loading(0)
             // 以下代码只会执行一次
             if (this.state.period === 0 && confirm.radioList.length) {
+                let firstCard = confirm.radioList[0]
+                console.log(firstCard);
                 this.setState({
-                    period: confirm.radioList[0].period,
-                    price: confirm.radioList[0].price,
-                    selectCityId: Number.parseInt(confirm.data.city_id),
+                    period: firstCard.period,
+                    price: confirm.is_new && (firstCard.newuser_price !== firstCard.price) ? firstCard.price : firstCard.newuser_price,
+                    selectCityId: Number(confirm.data.city_id),
                     selectCityName: confirm.data.city_name,
-                    lastCityId: Number.parseInt(confirm.data.last_city_id),
+                    lastCityId: Number(confirm.data.last_city_id),
                     laseCityName: confirm.data.last_city_name,
                     accessTitle: `本卡权益（${confirm.data.city_name || ''}）`
                 })
@@ -142,7 +144,7 @@ export default class Confirm extends Component {
             let errno = json.error_no,
                 errmsg = json.error_msg,
                 result = json.result
-            if (Number.parseInt(errno) === 0) {
+            if (Number(errno) === 0) {
                 // 5. 判断网络环境
                 let params = {
                     payType: result.pay_type,// 1表示钱包，2表示聚合收银台
@@ -216,7 +218,7 @@ export default class Confirm extends Component {
                     <TitleBar type = "access-title" title = {this.state.accessTitle}/>
                     <Access accessList = {confirm.accessList} type = "privilege-detail"/>
                     <TitleBar type = "period-title" title = "有效期" />
-                    <RadioList radioList = {confirm.radioList} selected = {this.state.period} onSelectedValueChanged = {this.changePeriod}/>
+                    <RadioList radioList = {confirm.radioList} selected = {this.state.period} isNew = {confirm.is_new} onSelectedValueChanged = {this.changePeriod}/>
                     <Agree isAgree = {this.state.isAgree} onSelectedValueChanged = {this.changeAgree}/>
                     <div className = "buy-card" onClick = {this.buyCard} >去支付 ￥{this.state.price}</div>
                     <DialogModal show = {this.state.show} el = 'city-tip-dialog' title = '温馨提示' closeOnOuterClick = {false}>

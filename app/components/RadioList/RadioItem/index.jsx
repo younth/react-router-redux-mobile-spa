@@ -15,6 +15,9 @@ class RadioItem extends Component {
    
     render() {
         let radio = this.props.radio
+        if (this.props.isNew && (radio.price !== radio.newuser_price)) {
+            radio.price = radio.newuser_price
+        }
         return (
             <div className = { classNames('radio-item', { selected: this.props.selected === radio.period }) } onClick={this.props.onSelectedValueChanged.bind(null, radio.period, radio.price)} >
                 <div className = "text">{radio.period_str}</div>
