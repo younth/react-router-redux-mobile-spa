@@ -37,31 +37,37 @@ export default class DiscountList extends Component {
         super(props, context)
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
         this.state = {
-            lock: false,
-            loading: false,
+            loading: true,
             noMore: false,
             page: 1,
-            limit: 10,
             list: []
         }
+        this.lock = false
+        this.limit = 3
+        this.needLoadMore = false
     }
 
     componentWillMount() {
         // 获取数据
         // this.privilege_no = this.props.params.id
         this.city_id = localStorage.getItem('city_id')
+        
     }
 
     componentDidMount() {
-        // 首次计算页面滚动高度 和 页面高度
-        docHeight = document.body.scrollHeight || document.documentElement.scrollHeight
-        winHeight = window.innerHeight
-        // 监听页面滚动
-        window.addEventListener('scroll', () => {
-            if (document.body.scrollTop + winHeight + 110 >= docHeight ) {
-                this.doLoadmore()
-            }
-        }, false)
+        // 判断是否需要进行滑动加载
+        // 只有在list长度大于或等于每页限制时，才进行滑动加载
+        if (this.needLoadMore) {
+            // 首次计算页面滚动高度 和 页面高度
+            docHeight = document.body.scrollHeight || document.documentElement.scrollHeight
+            winHeight = window.innerHeight
+            // 监听页面滚动
+            window.addEventListener('scroll', () => {
+                if (document.body.scrollTop + winHeight >= docHeight ) {
+                    this.doLoadmore()
+                }
+            }, false)
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -70,14 +76,14 @@ export default class DiscountList extends Component {
         winHeight = window.innerHeight
 
         // 打开加载锁
-        this.state.lock = false
+        this.lock = false
         // console.log(this.props.params); // 这里取不到url参数，不知道为什么
     }
 
     doLoadmore() {
         let {globalVal} = this.props
-        if(!this.state.noMore && !this.state.lock) {
-            this.state.lock = true
+        if(!this.state.noMore && !this.lock) {
+            this.lock = true
             this.setState({
                 loading: true
             })
@@ -85,14 +91,14 @@ export default class DiscountList extends Component {
             get('/wmall/privilege/promotiondetail', {
                 ...globalVal,
                 page: ++this.state.page,
-                limit: this.state.limit,
+                limit: this.limit,
                 privilege_no: this.props.privilegeNo,
                 city_id: this.city_id
             }).then(res => {
                 return res.json()
             }).then(json => {
                 let list = json.result.list
-                if (list.length < this.state.limit) {
+                if (list.length < this.limit) {
                     // 全部加载完了
                     this.setState({
                         noMore: true,
@@ -100,8 +106,7 @@ export default class DiscountList extends Component {
                     })
                 } else {
                     this.setState({
-                        list: this.state.list.concat(list),
-                        loading: false
+                        list: this.state.list.concat(list)
                     })
                 }
             })
@@ -114,15 +119,22 @@ export default class DiscountList extends Component {
             // state初次赋值（首页数据）
             this.state.list = this.props.list
         }
+        if (this.state.list.length >= this.limit) {
+            this.needLoadMore = true
+        }
         return (
-            <div className="discount-wrap">
+            <div>
             {
                 this.state.list && this.state.list.length ? 
-                this.state.list.map((item, index) => <DiscountItem data = {item} key = {index} />)
-                : <div className="msg-tip">您还没有享受优惠哦~快去订餐吧</div>
+                <div className = "discount-wrap">
+                    {this.state.list.map((item, index) => <DiscountItem data = {item} key = {index} />)}
+                    {!this.needLoadMore ? '' : <div className = { classNames('loading-more', { hide: !this.state.loading }) }><i></i>努力加载中...</div>}
+                    {!this.needLoadMore ? '' : <div className = { classNames('no-more', { hide: !this.state.noMore }) }>全部加载完了~</div>}
+                </div>
+                : <div className="discount-wrap">
+                    <div className = "msg-tip">您还没有享受优惠哦~快去订餐吧</div>
+                </div>
             }
-            <div className = { classNames('loading-more', { hide: !this.state.loading }) }><i></i>努力加载中...</div>
-            <div className = { classNames('no-more', { hide: !this.state.noMore }) }>全部加载完了~</div>
             </div>
         )
     }
