@@ -44,7 +44,7 @@ class Access extends Component {
                 <div className = "access-wrap">
                     <div className = "access-item">
                         <div className = "info"><span className="num">{accessList.time_days || 0 }</span>天</div>
-                        <div className = "desc">特权时间</div>
+                        <div className = "desc">权益时间</div>
                     </div>
                     <div className = "access-item">
                         <div className = "info"><span className="num">{accessList.total_save || 0 }</span>元</div>
@@ -52,7 +52,7 @@ class Access extends Component {
                     </div>
                     <div className = "access-item">
                         <div className = "info"><span className="num">{accessList.delivery_times || 0 }</span>单</div>
-                        <div className = "desc">配送单量</div>
+                        <div className = "desc">折扣配送</div>
                     </div>
                 </div>
                 : ''

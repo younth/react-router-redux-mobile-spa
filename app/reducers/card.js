@@ -1,10 +1,7 @@
 import * as actionTypes from '../constants/types'
 
 const initialState = {
-    loading: true,
-    userPrivileges: {},
-    cityPrivileges: [],
-    cityName: ''
+    loading: true
 }
 
 export default function card(state = initialState, action) {

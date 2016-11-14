@@ -81,8 +81,8 @@ export default class Home extends Component {
         let {card, cardActions, globalActions} = this.props
         // 获取定位等基础信息
         window.WMAppReady(function() {
-            let lng = window.WMApp.location.getLocLng() || '1.295948313E7',
-                lat = window.WMApp.location.getLocLat() || '4849489.98',
+            let lng = window.WMApp.location.getLng() || '1.295948313E7',
+                lat = window.WMApp.location.getLat() || '4849489.98',
                 cityId = window.WMApp.location.getCityId() || '131',
                 app_ver = window.WMApp.device.getAppVersion() || '4.1.0',
                 getFrom = window.WMApp.device.getFrom() || 'na-iphone'
@@ -118,7 +118,12 @@ export default class Home extends Component {
     clickBtn(type, privilege_no, toastText) {
         let {card, cardActions} = this.props
         if (card.isLogin) {
-            if (type === 'buy' || type === 'renew') {
+            if (type === 'detail') {
+                // 详情页提前展示loading
+                Utils.loading()
+                // 通用: 开通或续费 跳到提单页
+                hashHistory.push(`/detail/${privilege_no}`)
+            } else if (type === 'buy' || type === 'renew') {
                 // 提单页提前展示loading
                 Utils.loading()
                 // 通用: 开通或续费 跳到提单页
@@ -169,7 +174,7 @@ export default class Home extends Component {
             <div>
                 { card.userPrivileges && <Mime cardList = {card.userPrivileges} isVip = {card.isVip} clickBtn = {this.clickBtn}/> }
                 { card.cityPrivileges && <Onsell cardList = {card.cityPrivileges} isNew = {card.isNew} cityName = {card.cityName} clickBtn = {this.clickBtn}/> }
-                <Link className = "to-rule" to = "rule">配送折扣卡规则</Link>
+                { card.cityPrivileges && <Link className = "to-rule" to = "rule">配送折扣卡规则</Link> }
                 <DialogModal show = {this.state.show} el='pay-success-dialog' title = '购买成功' closeOnOuterClick = {false}>
                     <div className = "pay-success-img"></div>
                     <div className = "pay-success-msg">购买成功，享受权益</div>

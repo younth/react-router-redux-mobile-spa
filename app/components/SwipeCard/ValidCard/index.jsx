@@ -3,7 +3,6 @@
  */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { Link } from 'react-router'
 import classNames from 'classnames';
 
 // 组装 ValidCard 组件
@@ -15,12 +14,11 @@ class ValidCard extends Component {
     render() {
         let card = this.props.card
         return (
-            <div className = { classNames("card-item", this.props.cardType) }>
+            <div className = { classNames("card-item", this.props.cardType) } onClick = {this.props.clickBtn.bind(null, 'detail', card.privilege_no)} >
                 <div className="inner-card">
                     <div className="section1">
                         <div className="city">{card.city_name}</div>
-                        <Link className="to-use-detail" to={'detail/' + card.privilege_no}>查看详情</Link>
-
+                        <div className="to-use-detail">查看详情</div>
                     </div>
                     <div className="section2">
                         <div className="discount">{card.discount_rate}</div>

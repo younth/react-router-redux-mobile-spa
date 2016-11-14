@@ -117,7 +117,7 @@ module.exports = function(req, res, next) {
                     privilege_no: "131201611000006",
                     privilege_type: "1000",
                     privilege_desc: "配送折扣",
-                    privilege_name: "32131231",
+                    privilege_name: "我是第三个模版啊啊啊",
                     privilege_info: {
                         discount_rate: 80,
                         day_limit: 4,

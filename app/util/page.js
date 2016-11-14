@@ -79,7 +79,7 @@ window.WMApp.nui.dialog = function(params, callback) {
         status: 1
     })
 }
-window.WMApp.location.getLocLng = window.WMApp.location.getLocLat = window.WMApp.location.getCityId = function() {
+window.WMApp.location.getLng = window.WMApp.location.getLat = window.WMApp.location.getCityId = function() {
     return null
 }
 window.WMApp.device.getAppVersion = function() {

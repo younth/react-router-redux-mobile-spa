@@ -66,9 +66,9 @@ class SellCard extends Component {
                 <div className="section1">
                     <div className="base-info">
                         <div className="name">
-                            {card.privilege_name}
+                            <span>{card.discount_rate}折{card.privilege_name}</span>
                             {
-                                (card.stock <= 300 && card.stock > 0) && <span className="stock">（库存{card.stock}张）</span>
+                                (card.stock <= 300 && card.stock > 0) && <span className="stock">(库存{card.stock})</span>
                             }
                         </div>
                         <div className="desc">仅支持百度专送</div>
@@ -110,7 +110,11 @@ class SellCard extends Component {
                         <p>权益只在{card.city_name}有效</p>
                         <p>每单最高减免{card.privilege_rule && card.privilege_rule.max_discount}元配送费</p>
                         <p>每天最多可减免{card.privilege_rule && card.privilege_rule.day_limit}单</p>
-                        <p>每月最多可减免{card.privilege_rule && card.privilege_rule.month_limit}单</p>
+                        {
+                            card.privilege_rule && card.privilege_rule.month_limit ? 
+                            <p>每月最多可减免{card.privilege_rule.month_limit}单</p>
+                            : ''
+                        }
                     </div>
                 }
             </div>

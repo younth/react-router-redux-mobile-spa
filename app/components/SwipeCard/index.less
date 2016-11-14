@@ -48,7 +48,7 @@
     .inner-card {
         width: 100%;
         height: 100%;
-        padding: 0 40px 30px 40px;
+        padding: 30px 40px 30px 40px;
         .section1 {
             display: flex;
             justify-content: space-between;
@@ -58,7 +58,6 @@
                     .icon-before('../../../static/img/i_location3x.png', 23px, 29px);
                 }
                 align-items: center;
-                padding-top: 30px;
                 flex: 1;
             }
             .to-use-detail {
@@ -71,7 +70,6 @@
                 [data-dpr='3'] & {
                     .icon-after('../../../static/img/i_right_white3x.png', 15px, 26px);
                 }
-                padding-top: 30px;
                 padding-right: 40px;
                 margin-right: -40px;
             }
@@ -171,6 +169,17 @@
             .setBG('./img/bg-valid3x.png', 1030px, 580px);
         }
         background-color: @red;
+    }
+    &.validCard,
+    &.renewCard {
+        .section2 {
+            padding: 10px 0;
+        }
+    }
+    &.unenforcedCard {
+        .section2 {
+            padding: 15px 0;
+        }
     }
     &.expiredCard,
     &.uselessCard {
