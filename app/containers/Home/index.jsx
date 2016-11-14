@@ -38,10 +38,12 @@ const mapDispatchToProps = dispatch => {
 // React & Redux 绑定
 @connect(mapStateToProps,mapDispatchToProps)
 export default class Home extends Component {
+
     static propTypes = {
         globalActions: PropTypes.object.isRequired,
         cardActions: PropTypes.object.isRequired
     }
+
     constructor(props, context) {
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
@@ -51,9 +53,13 @@ export default class Home extends Component {
             show: false
         }
     }
+
     componentWillMount() {
-        // 展示loading
-        Utils.loading()
+        // 只有首次进入的时候展示loading，或者其他条件，判断webappLocationFrom的来源是提单页面，也开loading
+        // this.props.location.key === Home.locationKey 代表饭hi
+        if(this.props.location.key !== Home.locationKey && !window.webappLocationFrom) {
+            Utils.loading()
+        }
         // 获取支付状态
         let {baseInfo} = this.props
         if (baseInfo.payResult === 'success') {
@@ -65,6 +71,12 @@ export default class Home extends Component {
             titleText: '小度商城'
         })
     }
+
+    componentWillUnmount() {
+        // 组件销毁时候，记录 location.key
+        Home.locationKey = this.props.location.key;
+    }
+
     componentDidMount() {
         let {card, cardActions, globalActions} = this.props
         // 获取定位等基础信息
