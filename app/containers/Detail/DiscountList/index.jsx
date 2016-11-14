@@ -12,7 +12,6 @@ import { get } from '../../../fetch/request'
 import DiscountItem from './DiscountItem'
 import './index.less'
 
-import * as globalActions from '../../../actions/globalVal'
 import * as cardActions from '../../../actions/card'
 
 let docHeight = 0,
@@ -26,7 +25,6 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        globalActions: bindActionCreators(globalActions, dispatch),
         cardActions: bindActionCreators(cardActions, dispatch)
     }
 }
@@ -39,19 +37,17 @@ export default class DiscountList extends Component {
         this.state = {
             loading: true,
             noMore: false,
-            page: 1,
             list: []
         }
         this.lock = false
+        this.page = 1
         this.limit = 3
         this.needLoadMore = false
     }
 
     componentWillMount() {
         // 获取数据
-        // this.privilege_no = this.props.params.id
         this.city_id = localStorage.getItem('city_id')
-        
     }
 
     componentDidMount() {
@@ -77,7 +73,6 @@ export default class DiscountList extends Component {
 
         // 打开加载锁
         this.lock = false
-        // console.log(this.props.params); // 这里取不到url参数，不知道为什么
     }
 
     doLoadmore() {
@@ -90,7 +85,7 @@ export default class DiscountList extends Component {
             // 获取分页数据
             get('/wmall/privilege/promotiondetail', {
                 ...globalVal,
-                page: ++this.state.page,
+                page: ++this.page,
                 limit: this.limit,
                 privilege_no: this.props.privilegeNo,
                 city_id: this.city_id
