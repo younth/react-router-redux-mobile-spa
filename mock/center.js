@@ -19,6 +19,7 @@ module.exports = function(req, res, next) {
                 end_time: "2017.10.01",
                 discount_rate: 8,
                 price: 1.1,
+                newuser_price: 0.9,
                 privilege_rule: {
                     discount_rate: 80,
                     day_limit: 4,
@@ -38,6 +39,7 @@ module.exports = function(req, res, next) {
                 end_time: "2017.10.01",
                 discount_rate: 8,
                 price: 1.1,
+                newuser_price: 0.9,
                 privilege_rule: {
                     discount_rate: 80,
                     day_limit: 4,
@@ -57,6 +59,7 @@ module.exports = function(req, res, next) {
                 end_time: "2017.10.01",
                 discount_rate: 8,
                 price: 1.1,
+                newuser_price: 0.9,
                 privilege_rule: {
                     discount_rate: 80,
                     day_limit: 4,
@@ -76,6 +79,7 @@ module.exports = function(req, res, next) {
                 end_time: "2017.10.01",
                 discount_rate: 8,
                 price: 1.1,
+                newuser_price: 0.9,
                 privilege_rule: {
                     discount_rate: 80,
                     day_limit: 4,
@@ -95,6 +99,7 @@ module.exports = function(req, res, next) {
                 end_time: "2017.10.01",
                 discount_rate: 8,
                 price: 1.1,
+                newuser_price: 0.9,
                 privilege_rule: {
                     discount_rate: 80,
                     day_limit: 4,

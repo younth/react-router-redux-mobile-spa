@@ -45,6 +45,7 @@
     display: flex;
     margin: 40px 15px 0 15px;
     float: left;
+    position: relative;
     .inner-card {
         width: 100%;
         height: 100%;
@@ -75,22 +76,24 @@
             }
         }
         .section2 {
-            display: flex;
-            align-items: flex-end;
-            .discount {
-                font-size: 200px;
-                margin-right: 20px;
-                margin-left: 10px;
-                margin-bottom: -10px;
-            }
-            .discount-rule {
-                .name {
-                    font-size: 40px;
-                    margin-bottom: 16px;
+            .desc-wrap {
+                display: flex;
+                align-items: flex-end;
+                .discount {
+                    font-size: 200px;
+                    margin-right: 20px;
+                    margin-left: 10px;
+                    margin-bottom: -10px;
                 }
-                .desc {
-                    font-size: 26px;
-                    margin-bottom: 16px;
+                .discount-rule {
+                    .name {
+                        font-size: 40px;
+                        margin-bottom: 16px;
+                    }
+                    .desc {
+                        font-size: 26px;
+                        margin-bottom: 16px;
+                    }
                 }
             }
         }
@@ -143,8 +146,9 @@
                 width: 160px;
                 .v-height(40px);
                 background: @yellow;
-                margin-right: -40px;
-                margin-bottom: 20px;
+                position: absolute;
+                right: 0;
+                top: 200px;
                 border-radius: 30px 0 0 30px;
                 text-indent: 20px;
             }

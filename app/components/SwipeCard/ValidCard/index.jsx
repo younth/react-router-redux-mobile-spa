@@ -21,10 +21,12 @@ class ValidCard extends Component {
                         <div className="to-use-detail">查看详情</div>
                     </div>
                     <div className="section2">
-                        <div className="discount">{card.discount_rate}</div>
-                        <div className="discount-rule">
-                            <div className="name">折 {card.privilege_name}</div>
-                            <div className="desc">仅支持百度专送</div>
+                        <div className="desc-wrap">
+                            <div className="discount">{card.discount_rate}</div>
+                            <div className="discount-rule">
+                                <div className="name">折 {card.privilege_name}</div>
+                                <div className="desc">仅支持百度专送</div>
+                            </div>
                         </div>
                     </div>
                     <div className="section3">
