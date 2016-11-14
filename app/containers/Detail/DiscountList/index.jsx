@@ -15,7 +15,8 @@ import './index.less'
 import * as cardActions from '../../../actions/card'
 
 let docHeight = 0,
-    winHeight = 0
+    winHeight = 0,
+    elastic = wmflex.rem2px(wmflex.px2rem(47, 75))
 // 组装 DiscountList 组件
 const mapStateToProps = state => {
     return {
@@ -59,7 +60,8 @@ export default class DiscountList extends Component {
             winHeight = window.innerHeight
             // 监听页面滚动
             window.addEventListener('scroll', () => {
-                if (document.body.scrollTop + winHeight >= docHeight ) {
+            console.log(document.body.scrollTop)
+                if (document.body.scrollTop + winHeight + elastic >= docHeight ) {
                     this.doLoadmore()
                 }
             }, false)
@@ -79,13 +81,12 @@ export default class DiscountList extends Component {
         let {globalVal} = this.props
         if(!this.state.noMore && !this.lock) {
             this.lock = true
-            this.setState({
-                loading: true
-            })
+            this.page = this.page + 1
+
             // 获取分页数据
             get('/wmall/privilege/promotiondetail', {
                 ...globalVal,
-                page: ++this.page,
+                page: this.page,
                 limit: this.limit,
                 privilege_no: this.props.privilegeNo,
                 city_id: this.city_id
