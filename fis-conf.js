@@ -131,10 +131,10 @@ fis.match('::package', {
 
 // 发送到测试机
 var deployConfig = {
-    receiver: 'http://10.19.161.92:8059/receiver.php',  // 该文件的位置在 /home/work/odp/webroot/receiver.php
+    receiver: 'http://10.19.161.29:8037/receiver.php',  // 该文件的位置在 /home/work/odp/webroot/receiver.php
     to: '/home/map/odp_cater/webroot/static/dumall'
 };
-fis.media('chuanbao')
+fis.media('qa')
 .match('*.{js,css,jsx,es6,less}', {
     domain: ['http://waimai.baidu.com']
 })
@@ -145,7 +145,7 @@ fis.media('chuanbao')
     useHash: false,
     useSprite: false,
     deploy: fis.plugin('http-push', {
-        receiver: 'http://10.19.161.92:8059/receiver.php',  // 该文件的位置在 /home/work/odp/webroot/receiver.php
+        receiver: 'http://10.19.161.29:8037/receiver.php',  // 该文件的位置在 /home/work/odp/webroot/receiver.php
         to: '/home/map/odp_cater/webroot'
     })
 })
@@ -153,7 +153,7 @@ fis.media('chuanbao')
 .match('*.html', {
     // optimizer: fis.plugin('compress'),
     deploy: fis.plugin('http-push', {
-        receiver: 'http://10.19.161.92:8059/receiver.php',  // 该文件的位置在 /home/work/odp/webroot/receiver.php
+        receiver: 'http://10.19.161.29:8037/receiver.php',  // 该文件的位置在 /home/work/odp/webroot/receiver.php
         to: '/home/map/odp_cater/webroot/static/dumall'
     })
 });

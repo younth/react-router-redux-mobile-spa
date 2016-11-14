@@ -21,7 +21,8 @@ export default function confirm(state = initialState, action) {
                 loading: false,
                 data: result,
                 accessList: result.privilege_rule,
-                radioList: result.prices
+                radioList: result.prices,
+                isNew: result.is_new
             }
         case actionTypes.GET_CONFIRMINFO_FAILURE:
             // error_no 不等于0

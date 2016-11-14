@@ -92,7 +92,7 @@ export default class Confirm extends Component {
                 let firstCard = confirm.radioList[0]
                 this.setState({
                     period: firstCard.period,
-                    price: confirm.is_new && (firstCard.newuser_price !== firstCard.price) ? firstCard.price : firstCard.newuser_price,
+                    price: (confirm.isNew && (firstCard.newuser_price !== firstCard.price)) ? firstCard.newuser_price : firstCard.price,
                     selectCityId: Number(confirm.data.city_id),
                     selectCityName: confirm.data.city_name,
                     lastCityId: Number(confirm.data.last_city_id),
@@ -107,7 +107,7 @@ export default class Confirm extends Component {
         }
     }
 
-    changePeriod (period, price) {
+    changePeriod(period, price) {
         this.setState({
             period: period,
             price: price
@@ -217,7 +217,7 @@ export default class Confirm extends Component {
                     <TitleBar type = "access-title" title = {this.state.accessTitle}/>
                     <Access accessList = {confirm.accessList} type = "privilege-detail"/>
                     <TitleBar type = "period-title" title = "有效期" />
-                    <RadioList radioList = {confirm.radioList} selected = {this.state.period} isNew = {confirm.is_new} onSelectedValueChanged = {this.changePeriod}/>
+                    <RadioList radioList = {confirm.radioList} selected = {this.state.period} isNew = {confirm.isNew} onSelectedValueChanged = {this.changePeriod}/>
                     <Agree isAgree = {this.state.isAgree} onSelectedValueChanged = {this.changeAgree}/>
                     <div className = "buy-card" onClick = {this.buyCard} >去支付 ￥{this.state.price}</div>
                     <DialogModal show = {this.state.show} el = 'city-tip-dialog' title = '温馨提示' closeOnOuterClick = {false}>
