@@ -60,7 +60,6 @@ export default class DiscountList extends Component {
             winHeight = window.innerHeight
             // 监听页面滚动
             window.addEventListener('scroll', () => {
-            console.log(document.body.scrollTop)
                 if (document.body.scrollTop + winHeight + elastic >= docHeight ) {
                     this.doLoadmore()
                 }
