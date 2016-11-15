@@ -70,6 +70,9 @@ export default class Detail extends Component {
         let {detail} = this.props
         if (!detail.loading) {
             Utils.loading(0)
+            if (detail.errno) {
+                Utils.showToast(detail.errmsg)
+            }
         }
         return (
             <div>

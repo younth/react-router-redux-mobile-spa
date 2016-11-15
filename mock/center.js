@@ -14,7 +14,7 @@ module.exports = function(req, res, next) {
                 city_id: "131",
                 city_name: "北京市",
                 privilege_no: "131201611000001",
-                privilege_name: "32131231",
+                privilege_name: "我是模版测试测",
                 start_time: "1995.01.01",
                 end_time: "2017.10.01",
                 discount_rate: 8,
@@ -27,7 +27,7 @@ module.exports = function(req, res, next) {
                     max_discount: 4,
                     month_max_save: 80
                 },
-                stock: 1030,
+                stock: 299,
                 btn_state: 1,
                 conflict_msg: ""
             }, {
@@ -122,7 +122,7 @@ module.exports = function(req, res, next) {
                     privilege_no: "131201611000006",
                     privilege_type: "1000",
                     privilege_desc: "配送折扣",
-                    privilege_name: "我是第三个模版啊啊啊",
+                    privilege_name: "我是模版测试测",
                     privilege_info: {
                         discount_rate: 80,
                         day_limit: 4,
@@ -146,7 +146,7 @@ module.exports = function(req, res, next) {
                     privilege_no: "131201611000007",
                     privilege_type: "1000",
                     privilege_desc: "配送折扣",
-                    privilege_name: "32131231",
+                    privilege_name: "我是第三个模版啊",
                     privilege_info: {
                         discount_rate: 80,
                         day_limit: 4,

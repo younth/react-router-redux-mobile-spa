@@ -27,7 +27,7 @@
 .icon-after(@bg: '../../../../static/img/i_bottom.png', @w: 17px, @h: 10px) {
     &:after {
         content: '';
-        display: inline-block;
+        display: block;
         .setBG(@bg, @w, @h);
         margin-left: 10px;
         transform: rotate(0deg)
@@ -38,7 +38,7 @@
     &:before {
         content: '￥';
         color: @color;
-        display: inline-block;
+        display: block;
         margin-bottom: -2px;
     }
 }
@@ -71,8 +71,7 @@
         }
         .other-info {
             display: flex;
-            justify-content: flex-end;
-            align-items: flex-end;
+            align-items: center;
             .price-wrap {
                 margin-right: 20px;
                 display: flex;
@@ -113,6 +112,8 @@
             color: @shallow-gray;
             padding-top: 20px;
             padding-bottom: 10px;
+            align-items: center;
+            display: flex;
             align-items: center;
             .icon-after();
             [data-dpr='3'] & {

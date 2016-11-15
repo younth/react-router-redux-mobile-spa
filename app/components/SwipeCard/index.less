@@ -14,7 +14,7 @@
 .icon-after(@bg, @w, @h) {
     &:after {
         content: '';
-        display: inline-block;
+        display: block;
         .setBG(@bg, @w, @h);
         margin-left: 10px;
     }
@@ -23,7 +23,7 @@
 .icon-before(@bg, @w, @h) {
     &:before {
         content: '';
-        display: inline-block;
+        display: block;
         .setBG(@bg, @w, @h);
         margin-right: 10px;
     }
@@ -53,26 +53,25 @@
         .section1 {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             .city {
+                display: flex;
+                align-items: center;
                 .icon-before(@bg: '../../../static/img/i_location.png', @w: 15px, @h: 19px);
                 [data-dpr='3'] & {
                     .icon-before('../../../static/img/i_location3x.png', 23px, 29px);
                 }
-                align-items: center;
-                flex: 1;
             }
             .to-use-detail {
-                flex: 2;
+                display: flex;
+                align-items: center;
                 text-align: right;
                 font-size: 22px;
-                padding: 6px;
                 color: @white;
                 .icon-after(@bg: '../../../static/img/i_right_white.png', @w: 11px, @h: 20px);
                 [data-dpr='3'] & {
                     .icon-after('../../../static/img/i_right_white3x.png', 15px, 26px);
                 }
-                padding-right: 40px;
-                margin-right: -40px;
             }
         }
         .section2 {
@@ -107,27 +106,14 @@
 }
 
 .card-item {
+    // 只有一张卡
     &.only-card {
         width: 690px !important; // 610px;
         margin: 0 auto;
         margin-top: 40px;
         float: none;
     }
-    &.unenforcedCard {
-        .section3 {
-            .time-wrap {
-                line-height: 30px;
-                margin-top: -22px;
-            }
-        }
-    }
-    &.validCard {
-        .section3 {
-            .time-wrap {
-                margin-top: 20px;
-            }
-        }
-    }
+    // 续费卡、过期卡、下架卡 布局
     &.renewCard,
     &.expiredCard,
     &.uselessCard {
@@ -148,7 +134,7 @@
                 background: @yellow;
                 position: absolute;
                 right: 0;
-                top: 200px;
+                top: 210px;
                 border-radius: 30px 0 0 30px;
                 text-indent: 20px;
             }
@@ -164,6 +150,7 @@
             }
         }
     }
+    // 卡片背景 红色有效
     &.validCard,
     &.renewCard,
     &.unenforcedCard {
@@ -173,17 +160,7 @@
         }
         background-color: @red;
     }
-    &.validCard,
-    &.renewCard {
-        .section2 {
-            padding: 10px 0;
-        }
-    }
-    &.unenforcedCard {
-        .section2 {
-            padding: 15px 0;
-        }
-    }
+    // 卡片背景 灰色无效
     &.expiredCard,
     &.uselessCard {
         .setBG('./img/bg-expired.png', 620px, 350px);
@@ -196,6 +173,38 @@
                 text-indent: 30px;
                 background-color: @bg-dark-gray;
             }
+        }
+    }
+    // 特殊样式 调整不同卡型样式
+    // 未生效卡 展示起止时间
+    &.unenforcedCard {
+        .section2 {
+            margin: 18px 0;
+        }
+        .section3 {
+            .time-wrap {
+                line-height: 30px;
+                margin-top: -22px;
+            }
+        }
+    }
+    // 有效卡 展示截止时间
+    &.validCard {
+        .section2 {
+            margin: 24px 0;
+        }
+        .section3 {
+            .time-wrap {
+                margin-top: 20px;
+            }
+        }
+    }
+    // 可续费、可删除卡 展示提示和按钮
+    &.renewCard,
+    &.expiredCard,
+    &.uselessCard {
+        .section2 {
+            margin: 5px 0;
         }
     }
 }

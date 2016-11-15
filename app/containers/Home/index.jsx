@@ -96,6 +96,8 @@ export default class Home extends Component {
             cardActions.getHomeCard()
             localStorage.setItem('city_id', cityId)
         })
+        // 添加统计
+        // Utils.addStat('centerPage')
     }
 
     componentDidUpdate() {

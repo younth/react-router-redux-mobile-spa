@@ -35,6 +35,7 @@
     .title-wrap {
         display: flex;
         .title {
+            display: flex;
             align-items: center;
             font-size: 32px;
             .icon-before(@bg: '../../../static/img/i_usercard.png', @w: 30px, @h: 30px);
@@ -62,10 +63,13 @@
     }
     // 首页
     // 热卖商品
-    &.city-card .title {
-        .icon-before(@bg: '../../../static/img/i_hotsell.png', @w: 30px, @h: 30px);
-        [data-dpr=3] & {
-            .icon-before(@bg: '../../../static/img/i_hotsell3x.png', @w: 45px, @h: 45px);
+    &.city-card {
+        margin-top: 70px;
+        .title {
+            .icon-before(@bg: '../../../static/img/i_hotsell.png', @w: 30px, @h: 30px);
+            [data-dpr=3] & {
+                .icon-before(@bg: '../../../static/img/i_hotsell3x.png', @w: 45px, @h: 45px);
+            }
         }
     }
     &.accessTitle .title {

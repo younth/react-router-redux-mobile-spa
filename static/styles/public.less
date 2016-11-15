@@ -51,29 +51,23 @@
     animation-iteration-count: @count;
 }
 
-//不设置width
-// .btn(@height, @background) {
-//     display: block;
-//     height: @height;
-//     line-height: @height;
-//     border-radius: 45px;
-//     text-align: center;
-//     background: @background;
-// }
 // 通用按钮 透明有边距
 .btn(@color: @red) {
     width: 110px;
-    .v-height(50px);
     border-radius: 25px;
     text-align: center;
     font-size: 28px;
     border: 2px solid @color; /*no*/
+    height: 50px;
+    line-height: 48px;
     color: @color;
     [data-dpr='1'] & {
         border: 1px solid @color; /*no*/
+        line-height: 49px;
     }
     [data-dpr='3'] & {
         border: 3px solid @color; /*no*/
+        line-height: 47px;
     }
 }
 
