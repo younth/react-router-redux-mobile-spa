@@ -80,7 +80,8 @@ export default class Confirm extends Component {
     }
 
     componentDidMount () {
-
+        // 添加页面访问次数统计
+        Utils.addStat('confirm')
     }
 
     componentDidUpdate () {
@@ -121,6 +122,8 @@ export default class Confirm extends Component {
     }
 
     buyCard() {
+        // 添加去支付按钮点击统计
+        Utils.addStat('pay', 'click')
         // 1. 检查信息完整度 2. 判断购卡城市与当前城市是否一致
         let result = this.validInfo()
         // 3. 拼装数据 4. 生成订单 5. 判断网络环境 6. 进行聚合收银台支付

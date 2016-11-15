@@ -17,11 +17,13 @@ module.exports = function(req, res, next) {
             prices: [{
                 period: 31,
                 period_str: "一个月",
-                price: 10
+                price: 10,
+                newuser_price: 9
             }, {
                 period: 93,
                 period_str: "三个月",
-                price: 30
+                price: 30,
+                newuser_price: 20
             }]
         },
         _bdstoken: "e363037bbcb605758073b209fb81446e",

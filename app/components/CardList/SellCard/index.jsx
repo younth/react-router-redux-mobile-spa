@@ -5,7 +5,7 @@ import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Link, hashHistory } from 'react-router'
 import classNames from 'classnames';
-
+import Utils from '../../../util/util.js'
 import './index.less'
 
 // 组装 SellCard 组件
@@ -26,6 +26,8 @@ class SellCard extends Component {
         this.setState({
             rulefold: !this.state.rulefold
         })
+        // 添加使用规则点击次数统计
+        Utils.addStat('cardrule', 'click')
     }
     
     componentDidUpdate() {

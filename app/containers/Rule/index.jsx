@@ -23,6 +23,11 @@ class Rule extends Component {
         return false
     }
 
+    componentDidMount() {
+        // 添加活动规则页面统计
+        Utils.addStat('rule')
+    }
+
     render() {
         return (
              <section id="rule">
