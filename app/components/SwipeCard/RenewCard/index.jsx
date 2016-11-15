@@ -29,7 +29,9 @@ class RenewCard extends Component {
                             </div>
                         </div>
                         <div className="msg-tip">
-                            <div className="expired-in">3</div>天后到期
+                            <div className = "tip">
+                                <div className="expired-in">3</div>天后到期
+                            </div>
                         </div>
                     </div>
                     {

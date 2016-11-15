@@ -9,7 +9,7 @@ module.exports = function(req, res, next) {
             displayname: "chenchuanbao01",
             is_vip: true,
             is_login: true,
-            is_new: true,
+            is_new: false,
             city_privileges: [{
                 city_id: "131",
                 city_name: "北京市",

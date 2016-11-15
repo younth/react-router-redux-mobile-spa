@@ -28,7 +28,7 @@ class UselessCard extends Component {
                                 <div className="desc">仅支持百度专送</div>
                             </div>
                         </div>
-                        <div className="msg-tip">已下架</div>
+                        <div className="msg-tip"><div className = "tip">已下架</div></div>
                     </div>
                     <div className="section3" onClick = {this.props.clickBtn.bind(null, 'delete', card.privilege_no)}>
                         <div className="btn-wrap">

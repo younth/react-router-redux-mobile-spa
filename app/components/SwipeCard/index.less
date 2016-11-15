@@ -125,18 +125,21 @@
                 align-items: flex-end;
             }
             .msg-tip {
-                .expired-in {
-                    color: @red;
-                    display: inline-block;
-                }
-                width: 160px;
-                .v-height(40px);
-                background: @yellow;
                 position: absolute;
                 right: 0;
                 top: 210px;
-                border-radius: 30px 0 0 30px;
-                text-indent: 20px;
+                .tip {
+                    .expired-in {
+                        color: @red;
+                        display: inline-block;
+                    }
+                    width: 160px;
+                    padding-right: 40px;
+                    .v-height(40px);
+                    background: @yellow;
+                    border-radius: 30px 0 0 30px;
+                    text-align: right;
+                }
             }
         }
         .section3 {
@@ -169,8 +172,7 @@
         }
         background-color: @bg-gray;
         .section2 {
-            .msg-tip {
-                text-indent: 30px;
+            .msg-tip .tip{
                 background-color: @bg-dark-gray;
             }
         }

@@ -28,7 +28,7 @@ class ExpiredCard extends Component {
                                 <div className="desc">仅支持百度专送</div>
                             </div>
                         </div>
-                        <div className="msg-tip">已过期</div>
+                        <div className="msg-tip"><div className = "tip">已过期</div></div>
                     </div>
                     {
                         card.notRenew ? '' :
