@@ -4,13 +4,13 @@
 
 var Utils = {
 
-    // addStat(src, type = 'show') {
-    //     addStat('SAK', {
-    //         da_trd: 'waimai',
-    //         da_src: `DuMall.${src}.${type}`,
-    //         da_act: type
-    //     });
-    // },
+    addStat(src, type = 'show') {
+        addStat('SAK', {
+            da_trd: 'waimai',
+            da_src: `DuMall.${src}.${type}`,
+            da_act: type
+        });
+    },
 
     // 获取url中所有的参数
     getParams(url) {

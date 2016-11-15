@@ -119,6 +119,7 @@ fis.match('::package', {
             // 将 /app/index/jsx 的所有依赖项加入队列，因为第一步中已经命中了 /node_module 中的所有依赖项，因此这里只打包 /app 中的依赖项
             '/app/index.jsx:deps'
         ],
+        
         'static/dumall/page.js': '/app/util/page.js',
     }),
 

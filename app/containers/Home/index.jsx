@@ -97,7 +97,7 @@ export default class Home extends Component {
             localStorage.setItem('city_id', cityId)
         })
         // 添加统计
-        // Utils.addStat('centerPage')
+        Utils.addStat('centerPage')
     }
 
     componentDidUpdate() {

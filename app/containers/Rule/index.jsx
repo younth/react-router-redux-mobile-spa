@@ -45,7 +45,7 @@ class Rule extends Component {
                  <p>
                     <span>3.1、 仅限在百度外卖手机客户端在线支付时使用；</span>
                     <span>3.2、 <span className="bold">每日最多可享受N单折扣配送权益, 每月最多可享受M单折扣配送权益（N、M为表示便利使用，具体数值以用户实际购买的折扣配送卡的<span className="red">说明</span>为准）</span>；</span>
-                    <span>3.3、 <span className="bold">每单最高减免4元</span>；</span>
+                    <span>3.3、 <span className="bold">每单最高减免4元</span>；实际配送价格以提交订单页面为准；</span>
                     <span>3.4、 仅限在开通折扣配送卡时所选的城市使用，不支持跨城市使用；</span>
                     <span>3.5、 仅限本人使用，不得授权或转授权他人使用；</span>
                     <span>3.6、 以上<span className="red">权益</span>仅限【百度专送】 餐厅使用；</span>
