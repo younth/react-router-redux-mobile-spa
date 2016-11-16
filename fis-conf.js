@@ -28,6 +28,18 @@ fis.match('{/app/**.js,*.jsx}', {
     rExt: '.js'
 });
 
+fis.match('*.{css,less}', {
+    postprocessor: fis.plugin('autoprefixer', {
+        browsers: [
+            'android 4',
+            'ios 6',
+            'last 1 Chrome versions',
+            'last 2 Safari versions'
+        ],
+        'cascade': true
+    })
+});
+
 fis.match('*.less', {
     parser: fis.plugin('less'),
     postprocessor: fis.plugin('px2rem', {
