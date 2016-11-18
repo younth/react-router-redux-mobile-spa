@@ -146,6 +146,8 @@ export default class Home extends Component {
                         if (Number(result) === 1) {
                             Utils.showToast('删除成功~')
                             cardActions.getHomeCard()
+                        } else {
+                            Utils.showToast(errmsg)
                         }
                     } else {
                         Utils.showToast(errmsg)

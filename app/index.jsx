@@ -21,14 +21,14 @@ const renderPage = function () {
     window.WMAppReady(function () {
         // 提前打开loading, 解决白页时间过长问题
         // Utils.loading()
-        // 测试环境打开上拉刷新 todo
-        WMApp.page.openPageRefresh();
-        WMApp.entry.setPageAction('onPageRefresh', function () {
-          setTimeout(function (){
-              WMApp.page.hidePageRefresh();
-              window.location.reload()
-          }, 400)
-        });
+        // 测试环境打开上拉刷新
+        // WMApp.page.openPageRefresh();
+        // WMApp.entry.setPageAction('onPageRefresh', function () {
+        //   setTimeout(function (){
+        //       WMApp.page.hidePageRefresh();
+        //       window.location.reload()
+        //   }, 400)
+        // });
         render(
             <Provider store={store}>
                 <Router history={hashHistory}/>

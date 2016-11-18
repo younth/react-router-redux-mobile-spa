@@ -137,7 +137,7 @@ module.exports = function(req, res, next) {
                     off_sale: false,
                     btn_state: 2,
                     expired: false,
-                    expired_in: 3
+                    expired_in: 0
                 }, {
                     city_id: "131",
                     state: "1",
