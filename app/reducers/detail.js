@@ -5,8 +5,8 @@ const initialState = {
     accessList: {},
     privilege_info: {},
     valid_date: '',
-    city_name: '',
-    list: []
+    city_name: ''
+    // list: []
 }
 
 export default function detail(state = initialState, action) {
@@ -26,7 +26,7 @@ export default function detail(state = initialState, action) {
                     total_save: result.total_save,
                     delivery_times: result.delivery_times
                 },
-                list: result.list,
+                // list: result.list,
                 privilege_info: result.privilege_info,
                 valid_date: `${result.date_start} - ${result.date_end}`,
                 city_name: result.city_name

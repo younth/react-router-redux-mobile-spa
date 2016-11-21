@@ -85,7 +85,7 @@ export default class Detail extends Component {
                         <TitleBar type = "access-title" title = "权益说明" />
                         <AccessInfo accessList = {detail.privilege_info}/>
                         <TitleBar type = "discount-title" title = "优惠明细" />
-                        <DiscountList list = {detail.list} privilegeNo = {this.privilegeNo} />
+                        <DiscountList privilegeNo = {this.privilegeNo} />
                     </div>
                     : ''
                 }
