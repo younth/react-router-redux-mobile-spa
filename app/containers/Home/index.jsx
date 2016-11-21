@@ -134,23 +134,34 @@ export default class Home extends Component {
                 hashHistory.push(`/confirm/${privilege_no}`)
             } else if (type === 'delete') {
                 // 已购卡: 用户删除已下架卡片
-                get('/wmall/privilege/del?display=json', {
-                    privilege_no: privilege_no
-                }).then(res => {
-                    return res.json()
-                }).then(json => {
-                    let errno = json.error_no,
-                        errmsg = json.error_msg,
-                        result = json.result
-                    if (Number(errno) === 0) {
-                        if (Number(result) === 1) {
-                            Utils.showToast('删除成功~')
-                            cardActions.getHomeCard()
-                        } else {
-                            Utils.showToast(errmsg)
-                        }
-                    } else {
-                        Utils.showToast(errmsg)
+                let params = {
+                    title: '温馨提示',
+                    content: '确认删除此卡片?',
+                    cancelBtnText: '取消',
+                    confirmBtnText: '确认'
+                }
+                window.WMApp.nui.dialog(params, function(data) {
+                    if (data.status) {
+                        // 确认操作
+                        get('/wmall/privilege/del?display=json', {
+                            privilege_no: privilege_no
+                        }).then(res => {
+                            return res.json()
+                        }).then(json => {
+                            let errno = json.error_no,
+                                errmsg = json.error_msg,
+                                result = json.result
+                            if (Number(errno) === 0) {
+                                if (Number(result) === 1) {
+                                    Utils.showToast('删除成功~')
+                                    cardActions.getHomeCard()
+                                } else {
+                                    Utils.showToast(errmsg)
+                                }
+                            } else {
+                                Utils.showToast(errmsg)
+                            }
+                        })
                     }
                 })
             } else {
