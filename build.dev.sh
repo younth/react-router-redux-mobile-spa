@@ -9,7 +9,7 @@ modulename=`basename $PWD`
 outputdir=$PROJECT_ROOT/output
 
 #模块目录
-moduledir=$PROJECT_ROOT/output/$modulename
+moduledir=$PROJECT_ROOT/output/static/$modulename
 
 echo $moduledir
 
@@ -17,13 +17,17 @@ echo $moduledir
 rm -rf $outputdir
 
 # fis3 --version --no-color
-fis3 release publish -cd $moduledir --no-color
+# fis3 release publish -cd $moduledir --no-color
+fis3 release publish -cd output --no-color
 
-cd $moduledir
+# cd $moduledir
+cd $outputdir
+
+mv ./index.html ./static/dumall/index.html
 
 rm -rf app mock node_modules static/lib static/styles
 
-tar -czvf $outputdir/dumall.tar.gz ./
+tar -czvf $outputdir/static.tar.gz ./
 
 cd $outputdir
-rm -rf $modulename
+rm -rf $outputdir/static

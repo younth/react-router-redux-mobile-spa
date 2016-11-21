@@ -83,6 +83,9 @@ fis.media('qa')
             return fis.util.md5(path);
         }
     })
+    .match('*.{js,css,png,jpg,jpeg,gif}', {
+        useHash: true
+    });
 
 // fis3 中预设的是 fis-components，这里使用 fis3-hook-node_modules，所以先关了。
 fis.unhook('components');
@@ -133,6 +136,9 @@ fis.match('::package', {
         ],
         
         'static/dumall/page.js': '/app/util/page.js',
+
+        // 不好使
+        'static/dumall/index.html': '/index.html'
     }),
 
     // 本项目为纯前端项目，所以用 loader 编译器加载 如果用后端运行时框架，请不要使用
@@ -143,30 +149,25 @@ fis.match('::package', {
 });
 
 // 发送到测试机
-var deployConfig = {
-    receiver: 'http://10.19.161.29:8037/receiver.php',  // 该文件的位置在 /home/work/odp/webroot/receiver.php
-    to: '/home/map/odp_cater/webroot/static/dumall'
-};
 fis.media('qa')
-.match('*.{js,css,jsx,es6,less}', {
-    domain: ['http://waimai.baidu.com']
-})
-
-.match('*', {
-    // domain: null,
-    // optimizer: null,
-    useHash: false,
-    useSprite: false,
-    deploy: fis.plugin('http-push', {
-        receiver: 'http://10.19.161.29:8037/receiver.php',  // 该文件的位置在 /home/work/odp/webroot/receiver.php
-        to: '/home/map/odp_cater/webroot'
+    .match('*.{js,css,jsx,es6,less}', {
+        domain: ['http://waimai.baidu.com'],
     })
-})
-// index.html单独发布到一个目录下
-.match('*.html', {
-    // optimizer: fis.plugin('compress'),
-    deploy: fis.plugin('http-push', {
-        receiver: 'http://10.19.161.29:8037/receiver.php',  // 该文件的位置在 /home/work/odp/webroot/receiver.php
-        to: '/home/map/odp_cater/webroot/static/dumall'
+    .match('*', {
+        // domain: null,
+        // optimizer: null,    
+        // useHash: true,  
+        useSprite: false,
+        deploy: fis.plugin('http-push', {
+            receiver: 'http://10.19.161.29:8037/receiver.php',  // 该文件的位置在 /home/work/odp/webroot/receiver.php
+            to: '/home/map/odp_cater/webroot'
+        })
     })
-});
+    // index.html单独发布到一个目录下
+    .match('*.html', {
+        // optimizer: fis.plugin('compress'),
+        deploy: fis.plugin('http-push', {
+            receiver: 'http://10.19.161.29:8037/receiver.php',  // 该文件的位置在 /home/work/odp/webroot/receiver.php
+            to: '/home/map/odp_cater/webroot/static/dumall'
+        })
+    });
