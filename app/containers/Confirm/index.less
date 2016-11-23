@@ -5,47 +5,44 @@
 @black: #333;
 @white2: #fffefe;
 
-html,
-body {
+.confirm-page {
     background-color: @gray;
-    .confirm-page {
-        .buy-card {
-            width: 700px;
-            .v-height(90px);
-            text-align: center;
-            color: @white2;
-            font-size: 32px;
-            background-color: @red;
-            border-radius: 6px;
-            margin: 0 auto;
-            margin-top: 56px;
-        }
-        .city-tip-dialog {
-            .tipmsg-wrap {
-                padding: 20px 0 30px 0;
-                p {
-                    color: @black;
-                    text-align: center;
-                    margin-bottom: 16px;
-                    span {
-                        color: @red;
-                    }
+    .buy-card {
+        width: 700px;
+        .v-height(90px);
+        text-align: center;
+        color: @white2;
+        font-size: 32px;
+        background-color: @red;
+        border-radius: 6px;
+        margin: 0 auto;
+        margin-top: 56px;
+    }
+    .city-tip-dialog {
+        .tipmsg-wrap {
+            padding: 20px 0 30px 0;
+            p {
+                color: @black;
+                text-align: center;
+                margin-bottom: 16px;
+                span {
+                    color: @red;
                 }
             }
-            footer {
-                display: flex;
-                justify-content: center;
-                a {
-                    display: block;
-                    border: 2px solid @font-gray2;
-                    /*no*/
-                    border-radius: 10px;
-                    color: @black;
-                    width: 200px;
-                    .v-height(80px);
-                    text-align: center;
-                    margin: 0 20px;
-                }
+        }
+        footer {
+            display: flex;
+            justify-content: center;
+            a {
+                display: block;
+                border: 2px solid @font-gray2;
+                /*no*/
+                border-radius: 10px;
+                color: @black;
+                width: 200px;
+                .v-height(80px);
+                text-align: center;
+                margin: 0 20px;
             }
         }
     }

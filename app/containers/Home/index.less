@@ -32,12 +32,16 @@
 
 // 支付成功弹框
 .pay-success-dialog {
+    width: auto;
     .pay-success-img {
-        .setBG('../../../static/img/pay-success.png', 610px, 353px);
+        .setBG('../../../static/img/pay-success.png', 565px, 297px);
+        [data-dpr=3]& {
+            .setBG('../../../static/img/pay-success3x.png', 848px, 446px);
+        }
     }
     .pay-success-msg {
         text-align: center;
-        margin-bottom: 20px;
+        margin: 20px 0;
         color: @black;
     }
     footer {
@@ -45,11 +49,11 @@
         justify-content: center;
         a {
             display: block;
-            border: 2px solid @shallow-gray2; /*no*/
+            border: 1px solid @shallow-gray2; /*no*/
             border-radius: 10px;
-            color: @black;
-            width: 200px;
-            .v-height(80px);
+            color: #808080;
+            width: 150px;
+            .v-height(58px);
             text-align: center;
         }
     }

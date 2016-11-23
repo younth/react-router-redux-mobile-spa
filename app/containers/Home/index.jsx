@@ -192,7 +192,7 @@ export default class Home extends Component {
                 { card.userPrivileges && <Mime cardList = {card.userPrivileges} isVip = {card.isVip} clickBtn = {this.clickBtn}/> }
                 { card.cityPrivileges && <Onsell cardList = {card.cityPrivileges} isNew = {card.isNew} cityName = {card.cityName} clickBtn = {this.clickBtn}/> }
                 { card.cityPrivileges && <Link className = "to-rule" to = "rule">配送折扣卡规则</Link> }
-                <DialogModal show = {this.state.show} el='pay-success-dialog' title = '购买成功' closeOnOuterClick = {false}>
+                <DialogModal show = {this.state.show} el='pay-success-dialog' closeOnOuterClick = {false}>
                     <div className = "pay-success-img"></div>
                     <div className = "pay-success-msg">购买成功，享受权益</div>
                     <footer>
