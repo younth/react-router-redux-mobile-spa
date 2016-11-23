@@ -1,1 +1,1 @@
-BUILD_SUBMITTER -u . -x -e FIS -m app/search/waimai/cwaimai/fe/vip -c "cd app/search/waimai/cwaimai/fe/vip && sh build.sh"
+BUILD_SUBMITTER -u . -x -e FIS -m app/search/waimai/cwaimai/fe/dumall -c "cd app/search/waimai/cwaimai/fe/dumall && sh build.sh"
