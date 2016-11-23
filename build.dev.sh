@@ -2,25 +2,16 @@
 #project目录
 PROJECT_ROOT=$PWD
 
-#模块名称
-modulename=`basename $PWD`
-
 #输出目录
 outputdir=$PROJECT_ROOT/output
 
-#模块目录
-moduledir=$PROJECT_ROOT/output/static/$modulename
-
-echo $moduledir
+echo $outputdir
 
 # 清除原有output目录下的内容
 rm -rf $outputdir
 
-# fis3 --version --no-color
-# fis3 release publish -cd $moduledir --no-color
-fis3 release publish -cd output --no-color
+fis3 release publish -cd $outputdir --no-color
 
-# cd $moduledir
 cd $outputdir
 
 mv ./index.html ./static/dumall/index.html
