@@ -9,17 +9,17 @@ module.exports = function(req, res, next) {
             displayname: "chenchuanbao01",
             is_vip: true,
             is_login: true,
-            is_new: false,
+            is_new: true,
             city_privileges: [{
                 city_id: "131",
                 city_name: "北京市",
                 privilege_no: "131201611000001",
-                privilege_name: "我是模版测试测",
+                privilege_name: "测试测试测试",
                 start_time: "1995.01.01",
                 end_time: "2017.10.01",
-                discount_rate: 8,
-                price: 1.1,
-                newuser_price: 0.9,
+                discount_rate: 5,
+                price: 1.15,
+                newuser_price: 0.3,
                 privilege_rule: {
                     discount_rate: 80,
                     day_limit: 4,
@@ -161,7 +161,7 @@ module.exports = function(req, res, next) {
                     off_sale: false,
                     btn_state: 0,
                     expired: false,
-                    expired_in: 3
+                    expired_in: 2
                 }, {
                     city_id: "131",
                     state: "1",

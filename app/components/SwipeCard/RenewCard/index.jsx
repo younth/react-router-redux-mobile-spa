@@ -38,8 +38,9 @@ class RenewCard extends Component {
                         </div>
                         <div className="msg-tip">
                             {
-                                card.expired_in === 0
-                                ? <div className = "tip">明天到期</div> 
+                                card.expired_in === 0 ? <div className = "tip">今天到期</div> 
+                                : card.expired_in === 1 ? <div className = "tip">明天到期</div> 
+                                : card.expired_in === 2 ? <div className = "tip">后天到期</div> 
                                 : <div className = "tip"><div className="expired-in">{card.expired_in}</div>天后到期</div>
                             }
                         </div>
