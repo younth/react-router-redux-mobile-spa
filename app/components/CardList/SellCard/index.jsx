@@ -68,7 +68,7 @@ class SellCard extends Component {
                 <div className="section1">
                     <div className="base-info">
                         <div className="name">
-                            <span>{card.discount_rate}折{card.privilege_name}</span>
+                            {card.discount_rate}折{card.privilege_name}
                             {
                                 (card.stock <= 300 && card.stock > 0) && <span className="stock">(库存{card.stock})</span>
                             }

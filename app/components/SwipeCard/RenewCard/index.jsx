@@ -28,7 +28,7 @@ class RenewCard extends Component {
                         <div className="city">{card.city_name}</div>
                         <div className="to-use-detail">查看详情</div>
                     </div>
-                    <div className="section2">
+                    <div className={ classNames('section2', { nobtn: card.notRenew }) }>
                         <div className="desc-wrap">
                             <div className="discount">{card.discount_rate}</div>
                             <div className="discount-rule">
