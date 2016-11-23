@@ -113,18 +113,15 @@
         margin-top: 40px;
         float: none;
     }
-    &.renewCard,
-    &.expiredCard {
-        .section2.nobtn {
-            margin-top: 16px;
-        }
-    }
+
     // 续费卡、过期卡、下架卡 布局
+    // 可续费、可删除卡 展示提示和按钮
     &.renewCard,
     &.expiredCard,
     &.uselessCard {
         .section2 {
             height: 210px;
+            margin: 5px 0;
             justify-content: space-between;
             .desc-wrap {
                 display: flex;
@@ -207,12 +204,11 @@
             }
         }
     }
-    // 可续费、可删除卡 展示提示和按钮
+    // 不展示续费按钮卡 特殊样式
     &.renewCard,
-    &.expiredCard,
-    &.uselessCard {
-        .section2 {
-            margin: 5px 0;
+    &.expiredCard {
+        .section2.nobtn {
+            margin-top: 16px;
         }
     }
 }

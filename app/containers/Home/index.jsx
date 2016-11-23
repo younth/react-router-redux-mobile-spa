@@ -108,12 +108,17 @@ export default class Home extends Component {
     }
 
     hideDialog() {
-        let {cardActions} = this.props
+        let {cardActions, globalActions} = this.props
+        // 重新获取首页数据
         cardActions.getHomeCard()
+        // 关闭弹框
         this.setState({
             show: false
         })
-        // 关闭对话框不代表页面最新 应该重新加载并且关掉对话框
+        // 设置支付结果为空
+        globalActions.savePayResult({
+            payResult: ''
+        })
     }
 
     // 统一管理点击按钮
@@ -192,7 +197,7 @@ export default class Home extends Component {
                 { card.userPrivileges && <Mime cardList = {card.userPrivileges} isVip = {card.isVip} clickBtn = {this.clickBtn}/> }
                 { card.cityPrivileges && <Onsell cardList = {card.cityPrivileges} isNew = {card.isNew} cityName = {card.cityName} clickBtn = {this.clickBtn}/> }
                 { card.cityPrivileges && <Link className = "to-rule" to = "rule">配送折扣卡规则</Link> }
-                <DialogModal show = {this.state.show} el='pay-success-dialog' closeOnOuterClick = {false}>
+                <DialogModal show = {this.state.show} el = 'pay-success-dialog' closeOnOuterClick = {false}>
                     <div className = "pay-success-img"></div>
                     <div className = "pay-success-msg">购买成功，享受权益</div>
                     <footer>
