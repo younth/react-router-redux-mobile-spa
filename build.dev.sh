@@ -18,7 +18,7 @@ mv ./index.html ./static/dumall/index.html
 
 rm -rf app mock node_modules static/lib static/styles
 
-tar -czvf $outputdir/static.tar.gz ./
+tar -czvf $outputdir/dumall.tar.gz ./
 
 cd $outputdir
 rm -rf $outputdir/static
