@@ -5,7 +5,7 @@
 var Utils = {
 
     addStat(src, type = 'show') {
-        addStat('SAK', {
+        window.addStat('SAK', {
             da_trd: 'waimai',
             da_src: `DuMall.${src}.${type}`,
             da_act: type

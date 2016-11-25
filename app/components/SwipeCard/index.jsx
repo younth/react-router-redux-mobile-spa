@@ -131,7 +131,7 @@ export default class SwipeCard extends Component {
             }
 
         }
-        let swipeWrapWidth = wmflex.px2rem(650 * cardList.length, 75)
+        let swipeWrapWidth = window.wmflex.px2rem(650 * cardList.length, 75)
         let swipeStyle = {
             width: `${swipeWrapWidth}rem`
         }

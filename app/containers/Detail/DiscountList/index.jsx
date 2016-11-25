@@ -15,8 +15,9 @@ import './index.less'
 import * as cardActions from '../../../actions/card'
 
 let docHeight = 0,
-    winHeight = 0,
-    elastic = wmflex.rem2px(wmflex.px2rem(47, 75))
+    winHeight = 0
+// 弹性区域，用于上滑时向展示“正在加载中”状态
+let elastic = window.wmflex.rem2px(window.wmflex.px2rem(47, 75))
 // 组装 DiscountList 组件
 const mapStateToProps = state => {
     return {
