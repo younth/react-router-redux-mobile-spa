@@ -109,6 +109,10 @@ export default class SwipeCard extends Component {
         let {globalVal, globalActions} = this.props
     }
 
+    componentDidUpdate() {
+        this.refs.reactSwipe.refresh()
+    }
+
     render() {
         let cardList = this.distinguishCard(this.props.cardList)
         // swipes 的配置
@@ -137,7 +141,7 @@ export default class SwipeCard extends Component {
                 cardList && cardList.length === 1
                 ? this.renderCard(cardList[0], 0, 'only-card')
                 : <div className = "swipe-wrap" style = {swipeStyle}>
-                    <ReactSwipe className = "card-slide" options = {opt}>
+                    <ReactSwipe className = "card-slide" options = {opt} ref = "reactSwipe">
                     {
                         cardList.map((item, index) => this.renderCard(item, index))
                     }
