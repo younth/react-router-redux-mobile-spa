@@ -18,7 +18,11 @@ mv ./index.html ./static/dumall/index.html
 
 rm -rf app mock node_modules static/lib static/styles
 
+# 为了兼容公有云，cp 一份静态资源 待移除
+mkdir webroot
+cp -r static ./webroot
+
 tar -czvf $outputdir/dumall.tar.gz ./
 
 cd $outputdir
-rm -rf $outputdir/static
+rm -rf $outputdir/static $outputdir/webroot
