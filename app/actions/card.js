@@ -29,7 +29,7 @@ export function getConfirmInfo(params) {
         }
         return dispatch({
             type: actionTypes.GET_CONFIRMINFO,
-            promise: get('/wmall/privilege/view', params)
+            promise: post('/wmall/privilege/view', params)
         })
     }
 }
@@ -46,7 +46,7 @@ export function getDiscountDetail(params) {
         }
         return dispatch({
             type: actionTypes.GET_DISCOUNTDETAIL,
-            promise: get('/wmall/privilege/promotiondetail', params)
+            promise: post('/wmall/privilege/promotiondetail', params)
         })
     }
 }

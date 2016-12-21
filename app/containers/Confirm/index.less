@@ -35,8 +35,15 @@
             justify-content: center;
             a {
                 display: block;
-                border: 2px solid @font-gray2;
-                /*no*/
+                // anroid
+                border: 1px solid @font-gray2; /*no*/
+                // ios
+                [data-dpr=2]& {
+                    border: 2px solid @font-gray2;
+                }
+                [data-dpr=3]& {
+                    border: 2px solid @font-gray2;
+                }
                 border-radius: 10px;
                 color: @black;
                 width: 200px;
