@@ -110,7 +110,7 @@ export default class SwipeCard extends Component {
     }
 
     componentDidUpdate() {
-        this.refs.reactSwipe.refresh()
+        this.refs.reactSwipe && this.refs.reactSwipe.refresh()
     }
 
     render() {
