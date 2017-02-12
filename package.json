@@ -1,11 +1,10 @@
 {
-  "name": "dumall",
+  "name": "fis3+react+redux单页面应用实践",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "fis3 release -cw",
-    "qa": "fis3 release qa -cw",
     "clean": "fis3 server clean",
     "watch": "fis3 release -cwL",
     "lint": "eslint --ext \".js,.jsx\" app",
@@ -47,7 +46,6 @@
     "react-swipes": "^1.0.4",
     "redux": "^3.4.0",
     "redux-thunk": "^2.1.0",
-    "swipe-js-iso": "^2.0.3",
     "whatwg-fetch": "^1.0.0"
   }
 }
