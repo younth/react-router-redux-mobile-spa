@@ -9,7 +9,6 @@
     "clean": "fis3 server clean",
     "watch": "fis3 release -cwL",
     "lint": "eslint --ext \".js,.jsx\" app",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "publish": "rm -rf ./release && fis3 release publish -cd ./release && rm -rf ./release/app ./release/node_modules ./release/resource",
     "build": "rm -rf ./release && fis3 release publish -cd ./release"
   },

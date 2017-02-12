@@ -18,17 +18,7 @@ const store = configureStore()
 import Router from './router'
 
 const renderPage = function () {
-    window.WMAppReady(function () {
-        // 提前打开loading, 解决白页时间过长问题
-        // Utils.loading()
-        // 测试环境打开上拉刷新
-        // WMApp.page.openPageRefresh();
-        // WMApp.entry.setPageAction('onPageRefresh', function () {
-        //   setTimeout(function (){
-        //       WMApp.page.hidePageRefresh();
-        //       window.location.reload()
-        //   }, 400)
-        // });
+    WMAppReady(function () {
         render(
             <Provider store={store}>
                 <Router history={hashHistory}/>

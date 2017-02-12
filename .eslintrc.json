@@ -17,6 +17,10 @@
     "plugins": [
         "react"
     ],
+    "globals": {
+      "WMAppReady": true,
+      "WMApp": true
+    },
     "rules": {
         "strict": 0,
         "indent": 0,

@@ -3,6 +3,7 @@
  */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link, hashHistory } from 'react-router'
@@ -76,7 +77,6 @@ export default class Confirm extends Component {
         }
         // 点击返回回到上一页
         Utils.setBack()
-
     }
 
     componentDidMount () {
@@ -152,7 +152,7 @@ export default class Confirm extends Component {
                     payType: result.pay_type,// 1表示钱包，2表示聚合收银台
                     payParams: result.pay_params   // 聚合收银台服务端下发的是json串，不需要encode
                 }
-                window.WMApp.network.getNetwork((data) => {
+                WMApp.network.getNetwork((data) => {
                     if (data.status && data.result.network === 'unreachable') {
                         Utils.showToast({text: '网络不可用'});
                     } else {
@@ -167,7 +167,7 @@ export default class Confirm extends Component {
     }
 
     doPay(params) {
-        window.WMApp.pay.doPay(params, data => {
+        WMApp.pay.doPay(params, data => {
             if (data.status) {
                 let {globalActions} = this.props
                 globalActions.savePayResult({
@@ -201,7 +201,7 @@ export default class Confirm extends Component {
     }
 
     toChangeCity () {
-        window.WMApp.page.changePage({
+        WMApp.page.changePage({
             pageName: 'home'
         })
     }
@@ -212,30 +212,34 @@ export default class Confirm extends Component {
 
     render() {
         let {confirm} = this.props
+        let animateLinkTime = window._animateLinkTime || 0
+        let animate = (Date.now() - animateLinkTime) < 1000
         return (
-            <div>
-                {
-                this.state.period === 0 ? '' :
-                <div className = "confirm-page">
-                    <TitleBar type = "access-title" title = {this.state.accessTitle}/>
-                    <Access accessList = {confirm.accessList} type = "privilege-detail"/>
-                    <TitleBar type = "period-title" title = "有效期" />
-                    <RadioList radioList = {confirm.radioList} selected = {this.state.period} isNew = {confirm.isNew} onSelectedValueChanged = {this.changePeriod}/>
-                    <Agree isAgree = {this.state.isAgree} onSelectedValueChanged = {this.changeAgree}/>
-                    <div className = "buy-card" onClick = {this.buyCard} >去支付 ￥{this.state.price}</div>
-                    <DialogModal show = {this.state.show} el = 'city-tip-dialog' title = '温馨提示' closeOnOuterClick = {false}>
-                        <div className="tipmsg-wrap">
-                            <p>您当前开通享有权益的城市是<span>{this.state.selectCityName}</span>，</p>
-                            <p>如需更换请到首页更改定位</p>
-                        </div>
-                        <footer>
-                            <a href="javascript:;" onClick = {this.toChangeCity}>更改城市</a>
-                            <a href="javascript:;" onClick = {this.sureToPay}>确认</a>
-                        </footer>
-                    </DialogModal>
+            <ReactCSSTransitionGroup  transitionName="animate-slide-left" transitionAppear={animate} transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                <div>
+                    {
+                    this.state.period === 0 ? '' :
+                    <div className = "confirm-page">
+                        <TitleBar type = "access-title" title = {this.state.accessTitle}/>
+                        <Access accessList = {confirm.accessList} type = "privilege-detail"/>
+                        <TitleBar type = "period-title" title = "有效期" />
+                        <RadioList radioList = {confirm.radioList} selected = {this.state.period} isNew = {confirm.isNew} onSelectedValueChanged = {this.changePeriod}/>
+                        <Agree isAgree = {this.state.isAgree} onSelectedValueChanged = {this.changeAgree}/>
+                        <div className = "buy-card" onClick = {this.buyCard} >去支付 ￥{this.state.price}</div>
+                        <DialogModal show = {this.state.show} el = 'city-tip-dialog' title = '温馨提示' closeOnOuterClick = {false}>
+                            <div className="tipmsg-wrap">
+                                <p>您当前开通享有权益的城市是<span>{this.state.selectCityName}</span>，</p>
+                                <p>如需更换请到首页更改定位</p>
+                            </div>
+                            <footer>
+                                <a href="javascript:;" onClick = {this.toChangeCity}>更改城市</a>
+                                <a href="javascript:;" onClick = {this.sureToPay}>确认</a>
+                            </footer>
+                        </DialogModal>
+                    </div>
+                    }
                 </div>
-                }
-            </div>
+            </ReactCSSTransitionGroup>
         )
     }
 }

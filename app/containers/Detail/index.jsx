@@ -3,6 +3,7 @@
  */
 import React, { PropTypes, Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
@@ -74,22 +75,31 @@ export default class Detail extends Component {
                 Utils.showToast(detail.errmsg)
             }
         }
+        // navHeader点击跳转的时候，会事先 window._animateLinkTime = Date.now() ，其他地方跳转之前则不会
+        // 因此这里可通过时间来判断是否是 navHeader 跳转过来的。如果是其他地方跳转过来的，则不用加动画效果了
+        let animateLinkTime = window._animateLinkTime || 0
+        let animate = (Date.now() - animateLinkTime) < 1000
+
         return (
-            <div>
-                {
-                    detail.city_name ? 
-                    <div className = "detail-page">
-                        <Access accessList = {detail.accessList} type = "discount-detail" />
-                        <TitleBar type = "city-name" title = "开通城市" value = {detail.city_name || ''}/>
-                        <TitleBar type = "valid_date" title = "有效时间" value = {detail.valid_date}/>
-                        <TitleBar type = "access-title" title = "权益说明" />
-                        <AccessInfo accessList = {detail.privilege_info}/>
-                        <TitleBar type = "discount-title" title = "优惠明细" />
-                        <DiscountList privilegeNo = {this.privilegeNo} />
-                    </div>
-                    : ''
-                }
-            </div>
+            <ReactCSSTransitionGroup  transitionName="animate-slide-left" transitionAppear={animate} transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                <div>
+                    {
+                        detail.city_name ? 
+                        <div className = "detail-page">
+                            <Access accessList = {detail.accessList} type = "discount-detail" />
+                            <TitleBar type = "city-name" title = "开通城市" value = {detail.city_name || ''}/>
+                            <TitleBar type = "valid_date" title = "有效时间" value = {detail.valid_date}/>
+                            <TitleBar type = "access-title" title = "权益说明" />
+                            <AccessInfo accessList = {detail.privilege_info}/>
+                            <TitleBar type = "discount-title" title = "优惠明细" />
+                            <DiscountList privilegeNo = {this.privilegeNo} />
+                        </div>
+                        : ''
+                    }
+                </div>
+            </ReactCSSTransitionGroup>
+
+
         )
     }
 }

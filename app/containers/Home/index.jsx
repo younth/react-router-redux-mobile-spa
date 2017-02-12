@@ -68,7 +68,7 @@ export default class Home extends Component {
         // 点击返回直接关闭
         Utils.setBack({type: 1})
         Utils.setTitleBar({
-            titleText: '小度商城'
+            titleText: 'fis3+react+redux单页面架构'
         })
     }
 
@@ -80,12 +80,12 @@ export default class Home extends Component {
     componentDidMount() {
         let {card, cardActions, globalActions} = this.props
         // 获取定位等基础信息
-        window.WMAppReady(function() {
-            let lng = window.WMApp.location.getLng() || '1.295948313E7',
-                lat = window.WMApp.location.getLat() || '4849489.98',
-                cityId = window.WMApp.location.getCityId() || '131',
-                app_ver = window.WMApp.device.getAppVersion() || '4.1.0',
-                getFrom = window.WMApp.device.getFrom() || 'na-iphone'
+        WMAppReady(function() {
+            let lng = WMApp.location.getLng() || '1.295948313E7',
+                lat = WMApp.location.getLat() || '4849489.98',
+                cityId = WMApp.location.getCityId() || '131',
+                app_ver = WMApp.device.getAppVersion() || '4.1.0',
+                getFrom = WMApp.device.getFrom() || 'na-iphone'
             globalActions.addressUpdate({
                 city_id: cityId,
                 lng: lng,
@@ -123,6 +123,9 @@ export default class Home extends Component {
 
     // 统一管理点击按钮
     clickBtn(type, privilege_no, toastText) {
+        // 这里跳转链接，跳转到的页面需要有动画效果，而且只有这里跳过过去的才允许有动画效果，其他地方跳转的不允许
+        // 因此，每次跳转之前，都先记录一下当前时间，然后再在跳转到的页面判断时间是否是刚才发生的，再判断是否要动画效果
+        window._animateLinkTime = Date.now()
         let {card, cardActions} = this.props
         // 添加按钮点击次数统计
         Utils.addStat(type, 'click')
@@ -145,7 +148,7 @@ export default class Home extends Component {
                     cancelBtnText: '取消',
                     confirmBtnText: '确认'
                 }
-                window.WMApp.nui.dialog(params, function(data) {
+                WMApp.nui.dialog(params, function(data) {
                     if (data.status) {
                         // 确认操作
                         get('/wmall/privilege/del?display=json', {
@@ -174,8 +177,8 @@ export default class Home extends Component {
                 Utils.showToast(toastText)
             }
         } else {
-            window.WMAppReady(() => {
-                window.WMApp.account.login(data => {
+            WMAppReady(() => {
+                WMApp.account.login(data => {
                     if (data.status) {   // 1表示成功，0表示登录取消，登录失败NA会处理
                         Utils.loading()
                         cardActions.getHomeCard()

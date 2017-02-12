@@ -1,6 +1,6 @@
 /**
  * promise中间件, 让action返回promise,把action与reducer联系起来
- * author: wangyang@iwaimai.baidu.com
+ * author: younthxg@gmail.com
  */
 require('es6-promise').polyfill()
 

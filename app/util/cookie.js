@@ -1,6 +1,6 @@
 /**
  * 本地储存封装
- * author: wangyang@iwaimai.baidu.com
+ * author: younthxg@gmail.com
  */
 
 // 操作 cookie 

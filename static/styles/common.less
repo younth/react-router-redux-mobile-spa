@@ -52,3 +52,15 @@ input {
 .item-transition-enter.item-transition-enter-active {
     opacity: 1;
 }
+// router转场动画效果
+.animate-slide-left-appear {
+  transform: translate(100%, 0);
+}
+.animate-slide-right-appear {
+  transform: translate(-100%, 0);
+}
+.animate-slide-left-appear.animate-slide-left-appear-active,
+.animate-slide-right-appear.animate-slide-right-appear-active {
+  transform: translate(0, 0);
+  transition: transform .2s ease-in;
+}

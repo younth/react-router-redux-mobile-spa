@@ -1,80 +1,6 @@
-# 小度商城前端技术方案
-
-## 项目背景
-    
-    针对会员二期的数据，产品上做出新的会员规划及调整，以商城的形式展现，本次主要做小度商城1.0版本。
+# fis3+react+redux单页面应用
 
 
-## h5 部分
-
-### 主要目标
-
-- 组件化，良好的拓展性
-- 稳定清晰的数据状态管理
-- 前端路由管理
-- 高效便捷的开发、部署及联调
-- 较高的性能
-- https
-
-### 技术选型
-
-结合之前会员二期，本次继续沿用react技术栈，并做较大的技术优化升级，提高开发效率、可维护性与页面性能。
-
-#### 1. 前端框架: react 技术栈
-
-- React
-- Reflex -> Redux
-- React-router
-- 基于React的同构
-
-
-#### 2. 构建工具：fekey
-
-##### 为什么不是 webpack ?
-
-- 依赖的插件多，不清楚构建细节，与目前已有插件融合较差
-- 产出包可控性较差，缓存机制不好
-- 联调复杂
-- 上手成本较高
-
-##### 以fekey作为构建的优势
-
-- 目前fekey已支持各项react技术栈构建能力
-- 构建流程可控，产出文件可定制，根据内容的md5机制得以实施
-- fekey release 实现联调
-- fekey核心仍然是fis，统一构建工具，减少人力成本
-
-
-```
-// 智能打包
-fis.match('::packager', {
-    packager: fis.plugin('deps-pack', {
-         useSourceMap : false,
-        // ---------按需打包js文件---------
-        'static/vip/third.js': [
-            '/client/scripts/index.js:deps',
-            '!/client/scripts/**'
-        ],
-        'static/vip/app.js': [
-            '/client/scripts/index.js',
-            '/client/scripts/index.js:deps'
-        ]
-    })
-});
-```
-
-#### 3. 数据流：redux
-
-> 单向数据流，统一状态树
-
-数据在系统中是如何传递的。这里的数据分为两种
-
-- 第一种可以称之为`系统数据`，和业务无关的，一般任何系统中都会有。例如会员基础信息等，这个的特点就是符合单例模式，全局共用一套。
-- 第二种可以称之为`业务数据`，每个页面都可能不一样。比如卡片详情，购买卡片请求数据。
-
-针对这两种不同的数据，当然要分开处理。针对第一种“系统数据”，系统一初始化就立即获取，然后交给Redux做管理，这也符合Redux的特点。而针对第二种“业务数据”，那就什么时候用，就什么时候获取。
-
-![image](http://wangfupeng.coding.me/imgs/138012-20160810170424496-2136848140.png)
 
 #### 4. 数据请求
 
@@ -185,62 +111,10 @@ dumall
 
 ```
 
-### 前后端分离 + 首屏渲染（NodeUI）
-
-> 本次的开发模式为：后端提供纯接口服务，路由及渲染nodeui来做。
 
 #### 前后端分离
 
 - 独立开发，提高效率
 - 基于接口数据的mock
-
-
-#### nodeui实现首屏渲染
-
-将首屏需要的数据，直接传递给redex,解决首屏闪白问题。
-
-
-![render](https://cloud.githubusercontent.com/assets/10385585/15856812/996ecf24-2cea-11e6-87e2-401cf4cccbc4.png)
-
-### 业务中的组件化具体拆分
-
->以小度商城首页为例，划分功能及业务组件。
-
-
-
-### 上线
-
-
-```
-// 上线脚本
-
-#project目录
-    PROJECT_ROOT=$PWD
-    modulename=`basename $PWD`
-    outputdir=$PROJECT_ROOT/output
-    moduledir=$PROJECT_ROOT/output/$modulename
-    rm -rf $outputdir
-    fekey release production -cd $moduledir --no-color
-    cd $moduledir
-    rm -rf static/vip/node_modules static/vip/styles static/vip/scripts static/vip/static
-    tar -czvf $outputdir/vip.tar.gz ./
-    cd $outputdir
-    rm -rf $modulename
-    
-```
-
-### 开发
-- 安装依赖包 npm i --registry=https://registry.npm.taobao.org
-- 启动fis3 server服务 fis3 server start
-- 查看项目信息 fis3 server info
-- 打开fis3 server地址 fis3 server open  
-- 将代码推到fis3 server www文件中 fis3 release -cwL 修改代码可以自动刷新浏览器
-- 项目链接 http://172.17.101.144:8080/
-- 代码规范检查 npm run lint
-
-
-### 联调部署
-
-针对QA/RD机器，静态资源发布到 `/home/map/odp_cater/webroot` ， index.html发布到`/home/map/odp_cater/webroot/static/dumall`。（纯前端项目，为了确保静态资源与模板在同一目录）
 
 
