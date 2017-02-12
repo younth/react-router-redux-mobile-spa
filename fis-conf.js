@@ -107,7 +107,7 @@ fis.media('publish')
         optimizer: fis.plugin('clean-css')
     })
     .match('*.{js,css,jsx,es6,less}', {
-        domain: ['//static.waimai.baidu.com']
+        domain: ['//cdn.baidu.com']
     })
     // 定义modile的id，即打包之后的代码中的 `defind('node_module/react/lib/index.js')`这种相对路径改为 `define('xxxxxx')` 这种ID的形式
     // 这个配置是上线之后又作为优化配置上去的，会是打包的代码更小一些
