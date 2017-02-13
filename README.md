@@ -1,16 +1,16 @@
-## fis3+react+redux单页面应用实践
+## fis3+react+react-router+redux单页面应用实践
 
-基于 `fis3+react+redux+react-router` 的单页面应用，目前应用在多个移动端业务线。
+基于 [fis3+react+redux+react-router](https://github.com/younth/fis3-react-redux-spa)的单页面应用，目前应用在多个移动端业务线。
 
 注意：本项目为剥离业务代码后的架子，只保留了基础UI样式及交互，demo中的数据全部是mock出来的。
 
 单页面效果：
 
-![redux](http://younth.coding.me/static/react/fis3+react+redux.gif)
+![react-spa](static/github/fis3+react+redux.gif)
 
 ### 安装启动
 
-- 安装依赖包 `npm i --registry=https://registry.npm.taobao.org`
+- 安装依赖包 `npm i --registry=https://registry.npm.taobao.org`，指定淘宝源可加速按照依赖
 - 启动fis3 server服务 fis3 server start
 - 将代码推到fis3 server www文件中 fis3 release -cwL 修改代码可以自动刷新浏览器
 
