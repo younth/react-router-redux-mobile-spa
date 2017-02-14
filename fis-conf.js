@@ -1,9 +1,8 @@
 /**
  * fis配置文件
- * 入口文件，按需加载，智能打包
  */
 
-// 按需编译，根据入口index.html寻找依赖编译
+// 按需编译，根据入口index.html寻找依赖编译，按需加载，智能打包
 fis.set('project.files', ['/index.html', '/mock/**']);
 
 // mock数据，必须放在mock下面才生效，并且不编译
