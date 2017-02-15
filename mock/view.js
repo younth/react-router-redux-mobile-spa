@@ -25,8 +25,6 @@ module.exports = function(req, res, next) {
                 price: 30,
                 newuser_price: 20
             }]
-        },
-        _bdstoken: "e363037bbcb605758073b209fb81446e",
-        _token_bindmobile: ""
+        }
     })
 };

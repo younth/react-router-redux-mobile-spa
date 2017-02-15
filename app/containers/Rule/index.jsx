@@ -25,7 +25,6 @@ class Rule extends Component {
 
     componentDidMount() {
         // 添加活动规则页面统计
-        Utils.addStat('rule')
     }
 
     render() {

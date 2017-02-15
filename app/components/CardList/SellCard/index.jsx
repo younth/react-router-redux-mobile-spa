@@ -27,7 +27,6 @@ class SellCard extends Component {
             rulefold: !this.state.rulefold
         })
         // 添加使用规则点击次数统计
-        Utils.addStat('cardrule', 'click')
     }
     
     componentDidUpdate() {
@@ -38,22 +37,17 @@ class SellCard extends Component {
         if (card.stock > 0) {
             let btn_state = Number(card.btn_state)
             if (btn_state === 1) {
-                // 可开通
                 btnstatus = 'buy'
             } else if (btn_state === 2) {
-                // 续费
                 btnstatus = 'renew'
             } else if (btn_state === 3) {
-                // 开通置灰
                 btnstatus = 'conflict'
                 conflictreason = card.conflict_msg
             } else if (btn_state === 4) {
-                // 续费置灰
                 btnstatus = 'notrenew'
                 conflictreason = card.conflict_msg
             }
         } else {
-            // 无库存
             btnstatus = 'nostock'
             conflictreason = '已经抢光啦，下次早点来哟~'
         }
@@ -73,7 +67,7 @@ class SellCard extends Component {
                                 (card.stock <= 300 && card.stock > 0) && <span className="stock">(库存{card.stock})</span>
                             }
                         </div>
-                        <div className="desc">仅支持百度专送</div>
+                        <div className="desc">仅支持专送</div>
                     </div>
                     <div className="other-info">
                         {

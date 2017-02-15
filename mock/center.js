@@ -1,5 +1,4 @@
 module.exports = function(req, res, next) {
-    // btn_state: 0 不展示， 1 开通 2 续费 3 开通置灰 4 续费置灰
     res.json({
         error_no: 0,
         error_msg: "",
@@ -285,8 +284,6 @@ module.exports = function(req, res, next) {
                     expired_in: 222
                 }]
             }
-        },
-        _bdstoken: "fa8a1722efee82fd7a34907d94a4f8e4",
-        _token_bindmobile: ""
+        }
     })
 };

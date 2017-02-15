@@ -47,6 +47,31 @@ module.exports = function(req, res, next) {
                 "create_time": "2016.10.29"
             }, {
                 "shop_logo": "http://img.waimai.baidu.com/pb/3e61963d3fb0ce02d02a76d7262928aa32",
+                "shop_name": "正宗云南过桥米线酸辣粉面 1",
+                "save_money": 5,
+                "create_time": "2016.10.29"
+            }, {
+                "shop_logo": "http://img.waimai.baidu.com/pb/3e61963d3fb0ce02d02a76d7262928aa32",
+                "shop_name": "正宗云南过桥米线酸辣粉面 1",
+                "save_money": 5,
+                "create_time": "2016.10.29"
+            }, {
+                "shop_logo": "http://img.waimai.baidu.com/pb/3e61963d3fb0ce02d02a76d7262928aa32",
+                "shop_name": "正宗云南过桥米线酸辣粉面 1",
+                "save_money": 5,
+                "create_time": "2016.10.29"
+            }, {
+                "shop_logo": "http://img.waimai.baidu.com/pb/3e61963d3fb0ce02d02a76d7262928aa32",
+                "shop_name": "正宗云南过桥米线酸辣粉面 1",
+                "save_money": 5,
+                "create_time": "2016.10.29"
+            }, {
+                "shop_logo": "http://img.waimai.baidu.com/pb/3e61963d3fb0ce02d02a76d7262928aa32",
+                "shop_name": "正宗云南过桥米线酸辣粉面 1",
+                "save_money": 5,
+                "create_time": "2016.10.29"
+            }, {
+                "shop_logo": "http://img.waimai.baidu.com/pb/3e61963d3fb0ce02d02a76d7262928aa32",
                 "shop_name": "---------------------------",
                 "save_money": 5,
                 "create_time": "2016.10.29"
@@ -62,8 +87,6 @@ module.exports = function(req, res, next) {
                 "month_limit": 40
             },
             "city_name": "北京市"
-        },
-        "_bdstoken": "fa8a1722efee82fd7a34907d94a4f8e4",
-        "_token_bindmobile": ""
+        }
     })
 };

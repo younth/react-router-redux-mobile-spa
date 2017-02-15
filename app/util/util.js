@@ -3,15 +3,7 @@
  */
 
 var Utils = {
-
-    addStat(src, type = 'show') {
-        window.addStat('SAK', {
-            da_trd: 'waimai',
-            da_src: `DuMall.${src}.${type}`,
-            da_act: type
-        });
-    },
-
+    
     // 获取url中所有的参数
     getParams(url) {
         var vars = {},

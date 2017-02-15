@@ -97,7 +97,6 @@ export default class Home extends Component {
             localStorage.setItem('city_id', cityId)
         })
         // 添加首页页面展现统计
-        Utils.addStat('center')
     }
 
     componentDidUpdate() {
@@ -128,7 +127,6 @@ export default class Home extends Component {
         window._animateLinkTime = Date.now()
         let {card, cardActions} = this.props
         // 添加按钮点击次数统计
-        Utils.addStat(type, 'click')
         if (card.isLogin) {
             if (type === 'detail') {
                 // 详情页提前展示loading

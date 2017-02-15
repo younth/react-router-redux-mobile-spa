@@ -37,33 +37,22 @@ export default class SwipeCard extends Component {
     constructor(props, context) {
         super(props, context)
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
-        // this.state = {
-        //     curCard: 0
-        // }
     }
 
     // 区分卡类型，以选择相应的卡组件进行渲染
     distinguishCard(cardList = {}) {
         let newCardList = []
-        // btn_state: 0 不展示， 1 开通 2 续费 3 开通置灰 4 续费置灰
         if (cardList.valid) {
-            // 区分有效卡中的 正常有效卡、可续费卡 和 未生效卡
             cardList.valid.length && cardList.valid.map((item, index) => {
                 if (item.btn_state === 2) {
-                    // 展示续费按钮：快到期可续费
                     item.cardType = 'renewCard'
                 } else if (item.btn_state === 0) {
-                    // 不展示按钮
                     if (item.expired_in < 3) {
-                        // expired_in = 0|1|2时，才提示还有几天到期
-                        // 快到期且不可续费
                         item.notRenew = true // 标识该卡不可续费
                         item.cardType = 'renewCard'
                     } else if (item.current_in_service === true) {
-                        // 当前使用中卡（只展示截止时间）
                         item.cardType = 'validCard'
                     } else if (item.current_in_service === false) {
-                        // 新卡当前未生效（展示起止时间）
                         item.cardType = 'unenforcedCard'
                     }
                 }
@@ -71,16 +60,12 @@ export default class SwipeCard extends Component {
             newCardList = cardList.valid
         }
         if (cardList.expired) {
-            // 区分过期卡中的 过期可续费卡（在售）和 无用可删除卡（下架）
             cardList.expired.length && cardList.expired.map((item, index) => {
                 if (item.off_sale) {
-                    // 过期下架可删除卡
                     item.cardType = 'uselessCard'
                 } else if (item.btn_state === 2) {
-                    // 展示可续按钮：过期在售可续费卡
                     item.cardType = 'expiredCard'
                 } else if (item.btn_state === 0) {
-                    // 不展示按钮：过期但不可续费卡
                     item.notRenew = true // 标识该卡不可续费
                     item.cardType = 'expiredCard'
                 }
@@ -125,9 +110,6 @@ export default class SwipeCard extends Component {
                     newPoint: ev.newPoint,
                     cancelled: ev.cancelled
                 }
-                // this.setState({
-                //     curCard: ev.newPoint
-                // })
             }
 
         }

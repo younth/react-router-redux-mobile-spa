@@ -33,7 +33,7 @@ class RenewCard extends Component {
                             <div className = "discount">{card.discount_rate}</div>
                             <div className = "discount-rule">
                                 <div className = "name">折 {card.privilege_name}</div>
-                                <div className = "desc">仅支持百度专送</div>
+                                <div className = "desc">仅支持专送</div>
                             </div>
                         </div>
                         <div className = "msg-tip">
