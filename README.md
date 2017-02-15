@@ -10,6 +10,8 @@
 
 ### 安装启动
 
+本项目构建基于`fis3`，不熟悉`fis3`的可以先去学习下。[传送门](http://fis.baidu.com/)
+
 - 安装依赖包 `npm i --registry=https://registry.npm.taobao.org`，指定淘宝源可加速按照依赖
 - 启动fis3 server服务 fis3 server start
 - 将代码推到fis3 server www文件中 fis3 release -cwL 修改代码可以自动刷新浏览器
@@ -100,6 +102,8 @@ getData().then(res => {
 
 #### redux-thunk 中间件形式
 
+通过`configureStore.js`去关联action与store
+
 ```
 // 调用
 actions.getCardList()
@@ -113,16 +117,28 @@ export const getCardList = () =>{
 }
 
 // cardList reducer
+import * as actionTypes from '../constants/types'
 
-import { TAG_LIST_SUCCESS, TAG_LIST_FAILURE } from '../actions/types'
-import { createReducer } from 'redux-immutablejs'
-import {List} from 'immutable'
+export default function card(state = initialState, action) {
+    switch (action.type) {
+        case actionTypes.GET_HOMECARD_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case actionTypes.GET_HOMECARD_SUCCESS:
+            let result = action.json.result
+            return {
+                ...state,
+            }
+        case actionTypes.GET_HOMECARD_FAILURE:
+            // error_no 不等于0
+            return {
+                ...state,
+            }
+        default:
+            return state
+    }
+}
 
-// 这个更新了store
-export default createReducer(List(), {
-  [TAG_LIST_SUCCESS]: (state, {json}) => state.merge(json.data),
-  [TAG_LIST_FAILURE]: (state) => state
-})
-
-// 更新store之后，会重新render
 ```
