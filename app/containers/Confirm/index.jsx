@@ -187,7 +187,7 @@ export default class Confirm extends Component {
             return false
         }
         if (!this.state.isAgree) {
-            Utils.showToast('请确认《百度外卖购卡协议》')
+            Utils.showToast('请确认《外卖购卡协议》')
             return false
         }
         // 2. 判断购卡城市与当前城市是否一致
