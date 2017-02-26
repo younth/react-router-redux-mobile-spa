@@ -1,18 +1,28 @@
 {
-  "name": "fis3+react+redux单页面应用实践",
-  "version": "1.0.0",
-  "description": "",
+  "name": "fis3-react-redux-spa",
+  "version": "1.0.1",
+  "description": "基于 fis3+react+redux+react-router移动端单页面应用",
   "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
   "scripts": {
-    "start": "fis3 release -cw",
-    "clean": "fis3 server clean",
-    "watch": "fis3 release -cwL",
-    "lint": "eslint --ext \".js,.jsx\" app",
-    "publish": "rm -rf ./release && fis3 release publish -cd ./release && rm -rf ./release/app ./release/node_modules ./release/resource",
-    "build": "rm -rf ./release && fis3 release publish -cd ./release"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/younth/fis3-react-redux-spa.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "fis3"
+  ],
+  "author": "younthxg@gmail.com",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/younth/fis3-react-redux-spa/issues"
+  },
+  "homepage": "https://github.com/younth/fis3-react-redux-spa#readme",
   "devDependencies": {
     "babel-eslint": "^7.0.0",
     "eslint": "^2.10.2",
@@ -35,12 +45,12 @@
     "classnames": "^2.2.5",
     "es6-promise": "^3.1.2",
     "fetch-jsonp": "^1.0.0",
-    "react": "^15.2.1",
-    "react-addons-css-transition-group": "^15.2.1",
-    "react-addons-perf": "^15.2.1",
-    "react-addons-pure-render-mixin": "^15.2.1",
-    "react-addons-update": "^15.2.1",
-    "react-dom": "^15.0.1",
+    "react": "^15.3.1",
+    "react-addons-css-transition-group": "^15.3.1",
+    "react-addons-perf": "^15.3.1",
+    "react-addons-pure-render-mixin": "^15.3.1",
+    "react-addons-update": "^15.3.1",
+    "react-dom": "^15.3.1",
     "react-redux": "^4.4.4",
     "react-router": "^2.2.2",
     "react-swipes": "^1.0.4",
