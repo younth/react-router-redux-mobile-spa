@@ -9,8 +9,6 @@ import SwipeCard from '../../../components/SwipeCard'
 import TitleBar from '../../../components/TitleBar'
 import ImgTip from '../../../components/ImgTip'
 
-import './index.less'
-
 // 组装 Mime 组件
 class Mime extends Component {
     constructor(props, context) {

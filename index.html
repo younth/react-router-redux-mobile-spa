@@ -8,18 +8,30 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>fis3+react+redux单页面应用实践</title>
-    <script src="./static/lib/mod.js"></script>
-    <script src="./static/lib/global.js"></script>
+    <script src="http://web2.waimai.bdimg.com/static/wmflex.js"></script>
+    <script>
+        ;(function(root){
+            // wmapp ready
+            root.WMAppReady = function(readyCallback) {
+                if (readyCallback && typeof readyCallback == 'function') {
+                    if (window.WMApp && typeof window.WMApp == 'object') {
+                        readyCallback();
+                    } else {
+                        document.addEventListener('WMAppReady', function() {
+                            readyCallback();
+                        }, false)
+                    }
+                }
+            };
+           WMAppReady(function() {
+               WMApp.nui.loading({show: 1 });
+           })
+        })(window)
+    </script>
 </head>
 
 <body>
     <div id="root"></div>
-    <script src="./static/lib/wmflex.js"></script>
-    <script src="./static/lib/fastclick-1.0.6.js"></script>
-    <script src="./static/lib/fastclick-conf.js"></script>
-    <script>
-    require('/app/index');
-    </script>
 </body>
 
 </html>

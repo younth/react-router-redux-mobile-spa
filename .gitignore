@@ -1,6 +1,9 @@
+.idea/
 node_modules/*
 release/*
 issue.txt
 npm-debug.log
+npm-debug*
 **/.DS_Store
+*.log
 

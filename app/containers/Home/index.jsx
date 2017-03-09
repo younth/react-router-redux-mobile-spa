@@ -11,7 +11,6 @@ import { get, post } from '../../fetch/request'
 import Utils from '../../util/util.js'
 import localStorage from '../../util/localStorage.js'
 
-import './title.less'
 import './index.less'
 
 import Mime from './Mime'

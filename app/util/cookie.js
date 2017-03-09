@@ -5,8 +5,8 @@
 
 // 操作 cookie 
 
-import cookie from 'react-cookie'
-import { CookieDomain } from '../config'
+// import cookie from 'react-cookie'
+// import { CookieDomain } from '../config'
 
 let cookieConfig = {}
 if(CookieDomain !== ''){
@@ -15,14 +15,14 @@ if(CookieDomain !== ''){
 
 export default {
     saveCookie(name, value) {
-        cookie.save(name, value, cookieConfig)
+        // cookie.save(name, value, cookieConfig)
     },
 
     getCookie(name) {
-        return cookie.load(name)
+        // return cookie.load(name)
     },
 
     removeCookie(name) {
-        cookie.remove(name, cookieConfig)
+        // cookie.remove(name, cookieConfig)
     }
 }
