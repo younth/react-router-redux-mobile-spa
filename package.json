@@ -1,7 +1,7 @@
 {
-  "name": "step-01",
-  "version": "1.0.0",
-  "description": "react-base",
+  "name": "react-redux-mobile-spa",
+  "version": "1.0.1",
+  "description": "基于 react+redux+react-router 移动端单页面应用",
   "main": "index.js",
   "scripts": {
     "start": "babel-node server.js",
