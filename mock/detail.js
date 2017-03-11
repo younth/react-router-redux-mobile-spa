@@ -1,5 +1,7 @@
+"use strict";
+
 module.exports = function(req, res, next) {
-    res.json({
+    const data = {
         "error_no": 0,
         "error_msg": "",
         "result": {
@@ -88,5 +90,9 @@ module.exports = function(req, res, next) {
             },
             "city_name": "北京市"
         }
-    })
+    }
+
+    // 这里不是express的中间件，res为原生
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify(data))
 };

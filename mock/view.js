@@ -1,5 +1,7 @@
+"use strict";
+
 module.exports = function(req, res, next) {
-    res.json({
+    const data = {
         error_no: 0,
         error_msg: "",
         result: {
@@ -26,5 +28,7 @@ module.exports = function(req, res, next) {
                 newuser_price: 20
             }]
         }
-    })
+    }
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify(data))
 };

@@ -11,6 +11,10 @@ npm i --registry=https://registry.npm.taobao.org
 - 支持热加载
 - flexible移动端布局
 
+### 接入`browser-sync` 
+
+极大方便移动端调试，同时支持`mock`能力！
+
 ### todo:
 
 - less升级为scss，更优雅的使用css

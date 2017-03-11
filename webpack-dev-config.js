@@ -12,22 +12,21 @@ module.exports = {
   // devtool 指明了sourcemap的生成方式，它有七个选项，具体请参考 https://segmentfault.com/a/1190000004280859
   // sourcemap 的作用就是为调试代码提供便利
   // cheap-module-eval-source-map 绝大多数情况下都会是最好的选择，这也是下版本 webpack 的默认选项。
-
+  noInfo: true,
   entry: [
+    // './src/webpack-public-path',
     'react-hot-loader/patch',
     'webpack-hot-middleware/client?reload=true',
     // 这里reload=true的意思是，如果碰到不能hot reload的情况，就整页刷新。
     path.resolve(__dirname, 'app/index.jsx') // 打包的入口 可以是多页 多页最后就是 page1.bundle.js 和 page2.bundle.js
   ],
   // 页面入口文件配置
-
+  target: 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   output: { // output项告诉webpack怎样存储输出结果以及存储到哪里
     filename: 'bundle.js',
-
-    path: path.join(__dirname, 'dist'),
+    path: `${__dirname}/dist`,
     // 输出目录的配置，模板、样式、脚本、图片等资源的路径配置都相对于它
     // “path”仅仅告诉Webpack结果存储在哪里
-
     publicPath: ''
     //模板、样式、脚本、图片等资源对应的server上的路径
     // “publicPath”项则被许多Webpack的插件用于在生产模式下更新内嵌到css、html文件里的url值。
@@ -65,13 +64,23 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'), // Tells React to build in either dev or prod modes. https://facebook.github.io/react/downloads.html (See bottom)
+      __DEV__: true
+    }),
+
     new webpack.HotModuleReplacementPlugin(), // 启用热替换,仅开发模式需要
 
     new webpack.NoErrorsPlugin(),// 允许错误不打断程序，,仅开发模式需要
     
     new HtmlWebpackPlugin({
         template: path.resolve(__dirname, 'index.html'),
-        inject: true
+        inject: 'body',
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        hash: true,// 这样每次客户端页面就会根据这个hash来判断页面是否有必要刷新
     })
   ]
 };
