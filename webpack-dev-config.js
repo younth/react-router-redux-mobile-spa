@@ -49,10 +49,12 @@ module.exports = {
       },
       {
         test: /\.less$/,
+        // loader: 'style!css!px2rem?remUnit=75&remPrecision=8!autoprefixer?{browsers:["android 4", "ios 6", "last 1 Chrome versions", "last 2 Safari versions"]}!less'
         loaders: [
           // http://stackoverflow.com/questions/29883534/webpack-node-modules-css-index-js-didnt-return-a-function
           'style-loader',
           'css-loader',// inline
+          'px2rem-loader?remUnit=75&remPrecision=8',
           'less-loader'
         ]
       },
