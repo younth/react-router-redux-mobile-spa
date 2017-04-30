@@ -41,38 +41,12 @@ var Utils = {
 
     // 设置头部信息及右上角按钮事件
     setTitleBar(cfg = {}) {
-        window.WMAppReady(function() {
-            window.WMApp.page.setTitleBar({
-                titleText: cfg.titleText, // 标题
-                actionText: cfg.actionText || ' ', // 右边操作文案，
-                actionClickAble: cfg.actionClickAble || 0 // 是否可点击，0不可点，1可点，默认0
-            })
-            // 设置右侧按钮时，设置分享文案或者跳转链接
-            cfg.actionClickAble && window.WMApp.entry.setPageAction('onActionClick', function() {
-                cfg.shareParams ? window.WMApp.share.share(cfg.shareParams) : (location.href = cfg.url || 'javascript:;')
-            })
-        })
+        document.title = cfg.titleText
     },
 
     // 设置返回按钮操作
     setBack(cfg = {}) {
-        window.WMAppReady(function() {
-            cfg.type = cfg.type || 3
-            window.WMApp.entry.setPageAction('onBack', function() {
-                if (cfg.type === 1) {
-                    // 关闭
-                    return 1
-                } else if (cfg.type === 3) {
-                    // 返回
-                    history.back()
-                    return 0
-                } else if (cfg.type === 2) {
-                    // 跳转url
-                    location.href = cfg.url
-                    return 0
-                }
-            })
-        })
+        return
     },
 
     openPage(linkUrl, pageData = {}, pageName = 'webview') {
@@ -90,11 +64,7 @@ var Utils = {
 
     // 显示loading 1(显示) 0(隐藏)
     loading(type = 1) {
-        window.WMAppReady(function() {
-            window.WMApp.nui.loading({
-                show: type
-            })
-        })
+        return
     },
 
     // 封装toast方法

@@ -27,7 +27,8 @@ module.exports = {
     path: `${__dirname}/dist`,
     // 输出目录的配置，模板、样式、脚本、图片等资源的路径配置都相对于它
     // “path”仅仅告诉Webpack结果存储在哪里
-    publicPath: ''
+    publicPath: '',
+    chunkFilename: '[name].[chunkhash:5].js',
     //模板、样式、脚本、图片等资源对应的server上的路径
     // “publicPath”项则被许多Webpack的插件用于在生产模式下更新内嵌到css、html文件里的url值。
   },

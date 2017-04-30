@@ -14,8 +14,13 @@ import Home from './containers/Home'
 import Confirm from './containers/Confirm'
 // Detail 使用详情
 import Detail from './containers/Detail'
-// Rule 使用详情
-import Rule from './containers/Rule'
+
+// 规则页面按需加载
+const Rule = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./containers/Rule').default)
+    },'rule')
+}
 
 // 404
 import NotFound from './containers/404'
@@ -39,10 +44,9 @@ export default class RouteMap extends Component {
                 <Route path="/" component={App}>
                     <IndexRoute component={Home}/>
                     <Route path="home" component={Home} />
-                    <Route path="confirm/:id" component={Confirm} onEnter={redirectToLogin} />
-                    <Route path="detail/:id" component={Detail} onEnter={redirectToLogin} />
-                    <Route path="rule" component={Rule} onEnter={redirectToLogin} />
-
+                    <Route path="confirm/:id" component={Confirm} onEnter={redirectToLogin} />// 确认页面
+                    <Route path="detail/:id" component={Detail} onEnter={redirectToLogin} />// 详情页面
+                    <Route path="rule" getComponent={Rule} onEnter={redirectToLogin} />// 规则页面 getComponent 按需
                     {/* 404 */}
                     <Route path="*" component={NotFound}/>
                     <Route path="/404" component={NotFound}/>

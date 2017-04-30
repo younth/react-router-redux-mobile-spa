@@ -101,7 +101,7 @@ export default class Confirm extends Component {
                 })
                 // 设置title
                 Utils.setTitleBar({
-                    titleText: `开通${confirm.data.privilege_name}`
+                    titleText: `开通卡片`
                 })
             }
         }
@@ -150,14 +150,7 @@ export default class Confirm extends Component {
                     payType: result.pay_type,// 1表示钱包，2表示聚合收银台
                     payParams: result.pay_params   // 聚合收银台服务端下发的是json串，不需要encode
                 }
-                WMApp.network.getNetwork((data) => {
-                    if (data.status && data.result.network === 'unreachable') {
-                        Utils.showToast({text: '网络不可用'});
-                    } else {
-                        // 6. 进行聚合收银台支付
-                        this.doPay(params)
-                    }
-                })
+                this.doPay(params)
             } else {
                 Utils.showToast(errmsg)
             }
@@ -165,17 +158,12 @@ export default class Confirm extends Component {
     }
 
     doPay(params) {
-        WMApp.pay.doPay(params, data => {
-            if (data.status) {
-                let {globalActions} = this.props
-                globalActions.savePayResult({
-                    payResult: 'success'
-                })
-                hashHistory.push('/home')
-            } else {
-                console.log('支付失败')
-            }
+
+        let {globalActions} = this.props
+        globalActions.savePayResult({
+            payResult: 'success'
         })
+        hashHistory.push('/home')
     }
 
     validInfo() {

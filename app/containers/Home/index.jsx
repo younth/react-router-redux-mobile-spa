@@ -78,24 +78,15 @@ export default class Home extends Component {
 
     componentDidMount() {
         let {card, cardActions, globalActions} = this.props
-        // 获取定位等基础信息
-        WMAppReady(function() {
-            let lng = WMApp.location.getLng() || '1.295948313E7',
-                lat = WMApp.location.getLat() || '4849489.98',
-                cityId = WMApp.location.getCityId() || '131',
-                app_ver = WMApp.device.getAppVersion() || '4.1.0',
-                getFrom = WMApp.device.getFrom() || 'na-iphone'
-            globalActions.addressUpdate({
-                city_id: cityId,
-                lng: lng,
-                lat: lat,
-                app_ver: app_ver,
-                from: getFrom
-            })
-            cardActions.getHomeCard()
-            localStorage.setItem('city_id', cityId)
+        globalActions.addressUpdate({
+            city_id: '131',
+            lng: '1.295948313E7',
+            lat: '4849489.98',
+            app_ver: '4.1.0',
+            from: 'na-iphone'
         })
-        // 添加首页页面展现统计
+        cardActions.getHomeCard()
+        localStorage.setItem('city_id', '131')
     }
 
     componentDidUpdate() {
@@ -125,7 +116,6 @@ export default class Home extends Component {
         // 因此，每次跳转之前，都先记录一下当前时间，然后再在跳转到的页面判断时间是否是刚才发生的，再判断是否要动画效果
         window._animateLinkTime = Date.now()
         let {card, cardActions} = this.props
-        // 添加按钮点击次数统计
         if (card.isLogin) {
             if (type === 'detail') {
                 // 详情页提前展示loading
@@ -174,16 +164,7 @@ export default class Home extends Component {
                 Utils.showToast(toastText)
             }
         } else {
-            WMAppReady(() => {
-                WMApp.account.login(data => {
-                    if (data.status) {   // 1表示成功，0表示登录取消，登录失败NA会处理
-                        Utils.loading()
-                        cardActions.getHomeCard()
-                    } else {
-                        console.log('登录取消')
-                    }
-                })
-            })
+            // 登录
         }
     }
 

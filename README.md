@@ -17,6 +17,8 @@ npm i --registry=https://registry.npm.taobao.org
 
 ### todo:
 
-- less升级为scss，更优雅的使用css
+- less升级为scss，更优雅的使用css，同时支持scss less
 - 增加postcss编译插件
 - lib库下面的公共js移植到app模块下
+- 资源按需加载
+- hot reload

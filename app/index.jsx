@@ -5,14 +5,18 @@ import { Provider } from 'react-redux'
 import { hashHistory } from 'react-router'
 import configureStore from './store/configureStore'
 
-// 性能测试
-import Perf from 'react-addons-perf'
-window.Perf = Perf
-
 import Utils from './util/util';
 import '../static/styles/common.less'
 
-import './util/page'
+
+// 性能测试
+if(__DEV__) {
+	require.ensure([], function(require) {
+		const Perf = require('react-addons-perf')
+		window.Perf = Perf
+	}, 'perf');
+}
+
 // 创建 Redux 的 store 对象
 const store = configureStore()
 
