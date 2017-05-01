@@ -103,6 +103,7 @@ export default class SwipeCard extends Component {
         // swipes 的配置
         let opt = {
             distance: window.wmflex.rem2px(window.wmflex.px2rem(650, 75)), // 每次移动的距离，卡片的真实宽度，需要计算
+            currentPoint: 1,// 初始位置，默认从0即第一个元素开始
             swTouchend: (ev) => {
                 let data = {
                     moved: ev.moved,
@@ -111,7 +112,6 @@ export default class SwipeCard extends Component {
                     cancelled: ev.cancelled
                 }
             }
-
         }
         let swipeWrapWidth = window.wmflex.px2rem(650 * cardList.length, 75)
         let swipeStyle = {
@@ -122,8 +122,8 @@ export default class SwipeCard extends Component {
             {
                 cardList && cardList.length === 1
                 ? this.renderCard(cardList[0], 0, 'only-card')
-                : <div className = "swipe-wrap" style = {swipeStyle}>
-                    <ReactSwipe className = "card-slide" options = {opt} ref = "reactSwipe">
+                : <div className="swipe-wrap" style={swipeStyle}>
+                    <ReactSwipe className="card-slide" options={opt} ref="reactSwipe">
                     {
                         cardList.map((item, index) => this.renderCard(item, index))
                     }

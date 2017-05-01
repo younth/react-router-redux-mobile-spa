@@ -9,3 +9,7 @@ export function redirectToLogin(nextState, replace) {
     console.log('enter');
     // replace(null, '/')
 }
+
+export function updateHandle () {
+	console.log('update');
+}

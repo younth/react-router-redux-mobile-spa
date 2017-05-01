@@ -127,57 +127,17 @@ export default class Home extends Component {
                 Utils.loading()
                 // 通用: 开通或续费 跳到提单页
                 hashHistory.push(`/confirm/${privilege_no}`)
-            } else if (type === 'delete') {
-                // 已购卡: 用户删除已下架卡片
-                let params = {
-                    title: '温馨提示',
-                    content: '确认删除此卡片?',
-                    cancelBtnText: '取消',
-                    confirmBtnText: '确认'
-                }
-                WMApp.nui.dialog(params, function(data) {
-                    if (data.status) {
-                        // 确认操作
-                        get('/wmall/privilege/del?display=json', {
-                            privilege_no: privilege_no
-                        }).then(res => {
-                            return res.json()
-                        }).then(json => {
-                            let errno = json.error_no,
-                                errmsg = json.error_msg,
-                                result = json.result
-                            if (Number(errno) === 0) {
-                                if (Number(result) === 1) {
-                                    Utils.showToast('删除成功~')
-                                    cardActions.getHomeCard()
-                                } else {
-                                    Utils.showToast(errmsg)
-                                }
-                            } else {
-                                Utils.showToast(errmsg)
-                            }
-                        })
-                    }
-                })
-            } else {
-                // 热卖中: 不可开通或不可续费 提示原因 dialog
-                Utils.showToast(toastText)
             }
-        } else {
-            // 登录
         }
     }
 
     render() {
-        let {card} = this.props
-        if (!card.loading) {
-            Utils.loading(0)
-        }
+        let { card } = this.props
         return (
             <div>
                 { card.userPrivileges && <Mime cardList = {card.userPrivileges} isVip = {card.isVip} clickBtn = {this.clickBtn}/> }
                 { card.cityPrivileges && <Onsell cardList = {card.cityPrivileges} isNew = {card.isNew} cityName = {card.cityName} clickBtn = {this.clickBtn}/> }
-                { card.cityPrivileges && <Link className = "to-rule" to = "rule">配送折扣卡规则</Link> }
+                { card.cityPrivileges && <Link className="to-rule" to = "rule">配送折扣卡规则</Link> }
                 <DialogModal show = {this.state.show} el = 'pay-success-dialog' closeOnOuterClick = {false}>
                     <div className = "pay-success-img"></div>
                     <div className = "pay-success-msg">购买成功，享受权益</div>

@@ -15,10 +15,11 @@ npm i --registry=https://registry.npm.taobao.org
 
 极大方便移动端调试，同时支持`mock`能力！
 
+### 关于 hot-reload
+
+我们拆分了一个 `app/containers/Root` 出来，所有Root相关的文件更新都 `布局更新` ，对应的系统的入口文件 `index.jsx` 的更新会重新刷新浏览器。
+
 ### todo:
 
-- less升级为scss，更优雅的使用css，同时支持scss less
 - 增加postcss编译插件
-- lib库下面的公共js移植到app模块下
-- 资源按需加载
-- hot reload
+- redux-thunk 升级为 redux-saga

@@ -1,5 +1,5 @@
 // 相当于layout
-import React, { PropTypes, Component } from 'react'
+import React, { PropTypes, Component, PureComponent } from 'react'
 import * as PureRenderMixin from 'react-addons-pure-render-mixin'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'

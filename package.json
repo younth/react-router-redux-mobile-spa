@@ -29,7 +29,7 @@
     "react-dom": "^15.4.1",
     "react-redux": "^4.4.4",
     "react-router": "^2.2.2",
-    "react-swipes": "^1.0.4",
+    "react-swipes": "^1.0.6",
     "redux": "^3.4.0",
     "redux-thunk": "^2.1.0",
     "whatwg-fetch": "^1.0.0"

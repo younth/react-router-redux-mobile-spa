@@ -1,3 +1,6 @@
+/**
+ * 创建store，并增加中间件
+ */
 import { createStore, compose, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import rootReducer from '../reducers'
